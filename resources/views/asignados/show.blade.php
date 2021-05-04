@@ -55,7 +55,7 @@
                 <p><strong>Fecha del contrato: </strong>{{\Carbon\Carbon::parse($asignado->FechaContrato)->format('d/m/Y')}}</p>
                 @if ($inspeccion != NULL)
                     <p><strong>Fecha de última inspeccion: </strong>{{\Carbon\Carbon::parse($inspeccion->FechaInspeccion)->format('d/m/Y')}}</p>
-                    <p><strong>Uso de suelo de acuerdo a la última inspección: </strong> {{$inspeccion->UsoVivienda}}</p>  
+                    <p><strong>Uso de suelo de acuerdo a la última inspección: </strong> <u>{{$inspeccion->UsoVivienda}}</u></p>  
                 @endif
                 <p><strong>Observaciones: </strong>{{$asignado->ObservacionesAsignado}}</p>
                 <br>
