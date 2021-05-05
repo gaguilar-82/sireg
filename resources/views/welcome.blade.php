@@ -11,9 +11,8 @@
     <body>
         <div class="container mx-auto pt-5">
             <div class="bg-gray-200">
-                <h1 class="font-sans text-3xl font-bold">Este es un H1</h1>
-                <h2 class="font-serif">Este es un H2</h2>
-                <h3 class="font-mono">Este es un H3</h3>
+                <h1 class="font-sans text-3xl font-bold">Bienvenido</h1>
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Registrar usuario</a>
             </div>
         </div>
     </body>
