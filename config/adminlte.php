@@ -233,7 +233,7 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => false,
+            'search' => true,
             'topnav' => true,
         ],
         [
@@ -248,7 +248,7 @@ return [
         ],
         [
             'text' => 'Usuarios',
-            'url'  => 'users.index',
+            'route'  => 'admin.users.index',
             'icon' => 'fas fa-users fa-fw',
         ],
         [
