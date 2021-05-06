@@ -242,6 +242,16 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Inicio',
+            'url'  => 'admin',
+            'icon' => 'fas fa-tachometer-alt fa-fw',
+        ],
+        [
+            'text' => 'Usuarios',
+            'url'  => 'users.index',
+            'icon' => 'fas fa-users fa-fw',
+        ],
+        [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
@@ -252,11 +262,6 @@ return [
         [
             'text' => 'profile',
             'url'  => 'user/profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Alta de Usuario',
-            'url'  => 'register',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -438,5 +443,5 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#93-livewire
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
