@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ])->assignRole('Admin');
 
-        User::factory(9)->create();
+        User::factory(19)->create();
          
     }
 }

@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Bienvenido a SIREG.</p>
+    @livewire('admin.users-index')
 @stop
 
 @section('css')
