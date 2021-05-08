@@ -63,6 +63,7 @@
 </div>
 @enderror
     <div class="container mx-auto pt-5">
+        @can('colonias.store')
         <div class="bg-gray-200">
             <h1>Colonias</h1>
     
@@ -136,15 +137,17 @@
                         <label for="ObservacionesColonia" class="form-label">Observaciones</label>
                         <textarea name="ObservacionesColonia" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
                     </div>
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                    </div>
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                        </div>    
+                    
                     <div class="form-group col-md-3">
                         <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
                     </div>
                 </div>
             </form>
         </div>
+        @endcan
     {{-- Datatable --}}
         <div class="card">
             <div class="card-body">
@@ -168,8 +171,12 @@
                             <td>{{$colonia->municipios->NombreMunicipio}}</td>
                             <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
                             <td>
+                                @can('colonias.show')
                                 <a href="{{route('colonias.show', [$colonia->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                @endcan
+                                @can('colonias.edit')
                                 <a href="{{route('colonias.edit', [$colonia->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

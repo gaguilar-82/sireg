@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -46,11 +46,12 @@ return [
     */
 
     'logo' => '<b>Si</b>REG',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'images/sireg.png',
+    'logo_img_class' => 'brand-image img-rectangle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'SiREG',
 
     /*
     |--------------------------------------------------------------------------
@@ -126,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-success elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -166,7 +167,7 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -233,7 +234,7 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
+            'search' => false,
             'topnav' => true,
         ],
         [
@@ -242,31 +243,32 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Inicio',
+            'text' => 'Sireg',
+            'route'  => 'home',
+            'icon' => 'fas fa-home fa-fw',
+            'can' => 'admin.index'
+        ],
+        [
+            'text' => 'Panel de control',
             'url'  => 'admin',
-            'icon' => 'fas fa-tachometer-alt fa-fw',
+            'icon' => 'fas fa-cogs-alt fa-fw',
         ],
         [
             'text' => 'Usuarios',
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-users fa-fw',
+            'can' => 'admin.index'
         ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
+       
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
+        /*[
             'text' => 'change_password',
-            'url'  => 'user/settings',
+            'url'  => 'register',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
@@ -322,7 +324,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*

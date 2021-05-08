@@ -27,11 +27,13 @@
                 <br>
                 <a href="{{route('colonias.edit', $colonia)}}" class="btn btn-warning editar">Editar Colonia</a>
                 <a href="{{route('colonias.index')}}" class="btn btn-info">Regresar a Colonias</a>
+                @can('colonias.destroy')
                 <form action="{{route('colonias.destroy',[$colonia->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
                     @method('DELETE')
                     @csrf
                     <button class="btn btn-danger" type="submit">Eliminar</button>
                 </form>
+                @endcan
             </div>
             <div class="card-footer text-muted">
               Fecha de creación {{$colonia->created_at->diffForHumans()}}

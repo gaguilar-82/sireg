@@ -8,37 +8,44 @@
         [
             'name' => 'Colonias',
             'route' => '\colonias',
-            'active' =>  request()->routeIs('colonias.*')
+            'active' =>  request()->routeIs('colonias.*'),
+            'can' => 'colonias.index'
         ],
         [
             'name' => 'Lotes',
             'route' => '\lotes',
-            'active' => request()->routeIs('lotes.*')
+            'active' => request()->routeIs('lotes.*'),
+            'can' => 'lotes.index'
         ],
         [
             'name' => 'Posesionarios',
             'route' => '\posesionarios',
-            'active' => request()->routeIs('posesionarios.*')
+            'active' => request()->routeIs('posesionarios.*'),
+            'can' => 'posesionarios.index'
         ],
         [
             'name' => 'Asignación',
             'route' => '\asignados',
-            'active' => request()->routeIs('asignados.*')
+            'active' => request()->routeIs('asignados.*'),
+            'can' => 'asignados.index'
         ],
         [
             'name' => 'Pagos',
             'route' => '\pagos',
-            'active' => request()->routeIs('pagos.*')
+            'active' => request()->routeIs('pagos.*'),
+            'can' => 'pagos.index'
         ],
         [
             'name' => 'Inspecciones',
             'route' => '\inspecciones',
-            'active' => request()->routeIs('inspecciones.*')
+            'active' => request()->routeIs('inspecciones.*'),
+            'can' => 'inspecciones.index'
         ],
         [
             'name' => 'Escrituración',
             'route' => '\escrituras',
-            'active' => request()->routeIs('escrituras.*')
+            'active' => request()->routeIs('escrituras.*'),
+            'can' => 'escrituras.index'
         ],
     ];  
 @endphp
@@ -59,9 +66,11 @@
                 <div class="hidden space-x-4 sm:-my-px sm:ml-1 sm:flex">
                    
                     @foreach ($nav_links as $nav_link)
+                        @can('can')
                         <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                             {{ $nav_link['name'] }}
                         </x-jet-responsive-nav-link> 
+                        @endcan
                      @endforeach
 
                 </div>
@@ -137,6 +146,16 @@
 
                                 <div class="border-t border-gray-100"></div>
                             @endif
+                            @can('admin.index')
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Administrar Permisos de Usuario') }}
+                                </div>
+                                <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                                    {{ __('Panel de administrador') }}
+                                </x-jet-dropdown-link>
+                            @endcan
+
+
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
@@ -174,9 +193,11 @@
         <div class="pt-2 pb-3 space-y-1">
 
             @foreach ($nav_links as $nav_link)
+            @can('can')
                 <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
                     {{ $nav_link['name'] }}
-                </x-jet-responsive-nav-link> 
+                </x-jet-responsive-nav-link>
+            @endcan
             @endforeach
             
         </div>
