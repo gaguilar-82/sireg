@@ -251,7 +251,7 @@ return [
         [
             'text' => 'Panel de control',
             'url'  => 'admin',
-            'icon' => 'fas fa-cogs-alt fa-fw',
+            'icon' => 'fas fa-cogs fa-fw',
         ],
         [
             'text' => 'Usuarios',
@@ -259,6 +259,7 @@ return [
             'icon' => 'fas fa-users fa-fw',
             'can' => 'admin.index'
         ],
+       
        
         ['header' => 'account_settings'],
         [

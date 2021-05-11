@@ -3,7 +3,8 @@
         [
             'name' => 'Inicio',
             'route' => route('home'),
-            'active' => request()->routeIs('home')
+            'active' => request()->routeIs('home'),
+            'can' => 'home'
         ],
         [
             'name' => 'Colonias',
@@ -63,17 +64,17 @@
                 </div>
 
                 <!-- Navigation Links -->
+                
                 <div class="hidden space-x-4 sm:-my-px sm:ml-1 sm:flex">
-                   
                     @foreach ($nav_links as $nav_link)
-                        @can('can')
-                        <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
-                            {{ $nav_link['name'] }}
-                        </x-jet-responsive-nav-link> 
+                        @can($nav_link['can'])
+                            <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                                {{ $nav_link['name'] }}
+                            </x-jet-responsive-nav-link>
                         @endcan
-                     @endforeach
-
+                    @endforeach
                 </div>
+                
             </div>
 
             <!-- Settings Dropdown -->
@@ -193,11 +194,11 @@
         <div class="pt-2 pb-3 space-y-1">
 
             @foreach ($nav_links as $nav_link)
-            @can('can')
-                <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
-                    {{ $nav_link['name'] }}
-                </x-jet-responsive-nav-link>
-            @endcan
+                @can($nav_link['can'])
+                    <x-jet-responsive-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                        {{ $nav_link['name'] }}
+                    </x-jet-responsive-nav-link>
+                @endcan
             @endforeach
             
         </div>

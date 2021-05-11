@@ -6,68 +6,67 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.bootstrap4.min.css">
-@endsection
+@stop
 
-@section('Title', 'Colonias')
+@section('title', 'Colonias')
 
 
 @section('Content')
     
-{{-- Mensajes --}}
-@if ( session('mensaje') )
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('mensaje') }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
-@error('NombreColonia')
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@enderror
-@error('TipoColonia')
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@enderror
-@error('municipios_id')
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@enderror
-@error('ClaveColonia')
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@enderror
-@error('ValorMetroCuadrado')
+    {{-- Mensajes --}}
+    @if ( session('mensaje') )
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('mensaje') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    @error('NombreColonia')
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@enderror
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('TipoColonia')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('municipios_id')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('ClaveColonia')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('ValorMetroCuadrado')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
     <div class="container mx-auto pt-5">
+        <h1>Colonias</h1>
         @can('colonias.store')
         <div class="bg-gray-200">
-            <h1>Colonias</h1>
-    
-    {{-- Formulario --}}
+            {{-- Formulario --}}
             @php $del=""@endphp
             <form action="{{route('colonias.store')}}" onSubmit="javascript:procesar();" method="POST">
                 @csrf
@@ -185,7 +184,7 @@
             </div>
         </div>
     </div>
-@endsection
+@stop
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -219,4 +218,4 @@
         <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
     @endif
     
-@endsection
+@stop

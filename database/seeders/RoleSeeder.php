@@ -32,6 +32,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.users.edit'])->assignRole($rol1);
         Permission::create(['name' => 'admin.users.update'])->assignRole($rol1);
 
+        //Permisos home
+        Permission::create(['name' => 'home'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol6, $rol7]);
+
         //Permisos para el módulo de Colonias
         Permission::create(['name' => 'colonias.index'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol7]);
         Permission::create(['name' => 'colonias.store'])->syncRoles([$rol2]);
