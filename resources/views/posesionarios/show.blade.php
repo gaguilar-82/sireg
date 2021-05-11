@@ -2,7 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-@section('title','Posesionario')
+@section('title','SIREG | Posesionario')
 
 @section('Content')
 
@@ -48,13 +48,19 @@
                         @endif
                     </div>
                 </p>
-                <a href="{{route('posesionarios.edit', $posesionario)}}" class="btn btn-warning editar">Editar Posesionario</a>
-                <a href="{{route('posesionarios.index')}}" class="btn btn-info">Regresar a Posesionarios</a>
-                <form action="{{route('posesionarios.destroy',[$posesionario->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                </form>
+                @can('posesionarios.edit')
+                    <a href="{{route('posesionarios.edit', $posesionario)}}" class="btn btn-warning editar">Editar Posesionario</a>
+                @endcan
+                @can('posesionarios.index')
+                    <a href="{{route('posesionarios.index')}}" class="btn btn-info">Regresar a Posesionarios</a>
+                @endcan
+                @can('posesionarios.destroy')
+                    <form action="{{route('posesionarios.destroy',[$posesionario->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
+                @endcan
             </div>
             <div class="card-footer text-muted">
               Fecha de creación {{$posesionario->created_at->diffForHumans()}}

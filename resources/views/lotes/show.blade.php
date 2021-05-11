@@ -2,7 +2,7 @@
 
 @section('css')
 
-@section('title','Lote '. $lote->colonias->NombreColonia . $lote->Manzana . $lote->NumLote)
+@section('title','SIREG | Lote '. $lote->colonias->ClaveColonia.$lote->Manzana.$lote->NumLote)
 
 @section('Content')
 
@@ -81,14 +81,22 @@
                 <br>
                 <p><strong>Observaciones: </strong>{{$lote->ObservacionesLote}}</p>
                 <p><strong>Conflicto Legal: </strong>{{$lote->ConflictoLegal}}</p>
-                <a href="{{route('lotes.edit', $lote)}}" class="btn btn-warning">Editar Lote</a>
-                <a href="{{route('lotes.index')}}" class="btn btn-info">Regresar a Lotes</a>
-                <a href="{{route('lotes.print', [$lote->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
-                <form action="{{route('lotes.destroy',[$lote->id])}}" method="POST" class="d-inline" id="eliminar">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                </form>
+                @can('lotes.edit')
+                    <a href="{{route('lotes.edit', $lote)}}" class="btn btn-warning">Editar Lote</a>
+                @endcan
+                @can('lotes.index')
+                    <a href="{{route('lotes.index')}}" class="btn btn-info">Regresar a Lotes</a>
+                @endcan
+                @can('lotes.print')
+                    <a href="{{route('lotes.print', [$lote->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
+                @endcan
+                @can('lotes.destroy') 
+                    <form action="{{route('lotes.destroy',[$lote->id])}}" method="POST" class="d-inline" id="eliminar">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
+                @endcan
             </div>
             <div class="card-footer text-muted">
               Fecha de creación {{$lote->created_at->diffForHumans()}}

@@ -74,19 +74,19 @@ function procesar() {
     }
     
     switch (tipo) {
-        case 'Patrimonio INVISUR': tipo = 'IVS';
+        case 'PATRIMONIO INVISUR': tipo = 'IVS';
         break;
 
-        case 'Patrimonio CRETT': tipo = 'CRT';
+        case 'PATRIMONIO CRETT': tipo = 'CRT';
         break;
 
-        case 'Barrios Históricos': tipo = 'BH';
+        case 'BARRIOS HISTÓRICOS': tipo = 'BH';
         break;
 
-        case 'Donación Condicional': tipo = 'DN';
+        case 'DONANCIÓN CONDICIONAL': tipo = 'DN';
         break;
 
-        case 'Parque Nacional El Veladero': tipo = 'PNV';
+        case 'PARQUE NACIONAL EL VELADERO': tipo = 'PNV';
         break;
     }
 

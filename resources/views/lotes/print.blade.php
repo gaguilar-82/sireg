@@ -3,7 +3,7 @@
 @section('css')
     
 
-@section('title','Croquis del Lote '. $lote->colonias->NombreColonia . $lote->Manzana . $lote->NumLote)
+@section('title','Croquis del Lote '. $lote->colonias->ClaveColonia.$lote->Manzana.$lote->NumLote)
 
 @section('Content')
 

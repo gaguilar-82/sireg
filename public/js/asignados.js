@@ -16,9 +16,9 @@ function SelLote() {
     var superficie = document.getElementById("Lote7").innerText;
     var valor = document.getElementById("Lote8").innerText;
 
-    var nombrelote = nombreColonia.concat(" Manzana ");
+    var nombrelote = nombreColonia.concat(" MANZANA ");
     nombrelote = nombrelote.concat(manzana);
-    nombrelote = nombrelote.concat(" Lote ");
+    nombrelote = nombrelote.concat(" LOTE ");
     nombrelote = nombrelote.concat(numLote);
 
     var claveContrato = claveColonia.concat('-');

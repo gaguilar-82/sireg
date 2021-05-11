@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Lotes')
+@section('title', 'SIREG | Lotes')
 
 @section('Content')
     {{-- Mensajes --}}
@@ -60,169 +60,171 @@
     </div>
     @enderror
     <div class="container mx-auto pt-5">
+        <h1>Lotes</h1>
         <div class="bg-gray-200">
-            <h1>Lotes</h1>
             {{-- Formulario --}}
-            <form action="{{route('lotes.store')}}" name="formulariolotes" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="inputColonia" class="form-label">Colonia</label>
-                        <select name="colonias_id" id="colonias_id" class="form-control">
-                            <option value="">--Seleccione la Colonia--</option>
-                            @foreach ($colonias as $colonia)
-                                <option value="{{$colonia['id']}}" @if (old('colonias_id') == ($colonia['id'])) selected="selected" @endif>{{$colonia->NombreColonia}} - {{$colonia->municipios->Delegacion}}</option>
-                                
-                            @endforeach
-                        </select>
+            @can('lotes.store')
+                <form action="{{route('lotes.store')}}" name="formulariolotes" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputColonia" class="form-label">Colonia</label>
+                            <select name="colonias_id" id="colonias_id" class="form-control">
+                                <option value="">--Seleccione la Colonia--</option>
+                                @foreach ($colonias as $colonia)
+                                    <option value="{{$colonia['id']}}" @if (old('colonias_id') == ($colonia['id'])) selected="selected" @endif>{{$colonia->NombreColonia}} - {{$colonia->municipios->Delegacion}}</option>
+                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Macrolote" class="form-label">Macrolote</label>
+                            <input type="text" name="Macrolote" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Macrolote') }}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Etapa" class="form-label">Etapa</label>
+                            <input type="text" name="Etapa" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Etapa') }}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Poligono" class="form-label">Polígono</label>
+                            <input type="text" name="Poligono" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Poligono') }}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Supermanzana" class="form-label">Súpermanzana</label>
+                            <input type="text" name="Supermanzana" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Supermanzana') }}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="Macrolote" class="form-label">Macrolote</label>
-                        <input type="text" name="Macrolote" class="form-control" mb-2 value="{{ old('Macrolote') }}">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="Manzana" class="form-label">Manzana</label>
+                            <input type="text" name="Manzana" id="Manzana" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Manzana') }}" onChange="javascript:procesar();">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="NumLote" class="form-label">Número de Lote</label>
+                            <input type="text" name="NumLote" id="NumLote" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('NumLote') }}" onChange="javascript:procesar();">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Casa" class="form-label">Casa</label>
+                            <input type="text" name="Casa" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Casa') }}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Superficie" class="form-label">Superficie (m²)</label>
+                            <input type="number" name="Superficie" class="form-control" mb-2 min="0" style="text-transform:uppercase;" value="{{ old('Superficie') }}">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="Latitud" class="form-label">Latitud</label>
+                            <input type="number" name="Latitud" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Latitud') }}">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="Longitud" class="form-label">Longitud</label>
+                            <input type="number" name="Longitud" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Longitud') }}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="CodigoPostal" class="form-label">Código Postal</label>
+                            <input type="text" name="CodigoPostal" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('CodigoPostal') }}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="Etapa" class="form-label">Etapa</label>
-                        <input type="text" name="Etapa" class="form-control" mb-2 value="{{ old('Etapa') }}">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="Colindancia1" class="form-label">Colindancia 1</label>
+                            <input type="text" name="Colindancia1" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia1') }}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Colindancia2" class="form-label">Colindancia 2</label>
+                            <input type="text" name="Colindancia2" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia2') }}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Colindancia3" class="form-label">Colindancia 3</label>
+                            <input type="text" name="Colindancia3" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia3') }}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Colindancia4" class="form-label">Colindancia 4</label>
+                            <input type="text" name="Colindancia4" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia4') }}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="Poligono" class="form-label">Polígono</label>
-                        <input type="text" name="Poligono" class="form-control" mb-2 value="{{ old('Poligono') }}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="Uso" class="form-label">Uso del predio</label>
+                            <select name="Uso" id="Uso" class="form-control">
+                                <option value="">--Seleccione el uso del predio--</option>
+                                <option value="HABITADO" @if (old('Uso') == 'HABITADO') selected="selected" @endif>HABITADO</option>
+                                <option value="DESHABITADO" @if (old('Uso') == 'DESHABITADO') selected="selected" @endif>DESHABITADO</option>
+                                <option value="BALDÍO" @if (old('Uso') == 'BALDÍO') selected="selected" @endif>BALDÍO</option>
+                                <option value="EN CONSTRUCCIÓN" @if (old('Uso') == 'EN CONSTRUCCIÓN') selected="selected" @endif>EN CONSTRUCCIÓN</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="AltoRiesgo" class="form-label">¿Está en Zona de Alto Riesgo?</label>
+                            <select name="AltoRiesgo" id="AltoRiesgo" class="form-control">
+                                <option value="">--Elija una opción--</option>
+                                <option value="SÍ" @if (old('AltoRiesgo') == 'SÍ') selected="selected" @endif>SÍ</option>
+                                <option value="NO" @if (old('AltoRiesgo') == 'No') selected="selected" @endif>NO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Afectacion" class="form-label">¿Tiene afectación?</label>
+                            <select name="Afectacion" id="Afectacion" class="form-control">
+                                <option value="">--Elija una opción--</option>
+                                <option value="SÍ" @if (old('Afectacion') == 'SÍ') selected="selected" @endif>SÍ</option>
+                                <option value="NO" @if (old('Afectacion') == 'NO') selected="selected" @endif>NO</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="Supermanzana" class="form-label">Súpermanzana</label>
-                        <input type="text" name="Supermanzana" class="form-control" mb-2 value="{{ old('Supermanzana') }}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="Subdivision" class="form-label">¿Está subdividido?</label>
+                            <select name="Subdivision" id="Subdivision" class="form-control">
+                                <option value="">--Elija una opción--</option>
+                                <option value="SÍ" @if (old('Subdivision') == 'SÍ') selected="selected" @endif>SÍ</option>
+                                <option value="NO" @if (old('Subdivision') == 'NO') selected="selected" @endif>NO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Fusion" class="form-label">¿Está fusionado?</label>
+                            <select name="Fusion" id="Fusion" class="form-control">
+                                <option value="">--Elija una opción--</option>
+                                <option value="SÍ" @if (old('Fusion') == 'SÍ') selected="selected" @endif>SÍ</option>
+                                <option value="NO" @if (old('Fusion') == 'NO') selected="selected" @endif>NO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Actualizacion" class="form-label">¿Se ha actualizado?</label>
+                            <select name="Actualizacion" id="Actualizacion" class="form-control">
+                                <option value="">--Elija una opción--</option>
+                                <option value="SÍ" @if (old('Actualizacion') == 'SÍ') selected="selected" @endif>SÍ</option>
+                                <option value="NO" @if (old('Actualizacion') == 'NO') selected="selected" @endif>NO</option>
+                            </select>
+                        </div>                   
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="Manzana" class="form-label">Manzana</label>
-                        <input type="text" name="Manzana" id="Manzana" class="form-control" mb-2 value="{{ old('Manzana') }}" onChange="javascript:procesar();">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ObservacionesLote" class="form-label">Observaciones</label>
+                            <textarea name="ObservacionesLote" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesLote') }}"></textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ConflictoLegal" class="form-label">Conflicto legal</label>
+                            <textarea name="ConflictoLegal" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ConflictoLegal') }}"></textarea>
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="NumLote" class="form-label">Número de Lote</label>
-                        <input type="text" name="NumLote" id="NumLote" class="form-control" mb-2 value="{{ old('NumLote') }}" onChange="javascript:procesar();">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="Casa" class="form-label">Casa</label>
-                        <input type="text" name="Casa" class="form-control" mb-2 value="{{ old('Casa') }}">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="Superficie" class="form-label">Superficie (m²)</label>
-                        <input type="number" name="Superficie" class="form-control" mb-2 min="0" value="{{ old('Superficie') }}">
-                    </div>
-                    <div class="form-group col-md-1">
-                        <label for="Latitud" class="form-label">Latitud</label>
-                        <input type="number" name="Latitud" class="form-control" mb-2 value="{{ old('Latitud') }}">
-                    </div>
-                    <div class="form-group col-md-1">
-                        <label for="Longitud" class="form-label">Longitud</label>
-                        <input type="number" name="Longitud" class="form-control" mb-2 value="{{ old('Longitud') }}">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="CodigoPostal" class="form-label">Código Postal</label>
-                        <input type="text" name="CodigoPostal" class="form-control" mb-2 value="{{ old('CodigoPostal') }}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label for="Colindancia1" class="form-label">Colindancia 1</label>
-                        <input type="text" name="Colindancia1" class="form-control" mb-2 value="{{ old('Colindancia1') }}">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Colindancia2" class="form-label">Colindancia 2</label>
-                        <input type="text" name="Colindancia2" class="form-control" mb-2 value="{{ old('Colindancia2') }}">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Colindancia3" class="form-label">Colindancia 3</label>
-                        <input type="text" name="Colindancia3" class="form-control" mb-2 value="{{ old('Colindancia3') }}">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="Colindancia4" class="form-label">Colindancia 4</label>
-                        <input type="text" name="Colindancia4" class="form-control" mb-2 value="{{ old('Colindancia4') }}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="Uso" class="form-label">Uso del predio</label>
-                        <select name="Uso" id="Uso" class="form-control">
-                            <option value="">--Seleccione el uso del predio--</option>
-                            <option value="Habitado" @if (old('Uso') == 'Habitado') selected="selected" @endif>Habitado</option>
-                            <option value="Deshabitado" @if (old('Uso') == 'Deshabitado') selected="selected" @endif>Deshabitado</option>
-                            <option value="Baldio" @if (old('Uso') == 'Baldio') selected="selected" @endif>Baldio</option>
-                            <option value="En construcción" @if (old('Uso') == 'En construcción') selected="selected" @endif>En construcción</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="AltoRiesgo" class="form-label">¿Está en Zona de Alto Riesgo?</label>
-                        <select name="AltoRiesgo" id="AltoRiesgo" class="form-control">
-                            <option value="">--Elija una opción--</option>
-                            <option value="Sí" @if (old('AltoRiesgo') == 'Sí') selected="selected" @endif>Sí</option>
-                            <option value="No" @if (old('AltoRiesgo') == 'No') selected="selected" @endif>No</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Afectacion" class="form-label">¿Tiene afectación?</label>
-                        <select name="Afectacion" id="Afectacion" class="form-control">
-                            <option value="">--Elija una opción--</option>
-                            <option value="Sí" @if (old('Afectacion') == 'Sí') selected="selected" @endif>Sí</option>
-                            <option value="No" @if (old('Afectacion') == 'No') selected="selected" @endif>No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="Subdivision" class="form-label">¿Está subdividido?</label>
-                        <select name="Subdivision" id="Subdivision" class="form-control">
-                            <option value="">--Elija una opción--</option>
-                            <option value="Sí" @if (old('Subdivision') == 'Sí') selected="selected" @endif>Sí</option>
-                            <option value="No" @if (old('Subdivision') == 'No') selected="selected" @endif>No</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Fusion" class="form-label">¿Está fusionado?</label>
-                        <select name="Fusion" id="Fusion" class="form-control">
-                            <option value="">--Elija una opción--</option>
-                            <option value="Sí" @if (old('Fusion') == 'Sí') selected="selected" @endif>Sí</option>
-                            <option value="No" @if (old('Fusion') == 'No') selected="selected" @endif>No</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Actualizacion" class="form-label">¿Se ha actualizado?</label>
-                        <select name="Actualizacion" id="Actualizacion" class="form-control">
-                            <option value="">--Elija una opción--</option>
-                            <option value="Sí" @if (old('Actualizacion') == 'Sí') selected="selected" @endif>Sí</option>
-                            <option value="No" @if (old('Actualizacion') == 'No') selected="selected" @endif>No</option>
-                        </select>
-                    </div>                   
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="ObservacionesLote" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesLote" rows="4" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesLote') }}"></textarea>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="ConflictoLegal" class="form-label">Conflicto legal</label>
-                        <textarea name="ConflictoLegal" rows="4" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ConflictoLegal') }}"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <input type="hidden" id ="clavelote" value="" name="ClaveLote">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="Croquis">Croquis</label>
-                        <input type="file" name="Croquis" id="Croquis" accept="image/png">
-                    </div> 
-                </div>   
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-primary btn-block" type="submit" onClick="javascript:procesar();">Agregar</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
-                    </div>
-                </div>              
-            </form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="hidden" id ="clavelote" value="" name="ClaveLote">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="Croquis">Croquis</label>
+                            <input type="file" name="Croquis" id="Croquis" accept="image/png">
+                        </div> 
+                    </div>   
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-primary btn-block" type="submit" onClick="javascript:procesar();">Agregar</button>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                        </div>
+                    </div>              
+                </form>
+            @endcan
         </div>
         
         {{-- Datatable --}}
@@ -250,8 +252,12 @@
                             <td>{{number_format($lote->Superficie,2,'.',',')}}m²</td>
                             <td>${{number_format($lote->colonias->ValorMetroCuadrado,2,'.','.')}}</td>
                             <td>
-                                <a href="{{route('lotes.show', $lote->id)}}" class="btn btn-info btn-sm">Detalles</a>
-                                <a href="{{route('lotes.edit', [$lote->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                @can('lotes.show')
+                                    <a href="{{route('lotes.show', $lote->id)}}" class="btn btn-info btn-sm">Detalles</a>
+                                @endcan
+                                @can('lotes.edit')
+                                    <a href="{{route('lotes.edit', [$lote->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

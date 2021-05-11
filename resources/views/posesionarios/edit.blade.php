@@ -95,110 +95,112 @@
         <div class="bg-gray-200">
             <h1>Editar Posesionario</h1>
             {{-- Formulario --}}
-            <form action="{{route('posesionarios.update', $posesionario)}}" name="formularioposesionarios" enctype="multipart/form-data" method="POST" onSubmit="javascript:ec();">
-                @csrf
-                @method('put')
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <input type="text" name="NombrePosesionario" placeholder="Nombre(s)" class="form-control" mb-2 value="{{$posesionario->NombrePosesionario}}">
+            @can('posesionarios.update')
+                <form action="{{route('posesionarios.update', $posesionario)}}" name="formularioposesionarios" enctype="multipart/form-data" method="POST" onSubmit="javascript:ec();">
+                    @csrf
+                    @method('put')
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="text" name="NombrePosesionario" placeholder="Nombre(s)" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$posesionario->NombrePosesionario}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ApellidoPaterno" placeholder="Apellido paterno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$posesionario->ApellidoPaterno}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ApellidoMaterno" placeholder="Apellido materno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$posesionario->ApellidoMaterno}}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="ApellidoPaterno" placeholder="Apellido paterno" class="form-control" mb-2 value="{{$posesionario->ApellidoPaterno}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="text" name="CURP" placeholder="CURP" id="CURP" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$posesionario->CURP}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="LugarNacimiento" placeholder="Lugar de nacimiento" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$posesionario->LugarNacimiento}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="FechaNacimiento" placeholder="Fecha de nacimiento" class="date form-control" id="datetimepicker" mb-2 style="text-transform:uppercase;" value="{{$posesionario->FechaNacimiento}}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="ApellidoMaterno" placeholder="Apellido materno" class="form-control" mb-2 value="{{$posesionario->ApellidoMaterno}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <select name="" id="EstadoCivil" class="form-control" onChange="javascript:ec();">
+                                <option value="">--Seleccione el estado civil--</option>
+                                <option value="SOLTERO" @if (($posesionario->EstadoCivil) == 'SOLTERO' || ($posesionario->EstadoCivil) == 'SOLTERA') selected="selected" @endif>SOLTERO(A)</option>
+                                <option value="CASADO" @if (($posesionario->EstadoCivil) == 'CASADO' || ($posesionario->EstadoCivil) == 'CASADA') selected="selected" @endif>CASADO(A)</option>
+                                <option value="VIUDO" @if (($posesionario->EstadoCivil) == 'VIUDO' || ($posesionario->EstadoCivil) == 'VIUDA') selected="selected" @endif>VIUDO(A)</option>
+                                <option value="DIVORCIADO" @if (($posesionario->EstadoCivil) == 'DIVORCIADO' || ($posesionario->EstadoCivil) == 'DIVORCIADA') selected="selected" @endif>DIVORCIADO(A)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="Ocupacion" placeholder="Ocupación" class="form-control" mb-2 value="{{$posesionario->Ocupacion}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="Telefono" placeholder="Teléfono" class="form-control" mb-2 value="{{$posesionario->Telefono}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <input type="text" name="CURP" placeholder="CURP" id="CURP" class="form-control" mb-2 value="{{$posesionario->CURP}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="hidden" name="" placeholder="" id="sexo" class="form-control" mb-2 value="">
+                        </div>            
+                        <div class="form-group col-md-4">
+                            <input type="hidden" name="EstadoCivil" placeholder="" id="civil" class="form-control" mb-2 value="">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="LugarNacimiento" placeholder="Lugar de nacimiento" class="form-control" mb-2 value="{{$posesionario->LugarNacimiento}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2>{{$posesionario->ObservacionesPosesionario}}</textarea>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="FechaNacimiento" placeholder="Fecha de nacimiento" class="date form-control" id="datetimepicker" mb-2 value="{{$posesionario->FechaNacimiento}}">
+                    <div class="form-row">              
+                        <div class="input-group col-md-4">
+                            <label for="ActaNacimiento"><strong>Acta de nacimiento del posesionario</strong></label>
+                            <input type="file" name="ActaNacimiento" id="ActaNacimiento" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ActaMatrimonio"><strong>Acta de matrimonio del posesionario</strong></label>
+                            <input type="file" name="ActaMatrimonio" id="ActaMatrimonio" accept="application/pdf">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <select name="" id="EstadoCivil" class="form-control" onChange="javascript:ec();">
-                            <option value="">--Seleccione el estado civil--</option>
-                            <option value="soltero" @if (($posesionario->EstadoCivil) == 'soltero' || ($posesionario->EstadoCivil) == 'soltera') selected="selected" @endif>Soltero(a)</option>
-                            <option value="casado" @if (($posesionario->EstadoCivil) == 'casado' || ($posesionario->EstadoCivil) == 'casada') selected="selected" @endif>Casado(a)</option>
-                            <option value="viudo" @if (($posesionario->EstadoCivil) == 'viudo' || ($posesionario->EstadoCivil) == 'viuda') selected="selected" @endif>Viudo(a)</option>
-                            <option value="divorciado" @if (($posesionario->EstadoCivil) == 'divorciado' || ($posesionario->EstadoCivil) == 'divorciada') selected="selected" @endif>Divorciado(a)</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="input-group col-md-4">
+                            <label for="ActaHijos"><strong>Acta de nacimiento de sus hijos</strong></label>
+                            <input type="file" name="ActaHijos" id="ActaHijos" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="IdentificacionOficial"><strong>Identificación oficial con fotografía</strong></label>
+                            <input type="file" name="IdentificacionOficial" id="IdentificacionOficial" accept="application/pdf">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="Ocupacion" placeholder="Ocupación" class="form-control" mb-2 value="{{$posesionario->Ocupacion}}">
+                    <div class="form-row">              
+                        <div class="input-group col-md-4">
+                            <label for="ComprobanteDomicilio"><strong>Comprobante de domicilio</strong></label>
+                            <input type="file" name="ComprobanteDomicilio" id="ComprobanteDomicilio" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaNoPropiedad"><strong>Constancia de no propiedad</strong></label>
+                            <input type="file" name="ConstanciaNoPropiedad" id="ConstanciaNoPropiedad" accept="application/pdf">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <input type="text" name="Telefono" placeholder="Teléfono" class="form-control" mb-2 value="{{$posesionario->Telefono}}">
+                    <div class="form-row">
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaSolteria"><strong>Constancia de solteria</strong></label>
+                            <input type="file" name="ConstanciaSolteria" id="ConstanciaSolteria" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaSolteria"><strong>Poder notarial</strong></label>
+                            <input type="file" name="PoderNotarial" id="PoderNotarial" accept="application/pdf">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <input type="hidden" name="" placeholder="" id="sexo" class="form-control" mb-2 value="">
-                    </div>            
-                    <div class="form-group col-md-4">
-                        <input type="hidden" name="EstadoCivil" placeholder="" id="civil" class="form-control" mb-2 value="">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-primary" type="submit" id="guardar">Guardar cambios</button>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <a class="btn btn-secondary btn-block" href="{{route('posesionarios.index')}}" role="button">Cancelar</a>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2>{{$posesionario->ObservacionesPosesionario}}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">              
-                    <div class="input-group col-md-4">
-                        <label for="ActaNacimiento"><strong>Acta de nacimiento del posesionario</strong></label>
-                        <input type="file" name="ActaNacimiento" id="ActaNacimiento" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ActaMatrimonio"><strong>Acta de matrimonio del posesionario</strong></label>
-                        <input type="file" name="ActaMatrimonio" id="ActaMatrimonio" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="input-group col-md-4">
-                        <label for="ActaHijos"><strong>Acta de nacimiento de sus hijos</strong></label>
-                        <input type="file" name="ActaHijos" id="ActaHijos" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="IdentificacionOficial"><strong>Identificación oficial con fotografía</strong></label>
-                        <input type="file" name="IdentificacionOficial" id="IdentificacionOficial" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">              
-                    <div class="input-group col-md-4">
-                        <label for="ComprobanteDomicilio"><strong>Comprobante de domicilio</strong></label>
-                        <input type="file" name="ComprobanteDomicilio" id="ComprobanteDomicilio" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaNoPropiedad"><strong>Constancia de no propiedad</strong></label>
-                        <input type="file" name="ConstanciaNoPropiedad" id="ConstanciaNoPropiedad" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaSolteria"><strong>Constancia de solteria</strong></label>
-                        <input type="file" name="ConstanciaSolteria" id="ConstanciaSolteria" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaSolteria"><strong>Poder notarial</strong></label>
-                        <input type="file" name="PoderNotarial" id="PoderNotarial" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-primary" type="submit" id="guardar">Guardar cambios</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <a class="btn btn-secondary btn-block" href="{{route('posesionarios.index')}}" role="button">Cancelar</a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            @endcan
         </div>
     </div>
 @endsection

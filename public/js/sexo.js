@@ -14,19 +14,19 @@ function ec(){
     {
         if(edocivil == "1")
         {
-            document.getElementById('civil').value = "soltera";
+            document.getElementById('civil').value = "SOLTERA";
         }
         if(edocivil == "2")
         {
-            document.getElementById('civil').value = "casada";
+            document.getElementById('civil').value = "CASADA";
         }
         if(edocivil == "3")
         {
-            document.getElementById('civil').value = "viuda";
+            document.getElementById('civil').value = "VIUDA";
         }
         if(edocivil == "4")
         {
-            document.getElementById('civil').value = "divorciada";
+            document.getElementById('civil').value = "DIVORCIADA";
         }
     }
 
@@ -34,19 +34,19 @@ function ec(){
     {
         if(edocivil == "1")
         {
-            document.getElementById('civil').value = "soltero";
+            document.getElementById('civil').value = "SOLTERO";
         }
         if(edocivil == "2")
         {
-            document.getElementById('civil').value = "casado";
+            document.getElementById('civil').value = "CASADO";
         }
         if(edocivil == "3")
         {
-            document.getElementById('civil').value = "viudo";
+            document.getElementById('civil').value = "VIUDO";
         }
         if(edocivil == "4")
         {
-            document.getElementById('civil').value = "divorciado";
+            document.getElementById('civil').value = "DIVORCIADO";
         }
     }
 }

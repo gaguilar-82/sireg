@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.bootstrap4.min.css">
 @stop
 
-@section('title', 'Colonias')
+@section('title', 'SIREG | Colonias')
 
 
 @section('Content')
@@ -73,17 +73,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="NombreColonia" class="form-label">Colonia</label>
-                        <input type="text" name="NombreColonia" placeholder="Nombre de la Colonia" class="form-control mb-2" value="{{ old('NombreColonia') }}">
+                        <input type="text" name="NombreColonia" placeholder="Nombre de la Colonia" style="text-transform:uppercase;" class="form-control mb-2" value="{{ old('NombreColonia') }}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="TipoColonia" class="form-label">Tipo de Colonia</label>
                         <select name="TipoColonia" id="TipoColonia" class="form-control">
                             <option value="">--Seleccione el tipo de colonia--</option>
-                            <option value='Patrimonio INVISUR' @if (old('TipoColonia') == 'Patrimonio INVISUR') selected="selected" @endif>Patrimonio INVISUR</option>
-                            <option value="Patrimonio CRETT" @if (old('TipoColonia') == 'Patrimonio CRETT') selected="selected" @endif>Patrimonio CRETT</option>
-                            <option value="Barrios Históricos" @if (old('TipoColonia') == 'Barrios Históricos') selected="selected" @endif>Barrios Históricos</option>
-                            <option value="Donación Condicional" @if (old('TipoColonia') == 'Donación Condicional') selected="selected" @endif>Donación Condicional</option>
-                            <option value="Parque Nacional El Veladero" @if (old('TipoColonia') == 'Parque Nacional El Veladero') selected="selected" @endif>Parque Nacional El Veladero</option>
+                            <option value='PATRIMONIO INVISUR' @if (old('TipoColonia') == 'PATRIMONIO INVISUR') selected="selected" @endif>PATRIMONIO INVISUR</option>
+                            <option value="PATRIMONIO CRETT" @if (old('TipoColonia') == 'PATRIMONIO CRETT') selected="selected" @endif>PATRIMONIO CRETT</option>
+                            <option value="BARRIOS HISTÓRICOS" @if (old('TipoColonia') == 'BARRIOS HISTÓRICOS') selected="selected" @endif>BARRIOS HISTÓRICOS</option>
+                            <option value="DONACION CONDICIONAL" @if (old('TipoColonia') == 'DONACIÓN CONDICIONAL') selected="selected" @endif>DONACIÓN CONDICIONAL</option>
+                            <option value="PARQUE NACIONAL EL VELADERO" @if (old('TipoColonia') == 'PARQUE NACIONAL EL VELADERO') selected="selected" @endif>PARQUE NACIONAL EL VELADERO</option>
                         </select>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">                       
-                        <input type="hidden" id ="ClaveColonia" value="" name="ClaveColonia">
+                        <input type="text" id ="ClaveColonia" value="" name="ClaveColonia">
                     </div>
                 </div>
                 <div class="form-row">
@@ -134,7 +134,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="ObservacionesColonia" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesColonia" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
+                        <textarea name="ObservacionesColonia" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesColonia') }}"></textarea>
                     </div>
                         <div class="form-group col-md-3">
                             <button class="btn btn-primary btn-block" type="submit">Agregar</button>
@@ -171,10 +171,10 @@
                             <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
                             <td>
                                 @can('colonias.show')
-                                <a href="{{route('colonias.show', [$colonia->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    <a href="{{route('colonias.show', [$colonia->id])}}" class="btn btn-info btn-sm">Detalles</a>
                                 @endcan
                                 @can('colonias.edit')
-                                <a href="{{route('colonias.edit', [$colonia->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    <a href="{{route('colonias.edit', [$colonia->id])}}" class="btn btn-warning btn-sm">Editar</a>
                                 @endcan
                             </td>
                         </tr>

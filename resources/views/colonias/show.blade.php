@@ -2,7 +2,7 @@
 
 @section('css')
 
-@section('title','Colonia '. $colonia->NombreColonia)
+@section('title','SIREG | '. $colonia->NombreColonia)
 
 @section('Content')
 <div class="container mx-auto pt-5">
@@ -12,7 +12,7 @@
     <div class="bg-gray-200">    
         <div class="card text-center">
             <div class="card-header">
-                <h4>Colonia {{$colonia->NombreColonia}}</h4>
+                <h4>COLONIA {{$colonia->NombreColonia}}</h4>
                 <h5>{{strtoupper($colonia->ClaveColonia)}}</h5>
             </div>
             <div class="card-body">
@@ -25,14 +25,16 @@
                 <p><strong>Superficie Adquirida: </strong>{{$colonia->SuperficieAdquirida}}</p>
                 <p><strong>Observaciones: </strong>{{$colonia->ObservacionesColonia}}</p>
                 <br>
-                <a href="{{route('colonias.edit', $colonia)}}" class="btn btn-warning editar">Editar Colonia</a>
+                @can('colonias.edit')
+                    <a href="{{route('colonias.edit', $colonia)}}" class="btn btn-warning editar">Editar Colonia</a>
+                @endcan
                 <a href="{{route('colonias.index')}}" class="btn btn-info">Regresar a Colonias</a>
                 @can('colonias.destroy')
-                <form action="{{route('colonias.destroy',[$colonia->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                </form>
+                    <form action="{{route('colonias.destroy',[$colonia->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
                 @endcan
             </div>
             <div class="card-footer text-muted">

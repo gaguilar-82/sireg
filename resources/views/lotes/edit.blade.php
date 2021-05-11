@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 
-@section('title','Editar Lote')
+@section('title','SIREG | Editar Lote')
 
 @section('Content')
     {{-- Mensajes --}}
@@ -85,67 +85,67 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Macrolote" class="form-label">Macrolote</label>
-                    <input type="text" name="Macrolote" class="form-control" mb-2 value="{{$lote->Macrolote}}">
+                    <input type="text" name="Macrolote" class="form-control" style="text-transform:uppercase;" mb-2 value="{{$lote->Macrolote}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Etapa" class="form-label">Etapa</label>
-                    <input type="text" name="Etapa" class="form-control" mb-2 value="{{$lote->Etapa}}">
+                    <input type="text" name="Etapa" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Etapa}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Poligono" class="form-label">Polígono</label>
-                    <input type="text" name="Poligono" class="form-control" mb-2 value="{{$lote->Poligono}}">
+                    <input type="text" name="Poligono" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Poligono}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Supermanzana" class="form-label">Súpermanzana</label>
-                    <input type="text" name="Supermanzana" class="form-control" mb-2 value="{{$lote->Supermanzana}}">
+                    <input type="text" name="Supermanzana" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Supermanzana}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="Manzana" class="form-label">Manzana</label>
-                    <input type="text" id="Manzana" name="Manzana" class="form-control" mb-2 value="{{$lote->Manzana}}" oninput="javascript:procesar();">
+                    <input type="text" id="Manzana" name="Manzana" class="form-control" style="text-transform:uppercase;" mb-2 value="{{$lote->Manzana}}" oninput="javascript:procesar();">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="NumLote" class="form-label">Número de Lote</label>
-                    <input type="text" id="NumLote" name="NumLote" class="form-control" mb-2 value="{{$lote->NumLote}}" oninput="javascript:procesar();">
+                    <input type="text" id="NumLote" name="NumLote" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->NumLote}}" oninput="javascript:procesar();">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Casa" class="form-label">Casa</label>
-                    <input type="text" name="Casa" class="form-control" mb-2 value="{{$lote->Casa}}">
+                    <input type="text" name="Casa" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Casa}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="Superficie" class="form-label">Superficie (m²)</label>
-                    <input type="number" name="Superficie" class="form-control" mb-2 value="{{$lote->Superficie}}">
+                    <input type="number" name="Superficie" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Superficie}}">
                 </div>
                 <div class="form-group col-md-1">
                     <label for="Latitud" class="form-label">Latitud</label>
-                    <input type="number" name="Latitud" class="form-control" mb-2 value="{{$lote->Latitud}}">
+                    <input type="number" name="Latitud" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Latitud}}">
                 </div>
                 <div class="form-group col-md-1">
                     <label for="Longitud" class="form-label">Longitud</label>
-                    <input type="number" name="Longitud" class="form-control" mb-2 value="{{$lote->Longitud}}">
+                    <input type="number" name="Longitud" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Longitud}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="CodigoPostal" class="form-label">Código Postal</label>
-                    <input type="text" name="CodigoPostal" class="form-control" mb-2 value="{{$lote->CodigoPostal}}">
+                    <input type="text" name="CodigoPostal" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->CodigoPostal}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="Colindancia1" class="form-label">Colindancia 1</label>
-                    <input type="text" name="Colindancia1" class="form-control" mb-2 value="{{$lote->Colindancia1}}">
+                    <input type="text" name="Colindancia1" class="form-control" mb-2 style="text-transform:uppercase;" value="{{$lote->Colindancia1}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="Colindancia2" class="form-label">Colindancia 2</label>
-                    <input type="text" name="Colindancia2" class="form-control" mb-2 value="{{$lote->Colindancia2}}">
+                    <input type="text" name="Colindancia2" class="form-control" style="text-transform:uppercase;" mb-2 value="{{$lote->Colindancia2}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="Colindancia3" class="form-label">Colindancia 3</label>
-                    <input type="text" name="Colindancia3" class="form-control" mb-2 value="{{$lote->Colindancia3}}">
+                    <input type="text" name="Colindancia3" class="form-control" style="text-transform:uppercase;" style="text-transform:uppercase;" mb-2 value="{{$lote->Colindancia3}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="Colindancia4" class="form-label">Colindancia 4</label>
-                    <input type="text" name="Colindancia4" class="form-control" mb-2 value="{{$lote->Colindancia4}}">
+                    <input type="text" name="Colindancia4" class="form-control" style="text-transform:uppercase;" mb-2 value="{{$lote->Colindancia4}}">
                 </div>
             </div>
             <div class="form-row">
@@ -153,26 +153,26 @@
                     <label for="Uso" class="form-label">Uso del predio</label>
                     <select name="Uso" id="Uso" class="form-control">
                         <option value="">--Seleccione el uso del predio--</option>
-                        <option value="Habitado" @if ($lote->Uso == 'Habitado') selected="selected" @endif>Habitado</option>
-                        <option value="Deshabitado" @if ($lote->Uso == 'Deshabitado') selected="selected" @endif>Deshabitado</option>
-                        <option value="Baldio" @if ($lote->Uso == 'Baldio') selected="selected" @endif>Baldio</option>
-                        <option value="En construcción" @if ($lote->Uso == 'En construcción') selected="selected" @endif>En construcción</option>
+                        <option value="HABITADO" @if ($lote->Uso == 'HABITADO') selected="selected" @endif>HABITADO</option>
+                        <option value="DESHABITADO" @if ($lote->Uso == 'DESHABITADO') selected="selected" @endif>DESHABITADO</option>
+                        <option value="BALDÍO" @if ($lote->Uso == 'BALDÍO') selected="selected" @endif>BALDÍO</option>
+                        <option value="EN CONSTRUCCIÓN" @if ($lote->Uso == 'EN CONSTRUCCIÓN') selected="selected" @endif>EN CONSTRUCCIÓN</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="AltoRiesgo" class="form-label">¿Está en Zona de Alto Riesgo</label>
                     <select name="AltoRiesgo" id="AltoRiesgo" class="form-control">
                         <option value="">--Seleccione una opción--</option>
-                        <option value="Sí" @if ($lote->AltoRiesgo == 'Sí') selected="selected" @endif>Sí</option>
-                        <option value="No" @if ($lote->AltoRiesgo == 'No') selected="selected" @endif>No</option>
+                        <option value="SÍ" @if ($lote->AltoRiesgo == 'SÍ') selected="selected" @endif>SÍ</option>
+                        <option value="NO" @if ($lote->AltoRiesgo == 'NO') selected="selected" @endif>NO</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Afectacion" class="form-label">¿Tiene afectación?</label>
                     <select name="Afectacion" id="Afectacion" class="form-control">
                         <option value="">--Seleccione una opción--</option>
-                        <option value="Sí" @if ($lote->Afectacion == 'Sí') selected="selected" @endif>Sí</option>
-                        <option value="No" @if ($lote->Afectacion == 'No') selected="selected" @endif>No</option>
+                        <option value="SÍ" @if ($lote->Afectacion == 'SÍ') selected="selected" @endif>SÍ</option>
+                        <option value="NO" @if ($lote->Afectacion == 'NO') selected="selected" @endif>NO</option>
                     </select>
                 </div>
             </div>
@@ -181,35 +181,35 @@
                     <label for="Subdivision" class="form-label">¿Está subdividido?</label>
                     <select name="Subdivision" id="Subdivision" class="form-control">
                         <option value="">--Seleccione una opción--</option>
-                        <option value="Sí" @if ($lote->Subdivision == 'Sí') selected="selected" @endif>Sí</option>
-                        <option value="No" @if ($lote->Subdivision == 'No') selected="selected" @endif>No</option>
+                        <option value="SÍ" @if ($lote->Subdivision == 'SÍ') selected="selected" @endif>SÍ</option>
+                        <option value="NO" @if ($lote->Subdivision == 'NO') selected="selected" @endif>NO</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Fusion" class="form-label">¿Está fusionado?</label>
                     <select name="Fusion" id="Fusion" class="form-control">
                         <option value="">--Seleccione una opción--/option>
-                        <option value="Sí" @if ($lote->Fusion == 'Sí') selected="selected" @endif>Sí</option>
-                        <option value="No" @if ($lote->Fusion == 'No') selected="selected" @endif>No</option>
+                        <option value="SÍ" @if ($lote->Fusion == 'SÍ') selected="selected" @endif>SÍ</option>
+                        <option value="NO" @if ($lote->Fusion == 'NO') selected="selected" @endif>NO</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Actualizacion" class="form-label">¿Se ha actualizado?</label>
                     <select name="Actualizacion" id="Actualizacion" class="form-control">
                         <option value="">--Seleccione una opción--</option>
-                        <option value="Sí" @if ($lote->Actualizacion == 'Sí') selected="selected" @endif>Sí</option>
-                        <option value="No" @if ($lote->Actualizacion == 'No') selected="selected" @endif>No</option>
+                        <option value="SÍ" @if ($lote->Actualizacion == 'SÍ') selected="selected" @endif>SÍ</option>
+                        <option value="NO" @if ($lote->Actualizacion == 'NO') selected="selected" @endif>NO</option>
                     </select>
                 </div>                   
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="ObservacionesLote" class="form-label">Observaciones</label>
-                    <textarea name="ObservacionesLote" rows="4" cols="100" maxlength="100" class="form-control" mb-2>{{$lote->ObservacionesLote}}</textarea>
+                    <textarea name="ObservacionesLote" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;">{{$lote->ObservacionesLote}}</textarea>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="ConflictoLegal" class="form-label">Conflicto legal</label>
-                    <textarea name="ConflictoLegal" rows="4" cols="100" maxlength="100" class="form-control" mb-2>{{$lote->ConflictoLegal}}</textarea>
+                    <textarea name="ConflictoLegal" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;">{{$lote->ConflictoLegal}}</textarea>
                 </div>
             </div>  
             <div class="form-row">
