@@ -36,6 +36,7 @@ class PagoController extends Controller
         $pago->FechaPago = $request->FechaPago;
         $pago->conceptos_id = $request->conceptos_id;
         $pago->CantidadPago = $request->CantidadPago;
+        $pago->ObservacionesPago = $request->ObservacionesPago;
 
         $pago->save();
 

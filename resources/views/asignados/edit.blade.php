@@ -11,7 +11,7 @@
 
 @endsection
 
-@section('Title', 'Asignados')
+@section('title', 'SIREG | Asignados')
 
 @section('Content')
 
@@ -145,62 +145,64 @@
                 </div>
             </div>
     {{-- Formulario --}}
-            <form action="{{route('asignados.update', $asignado)}}" onSubmit="" method="POST">
-                @csrf
-                @method('put')
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Nombre" class="form-label">Nombre</label>
-                        <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}">
-                        <input type="hidden" name="posesionarios_id" id="posesionario_id" class="form-control" mb-2 value="{{$asignado->posesionarios_id}}">
+            @can('asignados.update')
+                <form action="{{route('asignados.update', $asignado)}}" onSubmit="" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Nombre" class="form-label">Nombre</label>
+                            <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}">
+                            <input type="hidden" name="posesionarios_id" id="posesionario_id" class="form-control" mb-2 value="{{$asignado->posesionarios_id}}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="NombreLote" class="form-label">Lote</label>
+                            <input type="text" name="" id="NombreLote" class="form-control" mb-2  disabled=true value="{{$asignado->lotes->colonias->NombreColonia}} Manzana {{$asignado->lotes->Manzana}} Lote {{$asignado->lotes->NumLote}}">
+                            <input type="hidden" name="lotes_id" id="lote_id" class="form-control" mb-2 value="{{$asignado->lotes_id}}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="NombreLote" class="form-label">Lote</label>
-                        <input type="text" name="" id="NombreLote" class="form-control" mb-2  disabled=true value="{{$asignado->lotes->colonias->NombreColonia}} Manzana {{$asignado->lotes->Manzana}} Lote {{$asignado->lotes->NumLote}}">
-                        <input type="hidden" name="lotes_id" id="lote_id" class="form-control" mb-2 value="{{$asignado->lotes_id}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
+                            <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2 value="{{$asignado->ClaveContrato}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="CostoLote" class="form-label">Costo del Lote</label>
+                            <input type="number" name="CostoLote" id="CostoLote" class="form-control" mb-2 value="{{$asignado->CostoLote}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
+                            <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" mb-2 value="{{$asignado->FechaContrato}}">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
-                        <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2 value="{{$asignado->ClaveContrato}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="TipoContrato" class="form-label">Tipo de contrato</label>
+                            <select name="TipoContrato" id="TipoContrato" class="form-control">
+                                <option value="">--Seleccione el Tipo de Contrato--</option>
+                                <option value="Contado" @if ($asignado->TipoContrato == 'Contado') selected="selected" @endif>Contado</option>
+                                <option value="Crédito" @if ($asignado->TipoContrato == 'Crédito') selected="selected" @endif>Crédito</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Mensualidades" class="form-label">Mensualidades</label>
+                            <input type="number" name="Mensualidades" placeholder="Mensualidades" id="Mensualidades" min="1" max="48" class="form-control" mb-2 value="{{$asignado->Mensualidades}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ObservacionesAsignado" class="form-label">Observaciones</label>
+                            <textarea name="ObservacionesAsignado" placeholder="Observaciones" rows="2" cols="100" maxlength="100" class="form-control" mb-2>{{$asignado->ObservacionesAsignado}}</textarea>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="CostoLote" class="form-label">Costo del Lote</label>
-                        <input type="number" name="CostoLote" id="CostoLote" class="form-control" mb-2 value="{{$asignado->CostoLote}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <a class="btn btn-secondary btn-block" href="{{route('asignados.index')}}" role="button">Cancelar</a>
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
-                        <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" mb-2 value="{{$asignado->FechaContrato}}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="TipoContrato" class="form-label">Tipo de contrato</label>
-                        <select name="TipoContrato" id="TipoContrato" class="form-control">
-                            <option value="">--Seleccione el Tipo de Contrato--</option>
-                            <option value="Contado" @if ($asignado->TipoContrato == 'Contado') selected="selected" @endif>Contado</option>
-                            <option value="Crédito" @if ($asignado->TipoContrato == 'Crédito') selected="selected" @endif>Crédito</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Mensualidades" class="form-label">Mensualidades</label>
-                        <input type="number" name="Mensualidades" placeholder="Mensualidades" id="Mensualidades" min="1" max="48" class="form-control" mb-2 value="{{$asignado->Mensualidades}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="ObservacionesAsignado" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesAsignado" placeholder="Observaciones" rows="2" cols="100" maxlength="100" class="form-control" mb-2>{{$asignado->ObservacionesAsignado}}</textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <a class="btn btn-secondary btn-block" href="{{route('asignados.index')}}" role="button">Cancelar</a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            @endcan
         </div>
     </div>
 @endsection

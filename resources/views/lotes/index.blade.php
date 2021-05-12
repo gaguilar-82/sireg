@@ -230,7 +230,7 @@
         {{-- Datatable --}}
         <div class="card">
             <div class="card-body">
-                <table id="datatable" class="table table-striped table-bordered">
+                <table id="datatable_lotes" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>

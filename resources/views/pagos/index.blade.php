@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Pagos')
+@section('title', 'SIREG | Pagos')
 
 @section('Content')
    
@@ -63,98 +63,104 @@
     <div class="container mx-auto pt-5">
         <div class="bg-gray-200">
             <h1>Pagos</h1>
-            <div class="card">
-                <div class="card-body">
-                    <h5>Seleccione al posesionario</h5>
-                    {{-- Datatable asignados --}}
-                    <table id="datatable_1" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Colonia</th>
-                                <th>Manzana</th>
-                                <th>Lote</th>
-                                <th>Contrato</th>
-                                <th>Posesionario</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($asignados as $asignado)
-                            <tr>
-                                <td id="Asig1">{{$asignado->id}}</td>
-                                <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
-                                <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
-                                <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
-                                <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
-                                <td>
-                                    <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            @can('pagos.store')
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Seleccione al posesionario</h5>
+                        {{-- Datatable asignados --}}
+                        <table id="datatable_1" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Colonia</th>
+                                    <th>Manzana</th>
+                                    <th>Lote</th>
+                                    <th>Contrato</th>
+                                    <th>Posesionario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($asignados as $asignado)
+                                <tr>
+                                    <td id="Asig1">{{$asignado->id}}</td>
+                                    <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
+                                    <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
+                                    <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
+                                    <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
+                                    <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                    <td>
+                                        <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('pagos.store')}}" method="POST">
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Nombre" class="form-label">Nombre</label>
-                                <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
-                                <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('pagos.store')}}" method="POST">
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
+                                    <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="ClaveContrato" class="form-label">Contrato</label>
-                                <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="FolioPago" class="form-label">Folio</label>
+                                    <input type="text" name="FolioPago" id="FolioPago" class="form-control" value="{{ old('FolioPago')}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaPago" class="form-label">Fecha</label>
+                                    <input type="date" name="FechaPago" id="FechaPago" class="form-control" value="{{ old('FechaPago')}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Concepto" class="form-label">Concepto</label>
+                                    <select name="conceptos_id" id="conceptos_id" class="form-control">
+                                        <option value="">--Seleccione el Concepto--</option>
+                                        @foreach ($conceptos as $concepto)
+                                            <option value="{{$concepto['id']}}"  
+                                                @if (old('conceptos_id') == ($concepto['id']))   
+                                                    selected="selected"     
+                                                @endif>
+                                                {{$concepto->Clave}} - {{$concepto->NombreConcepto}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="CantidadPago" class="form-label">Cantidad</label>
+                                    <input type="number" name="CantidadPago" class="date form-control" id="CantidadPago" class="form-control" value="{{ old('CantidadPago')}}" mb-2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="FolioPago" class="form-label">Folio</label>
-                                <input type="text" name="FolioPago" id="FolioPago" class="form-control" value="{{ old('FolioPago')}}" mb-2>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="ObservacionesPago" class="form-label">Observaciones</label>
+                                    <textarea name="ObservacionesPago"  rows="2" cols="100" maxlength="100" class="form-control" style="text-transform:uppercase;" mb-2 value="{{ old('ObservacionesPago') }}"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaPago" class="form-label">Fecha</label>
-                                <input type="date" name="FechaPago" id="FechaPago" class="form-control" value="{{ old('FechaPago')}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="Concepto" class="form-label">Concepto</label>
-                                <select name="conceptos_id" id="conceptos_id" class="form-control">
-                                    <option value="">--Seleccione el Concepto--</option>
-                                    @foreach ($conceptos as $concepto)
-                                        <option value="{{$concepto['id']}}"  
-                                            @if (old('conceptos_id') == ($concepto['id']))   
-                                                selected="selected"     
-                                            @endif>
-                                            {{$concepto->Clave}} - {{$concepto->NombreConcepto}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="CantidadPago" class="form-label">Cantidad</label>
-                                <input type="number" name="CantidadPago" class="date form-control" id="CantidadPago" class="form-control" value="{{ old('CantidadPago')}}" mb-2>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endcan
             <div class="card">
                 <div class="card-body">
                     {{-- Datatable pagos --}}
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="datatable_pagos" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -171,13 +177,17 @@
                             <tr>
                                 <td>{{$pago->id}}</td>
                                 <td>{{strtoupper($pago->asignados->ClaveContrato)}}</td>
-                                <td>{{$pago->asignados->lotes->colonias->NombreColonia}} Manzana {{$pago->asignados->lotes->Manzana}} Lote {{$pago->asignados->lotes->NumLote}}</td>
+                                <td>{{$pago->asignados->lotes->colonias->NombreColonia}} MANZANA {{$pago->asignados->lotes->Manzana}} LOTE {{$pago->asignados->lotes->NumLote}}</td>
                                 <td>{{$pago->asignados->posesionarios->NombrePosesionario}} {{$pago->asignados->posesionarios->ApellidoPaterno}} {{$pago->asignados->posesionarios->ApellidoMaterno}}</td>
                                 <td>{{\Carbon\Carbon::parse($pago->FechaPago)->format('d/m/Y')}}</td>
                                 <td>${{number_format($pago->CantidadPago,2,'.',',')}}</td>
                                 <td>
-                                    <a href="{{route('pagos.show', [$pago->id])}}" class="btn btn-info btn-sm">Detalles</a>
-                                    <a href="{{route('pagos.edit', [$pago->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    @can('pagos.show')
+                                        <a href="{{route('pagos.show', [$pago->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    @endcan
+                                    @can('pagos.edit')
+                                        <a href="{{route('pagos.edit', [$pago->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

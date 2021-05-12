@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Pagos')
+@section('title', 'SIREG | Inspecciones')
 
 @section('Content')
    
@@ -228,166 +228,171 @@
             {{-- Formulario Inspecciones --}}
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('inspecciones.update', $inspeccion)}}" method="POST" name="f1">
-                        @csrf
-                        @method('put')
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Nombre" class="form-label">Nombre</label>
-                                <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$inspeccion->asignados->posesionarios->NombrePosesionario}} {{$inspeccion->asignados->posesionarios->ApellidoPaterno}} {{$inspeccion->asignados->posesionarios->ApellidoMaterno}}">
-                                <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$inspeccion->asignados->posesionarios_id}}">
+                    @can('inspecciones.update')
+                        <form action="{{route('inspecciones.update', $inspeccion)}}" method="POST" name="f1">
+                            @csrf
+                            @method('put')
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$inspeccion->asignados->posesionarios->NombrePosesionario}} {{$inspeccion->asignados->posesionarios->ApellidoPaterno}} {{$inspeccion->asignados->posesionarios->ApellidoMaterno}}">
+                                    <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$inspeccion->asignados->posesionarios_id}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$inspeccion->asignados->ClaveContrato}}">
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="ClaveContrato" class="form-label">Contrato</label>
-                                <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$inspeccion->asignados->ClaveContrato}}">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inspectors_id" class="form-label">Inspector</label>
+                                    <select name="inspectors_id" id="inspectors_id" class="form-control">
+                                        <option value="">--Seleccione al Inspector--</option>
+                                        @foreach ($inspectores as $inspector)
+                                            <option value="{{$inspector['id']}}"  
+                                                @if (($inspeccion->inspectors_id) == ($inspector['id']))   
+                                                    selected="selected"     
+                                                @endif>
+                                                {{$inspector->NombreInspector}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaInspeccion" class="form-label">Fecha</label>
+                                    <input type="date" name="FechaInspeccion" id="FechaInspeccion" class="form-control" value="{{$inspeccion->FechaInspeccion}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="UsoVivienda" class="form-label">Uso de la vivienda</label>
+                                    <select name="UsoVivienda" id="UsoVivienda" class="form-control">
+                                        <option value="">--Seleccione el uso--</option>
+                                        <option value="HABITADA" @if ($inspeccion->UsoVivienda == 'HABITADA') selected="selected" @endif>HABITADA</option>
+                                        <option value="DESHABITADA" @if ($inspeccion->UsoVivienda == 'DESHABITADA') selected="selected" @endif>DESHABITADA</option>
+                                        <option value="EN CONSTRUCCIÓN" @if ($inspeccion->UsoVivienda == 'EN CONSTRUCCIÓN') selected="selected" @endif>EN CONSTRUCCIÓN</option>
+                                        <option value="BALDÍO" @if ($inspeccion->UsoVivienda == 'BALDÍO') selected="selected" @endif>BALDÍO</option>
+                                    </select> 
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inspectors_id" class="form-label">Inspector</label>
-                                <select name="inspectors_id" id="inspectors_id" class="form-control">
-                                    <option value="">--Seleccione al Inspector--</option>
-                                    @foreach ($inspectores as $inspector)
-                                        <option value="{{$inspector['id']}}"  
-                                            @if (($inspeccion->inspectors_id) == ($inspector['id']))   
-                                                selected="selected"     
-                                            @endif>
-                                            {{$inspector->NombreInspector}}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="MaterialVivienda" class="form-label">Material de la vivienda</label>
+                                    <select name="MaterialVivienda" id="MaterialVivienda" class="form-control" onChange="material();">
+                                        <option value="">--Seleccione el material--</option>
+                                        <option value="SIMPLE" @if ($inspeccion->MaterialVivienda == 'SIMPLE') selected="selected" @endif>SIMPLE</option>
+                                        <option value="MIXTO" @if ($inspeccion->MaterialVivienda == 'MIXTO') selected="selected" @endif>MIXTO</option>
+                                        <option value="FIRME" @if ($inspeccion->MaterialVivienda == 'FIRME') selected="selected" @endif>FIRME</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="MaterialTecho" class="form-label">Material del techo</label>
+                                    <select name="MaterialTecho" id="MaterialTecho" class="form-control">
+                                        <option value="">--Seleccione el material--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="MaterialMuros" class="form-label">Material de los muros</label>
+                                    <select name="MaterialMuros" id="MaterialMuros" class="form-control">
+                                        <option value="">--Seleccione el material--</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="MaterialPiso" class="form-label">Material del piso</label>
+                                    <select name="MaterialPiso" id="MaterialPiso" class="form-control">
+                                        <option value="">--Seleccione el material--</option>
+                                    </select>
+                                </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="ZAR" class="form-label">¿Zona de alto riesgo?</label>
+                                    <select name="ZAR" id="ZAR" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="SÍ" @if ($inspeccion->ZAR == 'SÍ') selected="selected" @endif>SÍ</option>
+                                        <option value="NO" @if ($inspeccion->ZAR == 'NO') selected="selected" @endif>NO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="EnergiaElectrica" class="form-label">¿Cuenta con energía eléctrica?</label>
+                                    <select name="EnergiaElectrica" id="EnergiaElectrica" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="SÍ" @if ($inspeccion->EnergiaElectrica == 'SÍ') selected="selected" @endif>SÍ</option>
+                                        <option value="NO" @if ($inspeccion->EnergiaElectrica == 'NO') selected="selected" @endif>NO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="AguaPotable" class="form-label">¿Cuenta con agua potable?</label>
+                                    <select name="AguaPotable" id="AguaPotable" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="SÍ" @if ($inspeccion->AguaPotable == 'SÍ') selected="selected" @endif>SÍ</option>
+                                        <option value="NO" @if ($inspeccion->AguaPotable == 'NO') selected="selected" @endif>NO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="Drenaje" class="form-label">¿Cuenta con drenaje?</label>
+                                    <select name="Drenaje" id="Drenaje" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="SÍ" @if ($inspeccion->Drenaje == 'SÍ') selected="selected" @endif>SÍ</option>
+                                        <option value="NO" @if ($inspeccion->Drenaje == 'NO') selected="selected" @endif>NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="Antiguedad" class="form-label">Antigüedad en la colonia</label>
+                                    <input type="number" name="Antiguedad" id="Antiguedad" class="form-control" min="1" value="{{$inspeccion->Antiguedad}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Habitantes" class="form-label">Número de habitantes</label>
+                                    <input type="number" name="Habitantes" id="Habitantes" class="form-control" min="1" value="{{$inspeccion->Habitantes}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Habitaciones" class="form-label">Número de habitaciones</label>
+                                    <input type="number" name="Habitaciones" id="Habitaciones" class="form-control" min="0" value="{{$inspeccion->Habitaciones}}" mb-2>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="GastoAlimentacion" class="form-label">Gasto en alimentacion</label>
+                                    <input type="number" name="GastoAlimentacion" id="GastoAlimentacion" class="form-control" min="0" value="{{$inspeccion->GastoAlimentacion}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="GastoSalud" class="form-label">Gasto en salud</label>
+                                    <input type="number" name="GastoSalud" id="GastoSalud" class="form-control" min="0" value="{{$inspeccion->GastoSalud}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="GastoEducacion" class="form-label">Gasto en educación</label> 
+                                    <input type="number" name="GastoEducacion" id="GastoEducacion" class="form-control" min="0" value="{{$inspeccion->GastoEducacion}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="GastoOtros" class="form-label">Otros gastos</label>
+                                    <input type="number" name="GastoOtros" id="GastoOtros" class="form-control" min="0" value="{{$inspeccion->GastoOtros}}" mb-2>
+                                    <input type="hidden" name="GastoTotal" id="GastoTotal" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <textarea name="ObservacionesInspeccion"  rows="2" cols="100" maxlength="100" class="form-control" placeholder="Observaciones" mb-2>{{$inspeccion->ObservacionesInspeccion}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-primary btn-block" type="submit" onClick="javascript:CalcularGasto();">Guardar cambios</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <a class="btn btn-secondary btn-block" href="{{route('inspecciones.index')}}" role="button">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
+                    @endcan
+                    @can('inspecciones.destroy')
+                        <form action="{{route('inspecciones.destroy',[$inspeccion->id])}}" method="POST" class="d-inline" id="eliminar">
+                            @method('DELETE')
+                            @csrf
                             <div class="form-group col-md-2">
-                                <label for="FechaInspeccion" class="form-label">Fecha</label>
-                                <input type="date" name="FechaInspeccion" id="FechaInspeccion" class="form-control" value="{{$inspeccion->FechaInspeccion}}" mb-2>
+                                <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="UsoVivienda" class="form-label">Uso de la vivienda</label>
-                                <select name="UsoVivienda" id="UsoVivienda" class="form-control">
-                                    <option value="">--Seleccione el uso--</option>
-                                    <option value="Habitada" @if ($inspeccion->UsoVivienda == 'Habitada') selected="selected" @endif>Habitada</option>
-                                    <option value="Deshabitada" @if ($inspeccion->UsoVivienda == 'Deshabitada') selected="selected" @endif>Deshabitada</option>
-                                    <option value="Baldio" @if ($inspeccion->UsoVivienda == 'Baldio') selected="selected" @endif>Baldio</option>
-                                </select> 
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="MaterialVivienda" class="form-label">Material de la vivienda</label>
-                                <select name="MaterialVivienda" id="MaterialVivienda" class="form-control" onChange="material();">
-                                    <option value="">--Seleccione el material--</option>
-                                    <option value="Simple" @if ($inspeccion->MaterialVivienda == 'Simple') selected="selected" @endif>Simple</option>
-                                    <option value="Mixto" @if ($inspeccion->MaterialVivienda == 'Mixto') selected="selected" @endif>Mixto</option>
-                                    <option value="Firme" @if ($inspeccion->MaterialVivienda == 'Firme') selected="selected" @endif>Firme</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="MaterialTecho" class="form-label">Material del techo</label>
-                                <select name="MaterialTecho" id="MaterialTecho" class="form-control">
-                                    <option value="">--Seleccione el material--</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="MaterialMuros" class="form-label">Material de los muros</label>
-                                <select name="MaterialMuros" id="MaterialMuros" class="form-control">
-                                    <option value="">--Seleccione el material--</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="MaterialPiso" class="form-label">Material del piso</label>
-                                <select name="MaterialPiso" id="MaterialPiso" class="form-control">
-                                    <option value="">--Seleccione el material--</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="ZAR" class="form-label">¿Zona de alto riesgo?</label>
-                                <select name="ZAR" id="ZAR" class="form-control">
-                                    <option value="">--Seleccione una opción--</option>
-                                    <option value="Sí" @if ($inspeccion->ZAR == 'Sí') selected="selected" @endif>Sí</option>
-                                    <option value="No" @if ($inspeccion->ZAR == 'No') selected="selected" @endif>No</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="EnergiaElectrica" class="form-label">¿Cuenta con energía eléctrica?</label>
-                                <select name="EnergiaElectrica" id="EnergiaElectrica" class="form-control">
-                                    <option value="">--Seleccione una opción--</option>
-                                    <option value="Sí" @if ($inspeccion->EnergiaElectrica == 'Sí') selected="selected" @endif>Sí</option>
-                                    <option value="No" @if ($inspeccion->EnergiaElectrica == 'No') selected="selected" @endif>No</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="AguaPotable" class="form-label">¿Cuenta con agua potable?</label>
-                                <select name="AguaPotable" id="AguaPotable" class="form-control">
-                                    <option value="">--Seleccione una opción--</option>
-                                    <option value="Sí" @if ($inspeccion->AguaPotable == 'Sí') selected="selected" @endif>Sí</option>
-                                    <option value="No" @if ($inspeccion->AguaPotable == 'No') selected="selected" @endif>No</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="Drenaje" class="form-label">¿Cuenta con drenaje?</label>
-                                <select name="Drenaje" id="Drenaje" class="form-control">
-                                    <option value="">--Seleccione una opción--</option>
-                                    <option value="Sí" @if ($inspeccion->Drenaje == 'Sí') selected="selected" @endif>Sí</option>
-                                    <option value="No" @if ($inspeccion->Drenaje == 'No') selected="selected" @endif>No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="Antiguedad" class="form-label">Antigüedad en la colonia</label>
-                                <input type="number" name="Antiguedad" id="Antiguedad" class="form-control" min="1" value="{{$inspeccion->Antiguedad}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="Habitantes" class="form-label">Número de habitantes</label>
-                                <input type="number" name="Habitantes" id="Habitantes" class="form-control" min="1" value="{{$inspeccion->Habitantes}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="Habitaciones" class="form-label">Número de habitaciones</label>
-                                <input type="number" name="Habitaciones" id="Habitaciones" class="form-control" min="0" value="{{$inspeccion->Habitaciones}}" mb-2>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="GastoAlimentacion" class="form-label">Gasto en alimentacion</label>
-                                <input type="number" name="GastoAlimentacion" id="GastoAlimentacion" class="form-control" min="0" value="{{$inspeccion->GastoAlimentacion}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="GastoSalud" class="form-label">Gasto en salud</label>
-                                <input type="number" name="GastoSalud" id="GastoSalud" class="form-control" min="0" value="{{$inspeccion->GastoSalud}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="GastoEducacion" class="form-label">Gasto en educación</label> 
-                                <input type="number" name="GastoEducacion" id="GastoEducacion" class="form-control" min="0" value="{{$inspeccion->GastoEducacion}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="GastoOtros" class="form-label">Otros gastos</label>
-                                <input type="number" name="GastoOtros" id="GastoOtros" class="form-control" min="0" value="{{$inspeccion->GastoOtros}}" mb-2>
-                                <input type="hidden" name="GastoTotal" id="GastoTotal" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <textarea name="ObservacionesInspeccion"  rows="2" cols="100" maxlength="100" class="form-control" placeholder="Observaciones" mb-2>{{$inspeccion->ObservacionesInspeccion}}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <button class="btn btn-primary btn-block" type="submit" onClick="javascript:CalcularGasto();">Guardar cambios</button>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <a class="btn btn-secondary btn-block" href="{{route('inspecciones.index')}}" role="button">Cancelar</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="{{route('inspecciones.destroy',[$inspeccion->id])}}" method="POST" class="d-inline" id="eliminar">
-                        @method('DELETE')
-                        @csrf
-                        <div class="form-group col-md-2">
-                            <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
-                        </div>
-                    </form>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>

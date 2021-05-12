@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Pagos')
+@section('title', 'SIREG | Pagos')
 
 @section('Content')
    
@@ -100,66 +100,74 @@
             <div class="card">
                 <div class="card-body">
                     {{-- Formulario --}}
-                    <form action="{{route('pagos.update', $pago)}}" method="POST">
-                        @csrf
-                        @method('put')
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Nombre" class="form-label">Nombre</label>
-                                <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$pago->asignados->posesionarios->NombrePosesionario}} {{$pago->asignados->posesionarios->ApellidoPaterno}} {{$pago->asignados->posesionarios->ApellidoMaterno}}">
-                                <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$pago->asignados_id}}">
+                    @can('pagos.update')
+                        <form action="{{route('pagos.update', $pago)}}" method="POST">
+                            @csrf
+                            @method('put')
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$pago->asignados->posesionarios->NombrePosesionario}} {{$pago->asignados->posesionarios->ApellidoPaterno}} {{$pago->asignados->posesionarios->ApellidoMaterno}}">
+                                    <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$pago->asignados_id}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$pago->asignados->ClaveContrato}}">
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="ClaveContrato" class="form-label">Contrato</label>
-                                <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$pago->asignados->ClaveContrato}}">
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="FolioPago" class="form-label">Folio</label>
+                                    <input type="text" name="FolioPago" id="FolioPago" class="form-control" value="{{$pago->FolioPago}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaPago" class="form-label">Fecha</label>
+                                    <input type="date" name="FechaPago" id="FechaPago" class="form-control" value="{{$pago->FechaPago}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Concepto" class="form-label">Concepto</label>
+                                    <select name="conceptos_id" id="conceptos_id" class="form-control">
+                                        <option value="">--Seleccione el Concepto--</option>
+                                        @foreach ($conceptos as $concepto)
+                                            <option value="{{$concepto['id']}}"  
+                                                @if (($pago->conceptos_id) == ($concepto['id']))   
+                                                    selected="selected"     
+                                                @endif>
+                                                {{$pago->conceptos->Clave}} - {{$pago->conceptos->NombreConcepto}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="CantidadPago" class="form-label">Cantidad</label>
+                                    <input type="number" name="CantidadPago" class="date form-control" id="CantidadPago" class="form-control" value="{{$pago->CantidadPago}}" mb-2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="FolioPago" class="form-label">Folio</label>
-                                <input type="text" name="FolioPago" id="FolioPago" class="form-control" value="{{$pago->FolioPago}}" mb-2>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="ObservacionesPago" class="form-label">Observaciones</label>
+                                    <textarea name="ObservacionesPago"  rows="2" cols="100" maxlength="100" class="form-control" style="text-transform:uppercase;" mb-2>{{ $pago->ObservacionesPago }}</textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <a class="btn btn-secondary btn-block" href="{{route('pagos.index')}}" role="button">Cancelar</a>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaPago" class="form-label">Fecha</label>
-                                <input type="date" name="FechaPago" id="FechaPago" class="form-control" value="{{$pago->FechaPago}}" mb-2>
+                        </form>
+                    @endcan
+                    @can('pagos.destroy')
+                        <form action="{{route('pagos.destroy',[$pago->id])}}" method="POST" class="d-inline" id="eliminar">
+                            @method('DELETE')
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="Concepto" class="form-label">Concepto</label>
-                                <select name="conceptos_id" id="conceptos_id" class="form-control">
-                                    <option value="">--Seleccione el Concepto--</option>
-                                    @foreach ($conceptos as $concepto)
-                                        <option value="{{$concepto['id']}}"  
-                                            @if (($pago->conceptos_id) == ($concepto['id']))   
-                                                selected="selected"     
-                                            @endif>
-                                            {{$pago->conceptos->Clave}} - {{$pago->conceptos->NombreConcepto}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="CantidadPago" class="form-label">Cantidad</label>
-                                <input type="number" name="CantidadPago" class="date form-control" id="CantidadPago" class="form-control" value="{{$pago->CantidadPago}}" mb-2>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <a class="btn btn-secondary btn-block" href="{{route('pagos.index')}}" role="button">Cancelar</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="{{route('pagos.destroy',[$pago->id])}}" method="POST" class="d-inline" id="eliminar">
-                        @method('DELETE')
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>

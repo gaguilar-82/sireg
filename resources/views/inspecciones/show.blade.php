@@ -2,7 +2,7 @@
 
 @section('css')
 
-@section('title','Inspeccion')
+@section('title','SIREG | Inspección '.$inspeccion->asignados->ClaveContrato)
 
 @section('Content')
 <div class="container mx-auto pt-5">
@@ -52,9 +52,15 @@
                     </table>
                 </p>
                 <p><strong>Observaciones: </strong><u>{{$inspeccion->ObservacionesInspeccion}}</u></p>
-                <a href="{{route('inspecciones.index')}}" class="btn btn-info">Regresar</a>
-                <a href="{{route('inspecciones.edit', [$inspeccion->id])}}" class="btn btn-warning">Editar</a>
-                <a href="{{route('inspecciones.print', [$inspeccion->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
+                @can('inspecciones.index')
+                    <a href="{{route('inspecciones.index')}}" class="btn btn-info">Regresar</a>
+                @endcan
+                @can('inspecciones.edit')
+                    <a href="{{route('inspecciones.edit', [$inspeccion->id])}}" class="btn btn-warning">Editar</a>
+                @endcan
+                @can('inspecciones.print')
+                    <a href="{{route('inspecciones.print', [$inspeccion->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
+                @endcan
             </div>
             <div class="card-footer text-muted text-center">
                 Fecha de creación: {{$inspeccion->created_at->diffForHumans()}}

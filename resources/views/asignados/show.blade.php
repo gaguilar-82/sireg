@@ -6,12 +6,13 @@
     
 @endsection
 
-@section('title','Asignado')
+@section('title','SIREG | '.$asignado->ClaveContrato)
 
 @section('Content')
 @php 
     $total=0;
     $porpagar=0;
+    $escrituras=0;
 @endphp
 @if ( session('mensaje') )
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,12 +46,18 @@
                                 $total=$total+$pago->CantidadPago
                             @endphp
                         @endif
+                        @if($pago->conceptos->Clave == 'IP-0002')
+                            @php
+                                $escrituras=$escrituras+$pago->CantidadPago  
+                            @endphp
+                        @endif
                     @endforeach
                     <p><strong>Pagos a cuenta de regularización: </strong>${{number_format($total,2,'.',',')}}</p>
                     @php
                         $porpagar=($asignado->CostoLote)-$total;
                     @endphp
                     <p><strong>Saldo por pagar: </strong>${{number_format($porpagar,2,'.',',')}}</p> 
+                    <p><strong>Pago de escrituras: </strong>${{number_format($escrituras,2,'.',',')}}</p>
                 @endif
                 <p><strong>Fecha del contrato: </strong>{{\Carbon\Carbon::parse($asignado->FechaContrato)->format('d/m/Y')}}</p>
                 @if ($inspeccion != NULL)
@@ -59,24 +66,34 @@
                 @endif
                 <p><strong>Observaciones: </strong>{{$asignado->ObservacionesAsignado}}</p>
                 <br>
-                <a href="{{route('posesionarios.show', [$asignado->posesionarios->id])}}" class="btn btn-success">Expediente</a>
-                <a href="{{route('asignados.edit', [$asignado->id])}}" class="btn btn-warning editar">Editar Asignación</a>
-                <a href="{{route('asignados.index')}}" class="btn btn-info">Regresar</a>
-                <form action="{{route('asignados.destroy',[$asignado->id])}}" class="d-inline eliminar" id="eliminar" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                </form>
-                <form action="{{route('asignados.validar',[$asignado->id])}}" class="d-inline eliminar" method="POST">
-                    @method('put')
-                    @csrf
-                    @if($pagos != NULL && $inspeccion != NULL)
-                        @if($asignado->CostoLote == $total && $inspeccion->UsoVivienda == "Habitada" && $inspeccion->ZAR != 'Sí' )
-                            <input type="hidden" name="ParaEscriturar" value="Sí">
-                            <button class="btn btn-dark" type="submit">Turnar a escrituración</button>
+                @can('posesionarios.show')
+                    <a href="{{route('posesionarios.show', [$asignado->posesionarios->id])}}" class="btn btn-success">Expediente</a>
+                @endcan
+                @can('asignados.edit')
+                    <a href="{{route('asignados.edit', [$asignado->id])}}" class="btn btn-warning editar">Editar Asignación</a>
+                @endcan
+                @can('asignados.index')
+                    <a href="{{route('asignados.index')}}" class="btn btn-info">Regresar</a>
+                @endcan
+                @can('asignados.destroy')
+                    <form action="{{route('asignados.destroy',[$asignado->id])}}" class="d-inline eliminar" id="eliminar" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
+                @endcan
+                @can('asignados.validar')
+                    <form action="{{route('asignados.validar',[$asignado->id])}}" class="d-inline eliminar" method="POST">
+                        @method('put')
+                        @csrf
+                        @if($pagos != NULL && $inspeccion != NULL)
+                            @if($asignado->CostoLote == $total && $escrituras == "2800" && $inspeccion->UsoVivienda == "HABITADA" && $inspeccion->ZAR != 'SÍ' )
+                                <input type="hidden" name="ParaEscriturar" value="Sí">
+                                <button class="btn btn-dark" type="submit">Turnar a escrituración</button>
+                            @endif
                         @endif
-                    @endif
-                </form>
+                    </form>
+                @endcan
             </div>
             <div class="card-footer text-muted">
               Fecha de creación {{$asignado->created_at->diffForHumans()}}

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Escrituras')
+@section('title', 'SIREG | Escrituras')
 
 @section('Content')
 
@@ -92,178 +92,182 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form action="{{route('escrituras.update', $escritura)}}" method="POST">
-                        @csrf
-                        @method('put')
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="Nombre" class="form-label">Nombre</label>
-                                <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$escritura->asignados->posesionarios->NombrePosesionario}} {{$escritura->asignados->posesionarios->ApellidoPaterno}} {{$escritura->asignados->posesionarios->ApellidoMaterno}}">
-                                <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$escritura->asignados->posesionarios_id}}">
+                    @can('escrituras.update')
+                        <form action="{{route('escrituras.update', $escritura)}}" method="POST">
+                            @csrf
+                            @method('put')
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true value="{{$escritura->asignados->posesionarios->NombrePosesionario}} {{$escritura->asignados->posesionarios->ApellidoPaterno}} {{$escritura->asignados->posesionarios->ApellidoMaterno}}">
+                                    <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2 value="{{$escritura->asignados->posesionarios_id}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$escritura->asignados->ClaveContrato}}">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FolioEscritura" class="form-label">Folio de la escritura</label>
+                                    <input type="text" name="FolioEscritura" id="FolioEscritura" class="form-control" value="{{$escritura->FolioEscritura}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaEscritura" class="form-label">Fecha de la escritura</label>
+                                    <input type="date" name="FechaEscritura" id="FechaEscritura" class="form-control" value="{{$escritura->FechaEscritura}}" mb-2>
+                                </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="ClaveContrato" class="form-label">Contrato</label>
-                                <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true value="{{$escritura->asignados->ClaveContrato}}">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Director" class="form-label">Nombre del Director</label>
+                                    <select name="directors_id" id="directors_id" class="form-control">
+                                        <option value="">--Seleccione el Director--</option>
+                                        @foreach ($directores as $director)
+                                            <option value="{{$director['id']}}"  
+                                                @if (($escritura->directors_id) == ($director['id']))   
+                                                    selected="selected"     
+                                                @endif>
+                                                {{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="FirmaPosesionario" class="form-label">¿Firmada por el posesionario?</label>
+                                    @if($escritura->FirmaPosesionario == NULL)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioSi" value="Sí">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioNo" value="No" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="FirmaDirector" class="form-label">¿Firmada por el director?</label>
+                                    @if($escritura->FirmaDirector == NULL)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorSi" value="Sí">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorNo" value="No" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FolioEscritura" class="form-label">Folio de la escritura</label>
-                                <input type="text" name="FolioEscritura" id="FolioEscritura" class="form-control" value="{{$escritura->FolioEscritura}}" mb-2>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="Forma3DCC" class="form-label">¿Tiene Forma 3DCC?</label>
+                                    @if($escritura->Forma3DCC == NULL)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCSi" value="Sí">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCNo" value="No" checked>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            Sí
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Forma3DCC" id="orma3DCCrNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            No
+                                            </label>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaIngresoRPP" class="form-label">Fecha de ingreso al RPP</label>
+                                    <input type="date" name="FechaIngresoRPP" id="FechaIngresoRPP" class="form-control" value="{{$escritura->FechaIngresoRPP}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="OficioRPP" class="form-label">No. de oficio de ingreso al RPP</label>
+                                    <input type="text" name="OficioRPP" id="OficioRPP" class="form-control" value="{{$escritura->OficioRPP}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FolioRealElectronico" class="form-label">Folio Real Electrónico asignado</label>
+                                    <input type="text" name="FolioRealElectronico" id="FolioRealElectronico" class="form-control" value="{{$escritura->FolioRealElectronico}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaInscripcionRPP" class="form-label">Fecha de inscripción al RPP</label>
+                                    <input type="date" name="FechaInscripcionRPP" id="FechaInscripcionRPP" class="form-control" value="{{$escritura->FechaInscripcionRPP}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaEntrega" class="form-label">Fecha de entrega al posesionario</label>
+                                    <input type="date" name="FechaEntrega" id="FechaEntrega" class="form-control" value="{{$escritura->FechaEntrega}}" mb-2>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaEscritura" class="form-label">Fecha de la escritura</label>
-                                <input type="date" name="FechaEscritura" id="FechaEscritura" class="form-control" value="{{$escritura->FechaEscritura}}" mb-2>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="ObservacionesEscritura" class="form-label">Observaciones</label>
+                                    <textarea name="ObservacionesEscritura"  rows="2" cols="100" maxlength="100" class="form-control" mb-2>{{$escritura->ObservacionesEscritura}}</textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Director" class="form-label">Nombre del Director</label>
-                                <select name="directors_id" id="directors_id" class="form-control">
-                                    <option value="">--Seleccione el Director--</option>
-                                    @foreach ($directores as $director)
-                                        <option value="{{$director['id']}}"  
-                                            @if (($escritura->directors_id) == ($director['id']))   
-                                                selected="selected"     
-                                            @endif>
-                                            {{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <a class="btn btn-secondary btn-block" href="{{route('escrituras.index')}}" role="button">Cancelar</a>
+                                </div>
                             </div>
+                        </form>
+                    @endcan
+                    @can('escrituras.destroy')
+                        <form action="{{route('escrituras.destroy',[$escritura->id])}}" method="POST" class="d-inline" id="eliminar">
+                            @method('DELETE')
+                            @csrf
                             <div class="form-group col-md-3">
-                                <label for="FirmaPosesionario" class="form-label">¿Firmada por el posesionario?</label>
-                                @if($escritura->FirmaPosesionario == NULL)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioSi" value="Sí">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioNo" value="No" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @else
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaPosesionario" id="FirmaPosesionarioNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @endif
+                                <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="FirmaDirector" class="form-label">¿Firmada por el director?</label>
-                                @if($escritura->FirmaDirector == NULL)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorSi" value="Sí">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorNo" value="No" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @else
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="FirmaDirector" id="FirmaDirectorNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <label for="Forma3DCC" class="form-label">¿Tiene Forma 3DCC?</label>
-                                @if($escritura->Forma3DCC == NULL)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCSi" value="Sí">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCNo" value="No" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @else
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Forma3DCC" id="Forma3DCCSi" value="Sí" @if($escritura->FirmaPosesionario == "Sí") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        Sí
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Forma3DCC" id="orma3DCCrNo" value="No" @if($escritura->FirmaPosesionario == "No") checked @endif>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        No
-                                        </label>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaIngresoRPP" class="form-label">Fecha de ingreso al RPP</label>
-                                <input type="date" name="FechaIngresoRPP" id="FechaIngresoRPP" class="form-control" value="{{$escritura->FechaIngresoRPP}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="OficioRPP" class="form-label">No. de oficio de ingreso al RPP</label>
-                                <input type="text" name="OficioRPP" id="OficioRPP" class="form-control" value="{{$escritura->OficioRPP}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="FolioRealElectronico" class="form-label">Folio Real Electrónico asignado</label>
-                                <input type="text" name="FolioRealElectronico" id="FolioRealElectronico" class="form-control" value="{{$escritura->FolioRealElectronico}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaInscripcionRPP" class="form-label">Fecha de inscripción al RPP</label>
-                                <input type="date" name="FechaInscripcionRPP" id="FechaInscripcionRPP" class="form-control" value="{{$escritura->FechaInscripcionRPP}}" mb-2>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaEntrega" class="form-label">Fecha de entrega al posesionario</label>
-                                <input type="date" name="FechaEntrega" id="FechaEntrega" class="form-control" value="{{$escritura->FechaEntrega}}" mb-2>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="ObservacionesEscritura" class="form-label">Observaciones</label>
-                                <textarea name="ObservacionesEscritura"  rows="2" cols="100" maxlength="100" class="form-control" mb-2>{{$escritura->ObservacionesEscritura}}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-primary btn-block" type="submit">Guardar cambios</button>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <a class="btn btn-secondary btn-block" href="{{route('escrituras.index')}}" role="button">Cancelar</a>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="{{route('escrituras.destroy',[$escritura->id])}}" method="POST" class="d-inline" id="eliminar">
-                        @method('DELETE')
-                        @csrf
-                        <div class="form-group col-md-3">
-                            <button class="btn btn-danger btn-block" type="submit">Eliminar</button>
-                        </div>
-                    </form>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>

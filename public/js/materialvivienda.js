@@ -4,10 +4,10 @@ function material() {
     if(materialvivienda != 0)
     {
         switch (materialvivienda) {
-            case 'Simple': 
-                            var techo = ["Lámina de cartón","Teja","Palma"];
-                            var muro = ["Madera","Lámina de cartón","Bajareque","Adobe"];
-                            var piso = ["Tierra"];
+            case 'SIMPLE': 
+                            var techo = ["LÁMINA DE CARTÓN","PALMA"];
+                            var muro = ["MADERA","LÁMINA DE CARTÓN","BAJAREQUE","ADOBE"];
+                            var piso = ["TIERRA"];
 
                             num_techo = techo.length;
                             document.f1.MaterialTecho.length = num_techo;
@@ -35,10 +35,10 @@ function material() {
                             }
             break;
             
-            case 'Mixto':
-                            var techo = ["Lámina Galvanizada","Lámina de cartón","Teja","Palma"];
-                            var muro = ["Tabique","Madera","Lámina de cartón","Bajareque","Adobe"];
-                            var piso = ["Cemento","Tierra"];
+            case 'MIXTO':
+                            var techo = ["LÁMINA GALVANIZADA","LÁMINA DE CARTÓN","TEJA","PALMA"];
+                            var muro = ["TABIQUE","MADERA","LÁMINA DE CARTÓN","BAJAREQUE","ADOBE"];
+                            var piso = ["CEMENTO","TIERRA"];
 
                             num_techo = techo.length;
                             document.f1.MaterialTecho.length = num_techo;
@@ -66,10 +66,10 @@ function material() {
                             }
             break;
             
-            case 'Firme':
-                            var techo = ["Concreto","Lámina Galvanizada"];
-                            var muro = ["Tabique"];
-                            var piso = ["Cemento"];
+            case 'FIRME':
+                            var techo = ["CONCRETO","LÁMINA GALVANIZADA"];
+                            var muro = ["TABIQUE"];
+                            var piso = ["CEMENTO"];
 
                             num_techo = techo.length;
                             document.f1.MaterialTecho.length = num_techo;

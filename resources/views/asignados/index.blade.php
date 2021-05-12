@@ -11,7 +11,7 @@
 
 @endsection
 
-@section('Title', 'Asignados')
+@section('title', 'SIREG | Asignados')
 
 @section('Content')
 
@@ -76,134 +76,136 @@
     <div class="container mx-auto pt-5">
         <div class="bg-gray-200">
             <h1>Asignación de lotes</h1>
-            <div class="card">
-                <div class="card-body">
-                    <h5>Seleccione al posesionario</h5>
-                    {{-- Datatable Posesionarios --}}
-                    <table id="datatable_1" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>CURP</th>
-                                <th>Telefono</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($posesionarios as $posesionario)
-                            <tr>
-                                <td id="Pos1">{{$posesionario->id}}</td>
-                                <td id="Pos2">{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
-                                <td id="Pos3">{{$posesionario->CURP}}</td>
-                                <td id="Pos4">{{$posesionario->Telefono}}</td>
-                                <td>
-                                    <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelPosesionario();">Seleccionar</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    {{-- Datatable Lotes --}}
-                    <h5>Seleccione el lote</h5>
-                    <table id="datatable_2" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Clave Colonia</th>
-                                <th>Colonia</th>
-                                <th>Clave Lote</th>
-                                <th>Manzana</th>
-                                <th>Lote</th>
-                                <th>Superficie (m²)</th>
-                                <th>Valor por m² ($)</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($lotes as $lote)
-                            <tr>
-                                <td id="Lote1">{{$lote->id}}</td>
-                                <td id="Lote2">{{$lote->colonias->ClaveColonia}}</td>
-                                <td id="Lote3">{{$lote->colonias->NombreColonia}}</td>
-                                <td id="Lote4">{{$lote->ClaveLote}}</td>
-                                <td id="Lote5">{{$lote->Manzana}}</td>
-                                <td id="Lote6">{{$lote->NumLote}}</td>
-                                <td id="Lote7">{{number_format($lote->Superficie,2,'.',',')}}</td>
-                                <td id="Lote8">{{number_format($lote->colonias->ValorMetroCuadrado,2,'.',',')}}</td>
-                                <td>
-                                    <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelLote();">Seleccionar</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-    {{-- Formulario --}}
-            <form action="{{route('asignados.store')}}" onSubmit="" method="POST">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="Nombre" class="form-label">Nombre</label>
-                        <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
-                        <input type="hidden" name="posesionarios_id" id="posesionario_id" class="form-control" mb-2>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="NombreLote" class="form-label">Lote</label>
-                        <input type="text" name="" id="NombreLote" class="form-control" mb-2  disabled=true>
-                        <input type="hidden" name="lotes_id" id="lote_id" class="form-control" mb-2>
+            @can('asignados.store')
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Seleccione al posesionario</h5>
+                        {{-- Datatable Posesionarios --}}
+                        <table id="datatable_1" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>CURP</th>
+                                    <th>Telefono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($posesionarios as $posesionario)
+                                <tr>
+                                    <td id="Pos1">{{$posesionario->id}}</td>
+                                    <td id="Pos2">{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
+                                    <td id="Pos3">{{$posesionario->CURP}}</td>
+                                    <td id="Pos4">{{$posesionario->Telefono}}</td>
+                                    <td>
+                                        <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelPosesionario();">Seleccionar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
-                        <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="CostoLote" class="form-label">Costo del Lote</label>
-                        <input type="text" name="CostoLote" id="CostoLote" class="form-control" mb-2>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
-                        <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" value="{{ old('FechaContrato')}}" mb-2>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="TipoContrato" class="form-label">Tipo de contrato</label>
-                        <select name="TipoContrato" id="TipoContrato" class="form-control">
-                            <option value="">--Seleccione el Tipo de Contrato--</option>
-                            <option value="Contado" @if (old('TipoContrato') == 'Contado') selected="selected" @endif>Contado</option>
-                            <option value="Crédito" @if (old('TipoContrato') == 'Crédito') selected="selected" @endif>Crédito</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Mensualidades" class="form-label">Mensualidades</label>
-                        <input type="number" name="Mensualidades" id="Mensualidades" min="1" max="48" class="form-control" value="{{ old('Mensualidades')}}" mb-2>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="ObservacionesAsignado" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesAsignado"  rows="2" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                <div class="card">
+                    <div class="card-body">
+                        {{-- Datatable Lotes --}}
+                        <h5>Seleccione el lote</h5>
+                        <table id="datatable_2" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Clave Colonia</th>
+                                    <th>Colonia</th>
+                                    <th>Clave Lote</th>
+                                    <th>Manzana</th>
+                                    <th>Lote</th>
+                                    <th>Superficie (m²)</th>
+                                    <th>Valor por m² ($)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($lotes as $lote)
+                                <tr>
+                                    <td id="Lote1">{{$lote->id}}</td>
+                                    <td id="Lote2">{{$lote->colonias->ClaveColonia}}</td>
+                                    <td id="Lote3">{{$lote->colonias->NombreColonia}}</td>
+                                    <td id="Lote4">{{$lote->ClaveLote}}</td>
+                                    <td id="Lote5">{{$lote->Manzana}}</td>
+                                    <td id="Lote6">{{$lote->NumLote}}</td>
+                                    <td id="Lote7">{{number_format($lote->Superficie,2,'.',',')}}</td>
+                                    <td id="Lote8">{{number_format($lote->colonias->ValorMetroCuadrado,2,'.',',')}}</td>
+                                    <td>
+                                        <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelLote();">Seleccionar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </form>
+        {{-- Formulario --}}
+                <form action="{{route('asignados.store')}}" onSubmit="" method="POST">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Nombre" class="form-label">Nombre</label>
+                            <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
+                            <input type="hidden" name="posesionarios_id" id="posesionario_id" class="form-control" mb-2>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="NombreLote" class="form-label">Lote</label>
+                            <input type="text" name="" id="NombreLote" class="form-control" mb-2  disabled=true>
+                            <input type="hidden" name="lotes_id" id="lote_id" class="form-control" mb-2>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
+                            <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="CostoLote" class="form-label">Costo del Lote</label>
+                            <input type="text" name="CostoLote" id="CostoLote" class="form-control" mb-2>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
+                            <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" value="{{ old('FechaContrato')}}" mb-2>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="TipoContrato" class="form-label">Tipo de contrato</label>
+                            <select name="TipoContrato" id="TipoContrato" class="form-control">
+                                <option value="">--Seleccione el Tipo de Contrato--</option>
+                                <option value="CONTADO" @if (old('TipoContrato') == 'CONTADO') selected="selected" @endif>CONTADO</option>
+                                <option value="CRÉDITO" @if (old('TipoContrato') == 'CRÉDITO') selected="selected" @endif>CRÉDITO</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Mensualidades" class="form-label">Mensualidades</label>
+                            <input type="number" name="Mensualidades" id="Mensualidades" min="1" max="48" class="form-control" value="{{ old('Mensualidades')}}" mb-2>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ObservacionesAsignado" class="form-label">Observaciones</label>
+                            <textarea name="ObservacionesAsignado"  rows="2" cols="100" maxlength="100" class="form-control" style="text-transform:uppercase;" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                        </div>
+                    </div>
+                </form>
+            @endcan
             <div class="card">
                 <div class="card-body">
                     {{-- Datatable asignados --}}
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="datatable_asignados" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -227,8 +229,12 @@
                                 <td>${{number_format($asignado->CostoLote,2,'.',',')}}</td>
                                 <td>{{$asignado->TipoContrato}}</td>
                                 <td>
-                                    <a href="{{route('asignados.show', [$asignado->id])}}" class="btn btn-info btn-sm">Detalles</a>
-                                    <a href="{{route('asignados.edit', [$asignado->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    @can('asignados.show')
+                                        <a href="{{route('asignados.show', [$asignado->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    @endcan
+                                    @can('asignados.edit')
+                                        <a href="{{route('asignados.edit', [$asignado->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

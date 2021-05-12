@@ -12,7 +12,6 @@
         <div class="container mx-auto pt-5">
             <div class="bg-gray-200">
                 <h1 class="font-sans text-3xl font-bold">Bienvenido</h1>
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Registrar usuario</a>
             </div>
         </div>
     </body>

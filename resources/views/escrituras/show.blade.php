@@ -2,7 +2,7 @@
 
 @section('css')
 
-@section('title','Inspeccion')
+@section('title','SIREG | Cédula de Escrituración')
 
 @section('Content')
 <div class="container mx-auto pt-5">
@@ -73,9 +73,15 @@
                 @if(($escritura->ObservacionesEscritura) != NULL)
                     <p><strong>Fecha de entrega al posesionario: </strong> {{$escritura->FechaEntrega}}</p>
                 @endif
-                <a href="{{route('escrituras.index')}}" class="btn btn-info">Regresar</a>
-                <a href="{{route('escrituras.print', [$escritura->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
-                <a href="{{route('escrituras.pdf', [$escritura->id])}}" target="_blank" class="btn btn-dark">Generar Escritura</a>
+                @can('escrituras.index')
+                    <a href="{{route('escrituras.index')}}" class="btn btn-info">Regresar</a>
+                @endcan
+                @can('escrituras.print')
+                    <a href="{{route('escrituras.print', [$escritura->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
+                @endcan
+                @can('escriturs.pdf')
+                    <a href="{{route('escrituras.pdf', [$escritura->id])}}" target="_blank" class="btn btn-dark">Generar Escritura</a>
+                @endcan
             </div>
             <div class="card-footer text-muted text-center">
                 Fecha de creación: {{$escritura->created_at->diffForHumans()}}

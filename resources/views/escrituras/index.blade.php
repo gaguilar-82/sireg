@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
 @endsection
 
-@section('Title', 'Escrituras')
+@section('title', 'SIREG | Escrituras')
 
 @section('Content')
 
@@ -56,98 +56,100 @@
     <div class="container mx-auto pt-5">
         <div class="bg-gray-200">
             <h1>Escrituras</h1>
-            <div class="card">
-                <div class="card-body">
-                    <h5>Seleccione al posesionario</h5>
-                    {{-- Datatable asignados --}}
-                    <table id="datatable_1" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Colonia</th>
-                                <th>Manzana</th>
-                                <th>Lote</th>
-                                <th>Contrato</th>
-                                <th>Posesionario</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($asignados as $asignado)
-                            <tr>
-                                <td id="Asig1">{{$asignado->id}}</td>
-                                <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
-                                <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
-                                <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
-                                <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
-                                <td>
-                                    <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            @can('escrituras.store')
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Seleccione al posesionario</h5>
+                        {{-- Datatable asignados --}}
+                        <table id="datatable_1" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Colonia</th>
+                                    <th>Manzana</th>
+                                    <th>Lote</th>
+                                    <th>Contrato</th>
+                                    <th>Posesionario</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($asignados as $asignado)
+                                <tr>
+                                    <td id="Asig1">{{$asignado->id}}</td>
+                                    <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
+                                    <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
+                                    <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
+                                    <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
+                                    <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                    <td>
+                                        <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('escrituras.store')}}" method="POST">
-                        @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="Nombre" class="form-label">Nombre</label>
-                                <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
-                                <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('escrituras.store')}}" method="POST">
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
+                                    <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FolioEscritura" class="form-label">Folio de la escritura</label>
+                                    <input type="text" name="FolioEscritura" id="FolioEscritura" class="form-control" value="{{ old('FolioPago')}}" mb-2>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FechaEscritura" class="form-label">Fecha de la escritura</label>
+                                    <input type="date" name="FechaEscritura" id="FechaEscritura" class="form-control" value="{{ old('FechaPago')}}" mb-2>
+                                </div>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="ClaveContrato" class="form-label">Contrato</label>
-                                <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Director" class="form-label">Nombre del Director</label>
+                                    <select name="directors_id" id="directors_id" class="form-control">
+                                        <option value="">--Seleccione el Director--</option>
+                                        @foreach ($directores as $director)
+                                            <option value="{{$director['id']}}"  
+                                                @if (old('directors_id') == ($director['id']))   
+                                                    selected="selected"     
+                                                @endif>
+                                                {{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ObservacionesEscritura" class="form-label">Observaciones</label>
+                                    <textarea name="ObservacionesEscritura"  rows="2" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FolioEscritura" class="form-label">Folio de la escritura</label>
-                                <input type="text" name="FolioEscritura" id="FolioEscritura" class="form-control" value="{{ old('FolioPago')}}" mb-2>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                                </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="FechaEscritura" class="form-label">Fecha de la escritura</label>
-                                <input type="date" name="FechaEscritura" id="FechaEscritura" class="form-control" value="{{ old('FechaPago')}}" mb-2>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Director" class="form-label">Nombre del Director</label>
-                                <select name="directors_id" id="directors_id" class="form-control">
-                                    <option value="">--Seleccione el Director--</option>
-                                    @foreach ($directores as $director)
-                                        <option value="{{$director['id']}}"  
-                                            @if (old('directors_id') == ($director['id']))   
-                                                selected="selected"     
-                                            @endif>
-                                            {{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="ObservacionesEscritura" class="form-label">Observaciones</label>
-                                <textarea name="ObservacionesEscritura"  rows="2" cols="100" maxlength="100" class="form-control" mb-2 value="{{ old('ObservacionesColonia') }}"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endcan
             <div class="card">
                 <div class="card-body">
                     {{-- Datatable escrituras --}}
-                    <table id="datatable" class="table table-striped table-bordered">
+                    <table id="datatable_escrituras" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -167,8 +169,12 @@
                                 <td>{{$escritura->asignados->posesionarios->NombrePosesionario}} {{$escritura->asignados->posesionarios->ApellidoPaterno}} {{$escritura->asignados->posesionarios->ApellidoMaterno}}</td>
                                 <td>{{\Carbon\Carbon::parse($escritura->FechaEscritura)->format('d/m/Y')}}</td>
                                 <td>
-                                    <a href="{{route('escrituras.edit', [$escritura->id])}}" class="btn btn-warning btn-sm">Seguimiento</a>
-                                    <a href="{{route('escrituras.show', [$escritura->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    @can('escrituras.edit')
+                                        <a href="{{route('escrituras.edit', [$escritura->id])}}" class="btn btn-warning btn-sm">Seguimiento</a>
+                                    @endcan
+                                    @can('escrituras.show')
+                                        <a href="{{route('escrituras.show', [$escritura->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

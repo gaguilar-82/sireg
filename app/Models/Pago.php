@@ -14,7 +14,8 @@ class Pago extends Model
                              'FolioPago',
                               'FechaPago',
                               'conceptos_id',
-                              'CantidadPago'
+                              'CantidadPago',
+                              'ObservacionesPago'
                             ];
 
     //Relación uno a muchos (inversa)

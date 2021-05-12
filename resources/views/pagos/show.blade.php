@@ -2,7 +2,7 @@
 
 @section('css')
 
-@section('title','Pago')
+@section('title','SIREG | Pago ' .$pago->asignados->ClaveContrato)
 
 @section('Content')
 
@@ -63,8 +63,12 @@
                 @endphp
                 <p><strong>Total de pagos por amortización: </strong>${{number_format($total,2,'.',',')}}</p>
                 <p><strong>Saldo por pagar: </strong>${{number_format($porpagar,2,'.',',')}}</p>
-                <p><a href="{{route('pagos.index')}}" class="btn btn-info">Regresar a Pagos</a></p>
-                <p><a href="{{route('pagos.print', [$pago->id])}}" target="_blank" class="btn btn-success">Vista previa</a></p>
+                @can('pagos.index')
+                    <p><a href="{{route('pagos.index')}}" class="btn btn-info">Regresar a Pagos</a></p>
+                @endcan
+                @can('pagos.print')
+                    <p><a href="{{route('pagos.print', [$pago->id])}}" target="_blank" class="btn btn-success">Vista previa</a></p>
+                @endcan
             </div>
             <div class="card-footer text-muted text-center">
                 Fecha de creación: {{$pago->created_at->diffForHumans()}}
