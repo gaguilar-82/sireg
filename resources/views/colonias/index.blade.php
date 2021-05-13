@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.bootstrap4.min.css">
-@stop
+@endsection
 
 @section('title', 'SIREG | Colonias')
 
@@ -65,87 +65,87 @@
     <div class="container mx-auto pt-5">
         <h1>Colonias</h1>
         @can('colonias.store')
-        <div class="bg-gray-200">
-            {{-- Formulario --}}
-            @php $del=""@endphp
-            <form action="{{route('colonias.store')}}" onSubmit="javascript:procesar();" method="POST">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="NombreColonia" class="form-label">Colonia</label>
-                        <input type="text" name="NombreColonia" placeholder="Nombre de la Colonia" style="text-transform:uppercase;" class="form-control mb-2" value="{{ old('NombreColonia') }}">
+            <div class="bg-gray-200">
+                {{-- Formulario --}}
+                @php $del=""@endphp
+                <form action="{{route('colonias.store')}}" onSubmit="javascript:procesar();" method="POST">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="NombreColonia" class="form-label">Colonia</label>
+                            <input type="text" name="NombreColonia" placeholder="Nombre de la Colonia" style="text-transform:uppercase;" class="form-control mb-2" value="{{ old('NombreColonia') }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="TipoColonia" class="form-label">Tipo de Colonia</label>
+                            <select name="TipoColonia" id="TipoColonia" class="form-control">
+                                <option value="">--Seleccione el tipo de colonia--</option>
+                                <option value='PATRIMONIO INVISUR' @if (old('TipoColonia') == 'PATRIMONIO INVISUR') selected="selected" @endif>PATRIMONIO INVISUR</option>
+                                <option value="PATRIMONIO CRETT" @if (old('TipoColonia') == 'PATRIMONIO CRETT') selected="selected" @endif>PATRIMONIO CRETT</option>
+                                <option value="BARRIOS HISTÓRICOS" @if (old('TipoColonia') == 'BARRIOS HISTÓRICOS') selected="selected" @endif>BARRIOS HISTÓRICOS</option>
+                                <option value="DONACION CONDICIONAL" @if (old('TipoColonia') == 'DONACIÓN CONDICIONAL') selected="selected" @endif>DONACIÓN CONDICIONAL</option>
+                                <option value="PARQUE NACIONAL EL VELADERO" @if (old('TipoColonia') == 'PARQUE NACIONAL EL VELADERO') selected="selected" @endif>PARQUE NACIONAL EL VELADERO</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="TipoColonia" class="form-label">Tipo de Colonia</label>
-                        <select name="TipoColonia" id="TipoColonia" class="form-control">
-                            <option value="">--Seleccione el tipo de colonia--</option>
-                            <option value='PATRIMONIO INVISUR' @if (old('TipoColonia') == 'PATRIMONIO INVISUR') selected="selected" @endif>PATRIMONIO INVISUR</option>
-                            <option value="PATRIMONIO CRETT" @if (old('TipoColonia') == 'PATRIMONIO CRETT') selected="selected" @endif>PATRIMONIO CRETT</option>
-                            <option value="BARRIOS HISTÓRICOS" @if (old('TipoColonia') == 'BARRIOS HISTÓRICOS') selected="selected" @endif>BARRIOS HISTÓRICOS</option>
-                            <option value="DONACION CONDICIONAL" @if (old('TipoColonia') == 'DONACIÓN CONDICIONAL') selected="selected" @endif>DONACIÓN CONDICIONAL</option>
-                            <option value="PARQUE NACIONAL EL VELADERO" @if (old('TipoColonia') == 'PARQUE NACIONAL EL VELADERO') selected="selected" @endif>PARQUE NACIONAL EL VELADERO</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="municipios_id" class="form-label">Municipio</label>
-                        <select name="municipios_id" id="municipios_id" class="form-control">
-                            <option value="">--Seleccione el Municipio--</option>
-                            @foreach ($municipios as $municipio)
-                                <option value="{{$municipio['id']}}"  
-                                    @if (old('municipios_id') == ($municipio['id']))   
-                                        selected="selected"     
-                                    @endif>
-                                    {{$municipio->NombreMunicipio}} 
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="ParcialColonia" class="form-label">Clave de Colonia</label>
-                        <input type="text" name="ParcialColonia" id="ParcialColonia" placeholder="Clave" class="form-control" style="text-transform:uppercase" mb-2 value="{{ old('ParcialColonia') }}">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="ValorMetroCuadrado" class="form-label">Valor por metro cuadrado</label>
-                        <input type="number" name="ValorMetroCuadrado" placeholder="Valor por Metro Cuadrado" class="form-control" mb-2 min="0" value="{{ old('ValorMetroCuadrado') }}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">                       
-                        <input type="text" id ="ClaveColonia" value="" name="ClaveColonia">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="TituloPropiedad" class="form-label">Antecedentes del Título de Propiedad</label>
-                        <textarea name="TituloPropiedad" placeholder="Titulo de Propiedad" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('TituloPropiedad') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Lotificacion" class="form-label">Antecedentes de Lotificación</label>
-                        <textarea name="Lotificacion" placeholder="Lotificación" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('Lotificacion') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="SuperficieAdquirida" class="form-label">Antecedentes de la Superficie Adquirida</label>
-                        <textarea name="SuperficieAdquirida" placeholder="Superficie Adquirida" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('SuperficieAdquirida') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
-                    </div>   
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="ObservacionesColonia" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesColonia" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesColonia') }}"></textarea>
-                    </div>
-                        <div class="form-group col-md-3">
-                            <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                        </div>    
                     
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="municipios_id" class="form-label">Municipio</label>
+                            <select name="municipios_id" id="municipios_id" class="form-control">
+                                <option value="">--Seleccione el Municipio--</option>
+                                @foreach ($municipios as $municipio)
+                                    <option value="{{$municipio['id']}}"  
+                                        @if (old('municipios_id') == ($municipio['id']))   
+                                            selected="selected"     
+                                        @endif>
+                                        {{$municipio->NombreMunicipio}} 
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="ParcialColonia" class="form-label">Clave de Colonia</label>
+                            <input type="text" name="ParcialColonia" id="ParcialColonia" placeholder="Clave" class="form-control" style="text-transform:uppercase" mb-2 value="{{ old('ParcialColonia') }}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="ValorMetroCuadrado" class="form-label">Valor por metro cuadrado</label>
+                            <input type="number" name="ValorMetroCuadrado" placeholder="Valor por Metro Cuadrado" class="form-control" mb-2 min="0" value="{{ old('ValorMetroCuadrado') }}">
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">                       
+                            <input type="text" id ="ClaveColonia" value="" name="ClaveColonia">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="TituloPropiedad" class="form-label">Antecedentes del Título de Propiedad</label>
+                            <textarea name="TituloPropiedad" placeholder="Titulo de Propiedad" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('TituloPropiedad') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Lotificacion" class="form-label">Antecedentes de Lotificación</label>
+                            <textarea name="Lotificacion" placeholder="Lotificación" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('Lotificacion') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="SuperficieAdquirida" class="form-label">Antecedentes de la Superficie Adquirida</label>
+                            <textarea name="SuperficieAdquirida" placeholder="Superficie Adquirida" style="text-transform:uppercase;" class="form-control" mb-2 value="{{ old('SuperficieAdquirida') }}"  onkeyup="javascript:this.value=this.value.toUpperCase();" rows="4" cols="100" maxlength="1000"></textarea>
+                        </div>   
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ObservacionesColonia" class="form-label">Observaciones</label>
+                            <textarea name="ObservacionesColonia" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesColonia') }}"></textarea>
+                        </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                            </div>    
+                        
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         @endcan
     {{-- Datatable --}}
         <div class="card">
@@ -184,7 +184,7 @@
             </div>
         </div>
     </div>
-@stop
+@endsection
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -218,4 +218,4 @@
         <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
     @endif
     
-@stop
+@endsection

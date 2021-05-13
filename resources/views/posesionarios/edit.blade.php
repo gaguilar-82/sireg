@@ -92,8 +92,8 @@
         </div>
     @enderror
     <div class="container mx-auto pt-5">
+        <h1>Editar Posesionario</h1>
         <div class="bg-gray-200">
-            <h1>Editar Posesionario</h1>
             {{-- Formulario --}}
             @can('posesionarios.update')
                 <form action="{{route('posesionarios.update', $posesionario)}}" name="formularioposesionarios" enctype="multipart/form-data" method="POST" onSubmit="javascript:ec();">

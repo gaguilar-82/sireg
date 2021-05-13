@@ -61,8 +61,8 @@
     </div>
     @enderror
     <div class="container mx-auto pt-5">
+        <h1>Editar Pago</h1>
         <div class="bg-gray-200">
-            <h1>Editar Pago</h1>
             <div class="card">
                 <div class="card-body">
                     <h5>Seleccione al posesionario</h5>

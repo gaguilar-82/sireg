@@ -74,8 +74,8 @@
     @enderror
 
     <div class="container mx-auto pt-5">
+        <h1>Editar asignación de lote</h1>
         <div class="bg-gray-200">
-            <h1>Editar asignación de lote</h1>
             <div class="card">
                 <div class="card-body">
                     <h5>Seleccione al posesionario</h5>
@@ -144,7 +144,7 @@
                     </table>
                 </div>
             </div>
-    {{-- Formulario --}}
+            {{-- Formulario --}}
             @can('asignados.update')
                 <form action="{{route('asignados.update', $asignado)}}" onSubmit="" method="POST">
                     @csrf
@@ -206,6 +206,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

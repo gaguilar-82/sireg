@@ -74,8 +74,8 @@
     @enderror
     
     <div class="container mx-auto pt-5">
+        <h1>Asignación de lotes</h1>
         <div class="bg-gray-200">
-            <h1>Asignación de lotes</h1>
             @can('asignados.store')
                 <div class="card">
                     <div class="card-body">
@@ -145,7 +145,7 @@
                         </table>
                     </div>
                 </div>
-        {{-- Formulario --}}
+                {{-- Formulario --}}
                 <form action="{{route('asignados.store')}}" onSubmit="" method="POST">
                     @csrf
                     <div class="form-row">

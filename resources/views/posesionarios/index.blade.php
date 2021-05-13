@@ -96,156 +96,157 @@
     </div>
     @enderror
     <div class="container mx-auto pt-5">
-        <div class="bg-gray-200">
         <h1>Posesionarios</h1>
-        {{-- Formulario --}}
-        @can('posesionarios.store')
-            <form action="{{route('posesionarios.store')}}" name="formularioposesionarios" enctype="multipart/form-data" method="POST" onSubmit="javascript:ec();">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="NombrePosesionario" class="form-label">Nombre(s)</label>
-                        <input type="text" name="NombrePosesionario" placeholder="Nombre(s)" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('NombrePosesionario')}}">
+        <div class="bg-gray-200">
+            {{-- Formulario --}}
+            @can('posesionarios.store')
+                <form action="{{route('posesionarios.store')}}" name="formularioposesionarios" enctype="multipart/form-data" method="POST" onSubmit="javascript:ec();">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="NombrePosesionario" class="form-label">Nombre(s)</label>
+                            <input type="text" name="NombrePosesionario" placeholder="Nombre(s)" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('NombrePosesionario')}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ApellidoPaterno" class="form-label">Apellido paterno</label>
+                            <input type="text" name="ApellidoPaterno" placeholder="Apellido paterno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoPaterno')}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ApellidoMaterno" class="form-label">Apellido materno</label>
+                            <input type="text" name="ApellidoMaterno" placeholder="Apellido materno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoMaterno')}}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="ApellidoPaterno" class="form-label">Apellido paterno</label>
-                        <input type="text" name="ApellidoPaterno" placeholder="Apellido paterno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoPaterno')}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="CURP" class="form-label">CURP</label>
+                            <input type="text" name="CURP" placeholder="CURP" id="CURP" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('CURP')}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="LugarNacimiento" class="form-label">Lugar de nacimiento</label>
+                            <input type="text" name="LugarNacimiento" placeholder="Lugar de nacimiento" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('LugarNacimiento')}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                            <input type="date" name="FechaNacimiento" placeholder="Fecha de nacimiento" class="date form-control" id="FechaNacimiento" mb-2 style="text-transform:uppercase;" value="{{ old('FechaNacimiento')}}">
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="ApellidoMaterno" class="form-label">Apellido materno</label>
-                        <input type="text" name="ApellidoMaterno" placeholder="Apellido materno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoMaterno')}}">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="EstadoCivil" class="form-label">Estado civil</label>
+                            <select name="" id="EstadoCivil" class="form-control" onChange="javascript:ec();">
+                                <option value="">--Seleccione el estado civil--</option>
+                                <option value="SOLTERO" @if (old('EstadoCivil') == 'SOLTERO' || old('EstadoCivil') == 'SOLTERA') selected="selected" @endif>SOLTERO(A)</option>
+                                <option value="CASADO" @if (old('EstadoCivil') == 'CASADO' || old('EstadoCivil') == 'CASADA') selected="selected" @endif>CASADO(A)</option>
+                                <option value="VIUDO" @if (old('EstadoCivil') == 'VIUDO' || old('EstadoCivil') == 'VIUDA') selected="selected" @endif>VIUDO(A)</option>
+                                <option value="DIVORCIADO" @if (old('EstadoCivil') == 'DIVORCIADO' || old('EstadoCivil') == 'DIVORCIADA') selected="selected" @endif>DIVORCIADO(A)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Ocupacion" class="form-label">Ocupación</label>
+                            <input type="text" name="Ocupacion" placeholder="Ocupación" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Ocupacion')}}">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Telefono" class="form-label">Teléfono</label>
+                            <input type="tel" name="Telefono" placeholder="Teléfono" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Telefono')}}">
+                        </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="hidden" name="" placeholder="" id="sexo" class="form-control" mb-2 value="">
+                        </div>            
+                        <div class="form-group col-md-4">
+                            <input type="hidden" name="EstadoCivil" placeholder="" id="civil" class="form-control" mb-2 value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="ObservacionesPosesionario" class="form-label">Observaciones</label>
+                            <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesPosesionario') }}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">              
+                        <div class="input-group col-md-4">
+                            <label for="ActaNacimiento"><strong>Acta de nacimiento del posesionario</strong></label>
+                            <input type="file" name="ActaNacimiento" id="ActaNacimiento" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ActaMatrimonio"><strong>Acta de matrimonio del posesionario</strong></label>
+                            <input type="file" name="ActaMatrimonio" id="ActaMatrimonio" accept="application/pdf">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group col-md-4">
+                            <label for="ActaHijos"><strong>Acta de nacimiento de sus hijos</strong></label>
+                            <input type="file" name="ActaHijos" id="ActaHijos" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="IdentificacionOficial"><strong>Identificación oficial con fotografía</strong></label>
+                            <input type="file" name="IdentificacionOficial" id="IdentificacionOficial" accept="application/pdf">
+                        </div>
+                    </div>
+                    <div class="form-row">              
+                        <div class="input-group col-md-4">
+                            <label for="ComprobanteDomicilio"><strong>Comprobante de domicilio</strong></label>
+                            <input type="file" name="ComprobanteDomicilio" id="ComprobanteDomicilio" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaNoPropiedad"><strong>Constancia de no propiedad</strong></label>
+                            <input type="file" name="ConstanciaNoPropiedad" id="ConstanciaNoPropiedad" accept="application/pdf">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaSolteria"><strong>Constancia de solteria</strong></label>
+                            <input type="file" name="ConstanciaSolteria" id="ConstanciaSolteria" accept="application/pdf">
+                        </div>
+                        <div class="input-group col-md-4">
+                            <label for="ConstanciaSolteria"><strong>Poder notarial</strong></label>
+                            <input type="file" name="PoderNotarial" id="PoderNotarial" accept="application/pdf">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-primary btn-block" type="submit">Agregar</button>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
+                        </div>
+                    </div>
+                </form>
+            @endcan
+            {{-- Datatable --}}
+            <div class="card">
+                <div class="card-body">
+                    <table id="datatable_posesionarios" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>CURP</th>
+                                <th>Telefono</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($posesionarios as $posesionario)
+                            <tr>
+                                <td>{{$posesionario->id}}</td>
+                                <td>{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
+                                <td>{{$posesionario->CURP}}</td>
+                                <td>{{$posesionario->Telefono}}</td>
+                                <td>
+                                    @can('posesionarios.show')
+                                        <a href="{{route('posesionarios.show', [$posesionario->id])}}" class="btn btn-info btn-sm">Detalles</a>
+                                    @endcan
+                                    @can('posesionarios.edit')
+                                        <a href="{{route('posesionarios.edit', [$posesionario->id])}}" class="btn btn-warning btn-sm">Editar</a>
+                                    @endcan
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="CURP" class="form-label">CURP</label>
-                        <input type="text" name="CURP" placeholder="CURP" id="CURP" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('CURP')}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="LugarNacimiento" class="form-label">Lugar de nacimiento</label>
-                        <input type="text" name="LugarNacimiento" placeholder="Lugar de nacimiento" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('LugarNacimiento')}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" name="FechaNacimiento" placeholder="Fecha de nacimiento" class="date form-control" id="FechaNacimiento" mb-2 style="text-transform:uppercase;" value="{{ old('FechaNacimiento')}}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="EstadoCivil" class="form-label">Estado civil</label>
-                        <select name="" id="EstadoCivil" class="form-control" onChange="javascript:ec();">
-                            <option value="">--Seleccione el estado civil--</option>
-                            <option value="SOLTERO" @if (old('EstadoCivil') == 'SOLTERO' || old('EstadoCivil') == 'SOLTERA') selected="selected" @endif>SOLTERO(A)</option>
-                            <option value="CASADO" @if (old('EstadoCivil') == 'CASADO' || old('EstadoCivil') == 'CASADA') selected="selected" @endif>CASADO(A)</option>
-                            <option value="VIUDO" @if (old('EstadoCivil') == 'VIUDO' || old('EstadoCivil') == 'VIUDA') selected="selected" @endif>VIUDO(A)</option>
-                            <option value="DIVORCIADO" @if (old('EstadoCivil') == 'DIVORCIADO' || old('EstadoCivil') == 'DIVORCIADA') selected="selected" @endif>DIVORCIADO(A)</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Ocupacion" class="form-label">Ocupación</label>
-                        <input type="text" name="Ocupacion" placeholder="Ocupación" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Ocupacion')}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="Telefono" class="form-label">Teléfono</label>
-                        <input type="tel" name="Telefono" placeholder="Teléfono" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Telefono')}}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <input type="hidden" name="" placeholder="" id="sexo" class="form-control" mb-2 value="">
-                    </div>            
-                    <div class="form-group col-md-4">
-                        <input type="hidden" name="EstadoCivil" placeholder="" id="civil" class="form-control" mb-2 value="">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="ObservacionesPosesionario" class="form-label">Observaciones</label>
-                        <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesPosesionario') }}"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">              
-                    <div class="input-group col-md-4">
-                        <label for="ActaNacimiento"><strong>Acta de nacimiento del posesionario</strong></label>
-                        <input type="file" name="ActaNacimiento" id="ActaNacimiento" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ActaMatrimonio"><strong>Acta de matrimonio del posesionario</strong></label>
-                        <input type="file" name="ActaMatrimonio" id="ActaMatrimonio" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="input-group col-md-4">
-                        <label for="ActaHijos"><strong>Acta de nacimiento de sus hijos</strong></label>
-                        <input type="file" name="ActaHijos" id="ActaHijos" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="IdentificacionOficial"><strong>Identificación oficial con fotografía</strong></label>
-                        <input type="file" name="IdentificacionOficial" id="IdentificacionOficial" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">              
-                    <div class="input-group col-md-4">
-                        <label for="ComprobanteDomicilio"><strong>Comprobante de domicilio</strong></label>
-                        <input type="file" name="ComprobanteDomicilio" id="ComprobanteDomicilio" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaNoPropiedad"><strong>Constancia de no propiedad</strong></label>
-                        <input type="file" name="ConstanciaNoPropiedad" id="ConstanciaNoPropiedad" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaSolteria"><strong>Constancia de solteria</strong></label>
-                        <input type="file" name="ConstanciaSolteria" id="ConstanciaSolteria" accept="application/pdf">
-                    </div>
-                    <div class="input-group col-md-4">
-                        <label for="ConstanciaSolteria"><strong>Poder notarial</strong></label>
-                        <input type="file" name="PoderNotarial" id="PoderNotarial" accept="application/pdf">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-primary btn-block" type="submit">Agregar</button>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button class="btn btn-secondary btn-block" type="reset">Limpiar formulario</button>
-                    </div>
-                </div>
-            </form>
-        @endcan
-        {{-- Datatable --}}
-        <div class="card">
-            <div class="card-body">
-                <table id="datatable_posesionarios" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>CURP</th>
-                            <th>Telefono</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($posesionarios as $posesionario)
-                        <tr>
-                            <td>{{$posesionario->id}}</td>
-                            <td>{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
-                            <td>{{$posesionario->CURP}}</td>
-                            <td>{{$posesionario->Telefono}}</td>
-                            <td>
-                                @can('posesionarios.show')
-                                    <a href="{{route('posesionarios.show', [$posesionario->id])}}" class="btn btn-info btn-sm">Detalles</a>
-                                @endcan
-                                @can('posesionarios.edit')
-                                    <a href="{{route('posesionarios.edit', [$posesionario->id])}}" class="btn btn-warning btn-sm">Editar</a>
-                                @endcan
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

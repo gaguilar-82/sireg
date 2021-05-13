@@ -11,7 +11,7 @@
 
 @section('Content')
 
-{{-- Mensajes --}}
+    {{-- Mensajes --}}
     @if ( session('mensaje') )
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('mensaje') }}
@@ -54,8 +54,8 @@
     @enderror
 
     <div class="container mx-auto pt-5">
+        <h1>Escrituras</h1>
         <div class="bg-gray-200">
-            <h1>Escrituras</h1>
             @can('escrituras.store')
                 <div class="card">
                     <div class="card-body">

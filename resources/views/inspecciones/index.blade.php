@@ -189,8 +189,8 @@
     </div>
     @enderror
     <div class="container mx-auto pt-5">
+        <h1>Inspecciones</h1>
         <div class="bg-gray-200">
-            <h1>Inspecciones</h1>
             @can('inspecciones.store')
                 <div class="card">
                     <div class="card-body">
@@ -226,7 +226,7 @@
                         </table>
                     </div>
                 </div>
-                {{-- Formulario Inspecciones --}}
+            {{-- Formulario Inspecciones --}}
                 <div class="card">
                     <div class="card-body">
                         <form action="{{route('inspecciones.store')}}" method="POST" name="f1">

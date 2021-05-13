@@ -11,7 +11,7 @@
 
 @section('Content')
 
-{{-- Mensajes --}}
+    {{-- Mensajes --}}
     @if ( session('mensaje') )
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('mensaje') }}
