@@ -15,5 +15,9 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    {{-- Confirmación registro eliminado --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    @if (session('eliminar') == 'ok')
+        <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
+    @endif
 @stop

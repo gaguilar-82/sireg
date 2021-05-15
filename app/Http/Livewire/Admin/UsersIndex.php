@@ -26,4 +26,13 @@ class UsersIndex extends Component
 
         return view('livewire.admin.users-index', compact('users'));
     }
+
+    public function alertConfirm()
+    {
+        $this->dispatchBrowserEvent('swal:confirm', [
+                'type' => 'warning',  
+                'message' => 'Are you sure?', 
+                'text' => 'If deleted, you will not be able to recover this imaginary file!'
+            ]);
+    }
 }

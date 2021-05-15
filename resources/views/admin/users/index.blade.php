@@ -15,5 +15,9 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+    {{-- SweetAlert Eliminar --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript" src="{{ asset('js/eliminar.js') }}"></script>
+
 @stop

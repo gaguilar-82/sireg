@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use App\Actions\Fortify\PasswordValidationRules;
 
 
 class UserController extends Controller
 {
+    use PasswordValidationRules;
    
     public function __construct()
     {
@@ -24,13 +27,28 @@ class UserController extends Controller
     
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
    
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => $this->passwordRules(),
+        ]);
+
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request['password']);
+        $user->save();
+
+        return back()->with('mensaje', 'Usuario agregado');
     }
 
     
@@ -55,8 +73,10 @@ class UserController extends Controller
         return redirect()->route('admin.users.edit', $user)->with('info', 'Se asignarón los roles correctamente');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('admin.index')->with('eliminar','ok');
     }
 }

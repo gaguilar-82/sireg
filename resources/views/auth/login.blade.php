@@ -38,7 +38,7 @@
                         {{ __('¿Olvidaste tu contraseña?') }}
                     </a>
                 @endif --}}
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Usuario nuevo</a>
+                {{-- <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Usuario nuevo</a> --}}
 
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}

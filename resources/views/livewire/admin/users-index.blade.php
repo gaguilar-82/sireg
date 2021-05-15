@@ -21,10 +21,16 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td width="10px">
-                                <a class="btn btn-primary" href="{{route('admin.users.edit', $user)}}">Editar</a>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.users.edit', $user)}}">Editar</a>
+                            </td>
+                            <td width="10px">
+                                <form action="{{route('admin.users.destroy',[$user->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm" type="submit" wire:click="alertConfirm">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
-                            
                         @endforeach
                     </tbody>
                 </table>

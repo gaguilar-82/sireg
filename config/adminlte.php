@@ -259,6 +259,13 @@ return [
             'icon' => 'fas fa-users fa-fw',
             'can' => 'admin.index'
         ],
+
+        [
+            'text' => 'Alta de usuarios',
+            'route'  => 'admin.users.create',
+            'icon' => 'fas fa-user-plus fa-fw',
+            'can' => 'admin.index'
+        ],
        
        
         ['header' => 'account_settings'],
