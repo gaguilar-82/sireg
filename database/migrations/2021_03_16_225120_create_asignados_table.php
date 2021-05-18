@@ -18,6 +18,7 @@ class CreateAsignadosTable extends Migration
 
             $table->string('ClaveContrato')->unique();
             $table->double('CostoLote');
+            $table->double('CostoEscrituras');
             $table->date('FechaContrato');
             $table->string('TipoContrato');
             $table->integer('Mensualidades')->nullable();

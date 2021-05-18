@@ -162,15 +162,19 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
                             <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2 value="{{$asignado->ClaveContrato}}">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="CostoLote" class="form-label">Costo del Lote</label>
                             <input type="number" name="CostoLote" id="CostoLote" class="form-control" mb-2 value="{{$asignado->CostoLote}}">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="CostoEscrituras" class="form-label">Costo de las Escrituras</label>
+                            <input type="text" name="CostoEscrituras" id="CostoEscrituras" class="form-control" mb-2 value="{{$asignado->CostoEscrituras}}">
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
                             <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" mb-2 value="{{$asignado->FechaContrato}}">
                         </div>
@@ -180,8 +184,8 @@
                             <label for="TipoContrato" class="form-label">Tipo de contrato</label>
                             <select name="TipoContrato" id="TipoContrato" class="form-control">
                                 <option value="">--Seleccione el Tipo de Contrato--</option>
-                                <option value="Contado" @if ($asignado->TipoContrato == 'Contado') selected="selected" @endif>Contado</option>
-                                <option value="Crédito" @if ($asignado->TipoContrato == 'Crédito') selected="selected" @endif>Crédito</option>
+                                <option value="CONTADO" @if ($asignado->TipoContrato == 'CONTADO') selected="selected" @endif>CONTADO</option>
+                                <option value="CRÉDITO" @if ($asignado->TipoContrato == 'CRÉDITO') selected="selected" @endif>CRÉDITO</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">

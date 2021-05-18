@@ -18,7 +18,7 @@ class CreateInspeccionsTable extends Migration
 
             $table->date('FechaInspeccion');
             $table->string('UsoVivienda');
-            $table->string("MaterialVivienda");
+            $table->string('MaterialVivienda');
             $table->string('MaterialMuros');
             $table->string('MaterialTecho');
             $table->string('MaterialPiso');
@@ -34,6 +34,7 @@ class CreateInspeccionsTable extends Migration
             $table->float('GastoEducacion',8,2);
             $table->float('GastoOtros',8,2);
             $table->float('GastoTotal',8,2);
+            $table->string('SeguridadSocial')->nullable();
             $table->text('ObservacionesInspeccion')->nullable();
 
             $table->unsignedBigInteger('asignados_id');//Relación con Asignados

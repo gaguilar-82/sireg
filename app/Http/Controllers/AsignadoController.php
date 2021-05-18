@@ -35,6 +35,7 @@ class AsignadoController extends Controller
         $asignado->lotes_id = $request->lotes_id;
         $asignado->ClaveContrato = $request->ClaveContrato;
         $asignado->CostoLote = $request->CostoLote;
+        $asignado->CostoEscrituras =$request->CostoEscrituras;
         $asignado->TipoContrato = $request->TipoContrato;
         $asignado->FechaContrato = $request->FechaContrato;
         $asignado->Mensualidades = $request->Mensualidades;
@@ -72,6 +73,7 @@ class AsignadoController extends Controller
                                 Rule::unique('Asignados')->ignore($asignado->id)
                             ],
             'CostoLote' => 'required',
+            'CostoEscrituras' => 'required',
             'TipoContrato' => 'required',
             'FechaContrato' => 'required',
             'Mensualidades' => 'required',

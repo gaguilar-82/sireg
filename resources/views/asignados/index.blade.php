@@ -161,15 +161,20 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
                             <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="CostoLote" class="form-label">Costo del Lote</label>
                             <input type="text" name="CostoLote" id="CostoLote" class="form-control" mb-2>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="CostoEscrituras" class="form-label">Costo de las Escrituras</label>
+                            <input type="text" name="CostoEscrituras" id="CostoEscrituras" class="form-control" mb-2>
+                        </div>
+
+                        <div class="form-group col-md-3">
                             <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
                             <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" value="{{ old('FechaContrato')}}" mb-2>
                         </div>

@@ -28,6 +28,7 @@
                 <p><strong>¿Cuenta con energía eléctrica? </strong><u>{{$inspeccion->EnergiaElectrica}}</u></p>
                 <p><strong>¿Cuenta con agua potable? </strong><u>{{$inspeccion->AguaPotable}}</u></p>
                 <p><strong>¿Cuenta con drenaje? </strong><u>{{$inspeccion->Drenaje}}</u></p>
+                <p><strong>Seguridad Social </strong><u>{{$inspeccion->SeguridadSocial}}</u></p>
                 <p><strong>Antigüedad en la colonia: </strong><u>{{$inspeccion->Antiguedad}} años</u></p>
                 <p><strong>Número de habitantes en la vivienda: </strong><u>{{$inspeccion->Habitantes}} habitantes</u></p>
                 <p><strong>Número de habitaciones en la vivienda: </strong><u>{{$inspeccion->Habitaciones}} habitaciones</u></p>

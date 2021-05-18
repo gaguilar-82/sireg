@@ -276,7 +276,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-3">
                                     <label for="MaterialVivienda" class="form-label">Material de la vivienda</label>
-                                    <select name="MaterialVivienda" id="MaterialVivienda" class="form-control" onChange="material();">
+                                    <select name="MaterialVivienda" id="MaterialVivienda" class="form-control" onChange="materialeditar();">
                                         <option value="">--Seleccione el material--</option>
                                         <option value="SIMPLE" @if ($inspeccion->MaterialVivienda == 'SIMPLE') selected="selected" @endif>SIMPLE</option>
                                         <option value="MIXTO" @if ($inspeccion->MaterialVivienda == 'MIXTO') selected="selected" @endif>MIXTO</option>
@@ -285,20 +285,32 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="MaterialTecho" class="form-label">Material del techo</label>
-                                    <select name="MaterialTecho" id="MaterialTecho" class="form-control">
+                                    <select name="MaterialTecho" id="MaterialTecho" class="form-control" disabled="true">
                                         <option value="">--Seleccione el material--</option>
+                                        <option value="" @if($inspeccion->MaterialTecho == 'LÁMINA DE CARTÓN') selected="selected" @endif>LÁMINA DE CARTÓN</option>
+                                        <option value="" @if($inspeccion->MaterialTecho == 'PALMA') selected="selected" @endif>PALMA</option>
+                                        <option value="" @if($inspeccion->MaterialTecho == 'LÁMINA GALVANIZADA') selected="selected" @endif>LÁMINA GALVANIZADA</option>
+                                        <option value="" @if($inspeccion->MaterialTecho == 'TEJA') selected="selected" @endif>TEJA</option>
+                                        <option value="" @if($inspeccion->MaterialTecho == 'CONCRETO') selected="selected" @endif>CONCRETO</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="MaterialMuros" class="form-label">Material de los muros</label>
-                                    <select name="MaterialMuros" id="MaterialMuros" class="form-control">
+                                    <select name="MaterialMuros" id="MaterialMuros" class="form-control" disabled="true">
                                         <option value="">--Seleccione el material--</option>
+                                        <option value="" @if($inspeccion->MaterialMuros == 'LÁMINA DE CARTÓN') selected="selected" @endif>LÁMINA DE CARTÓN</option>
+                                        <option value="" @if($inspeccion->MaterialMuros == 'MADERA') selected="selected" @endif>MADERA</option>
+                                        <option value="" @if($inspeccion->MaterialMuros == 'BAJAREQUE') selected="selected" @endif>BAJAREQUE</option>
+                                        <option value="" @if($inspeccion->MaterialMuros == 'ADOBE') selected="selected" @endif>ADOBE</option>
+                                        <option value="" @if($inspeccion->MaterialMuros == 'TABIQUE') selected="selected" @endif>TABIQUE</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="MaterialPiso" class="form-label">Material del piso</label>
-                                    <select name="MaterialPiso" id="MaterialPiso" class="form-control">
+                                    <select name="MaterialPiso" id="MaterialPiso" class="form-control" disabled="true">
                                         <option value="">--Seleccione el material--</option>
+                                        <option value="" @if($inspeccion->MaterialPiso == 'TIERRA') selected="selected" @endif>TIERRA</option>
+                                        <option value="" @if($inspeccion->MaterialPiso == 'CEMENTO') selected="selected" @endif>CEMENTO</option>
                                     </select>
                                 </div>
                             </div>
@@ -337,15 +349,27 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
+                                    <label for="SeguridadSocial" class="form-label">Seguridad Social</label>
+                                    <select name="SeguridadSocial" id="SeguridadSocial" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="IMSS" @if ($inspeccion->SeguridadSocial == 'IMSS') selected="selected" @endif>IMSS</option>
+                                        <option value="ISSSTE" @if ($inspeccion->SeguridadSocial == 'ISSSTE') selected="selected" @endif>ISSSTE</option>
+                                        <option value="ISSFAM" @if ($inspeccion->SeguridadSocial == 'ISSFAM') selected="selected" @endif>ISSFAM</option>
+                                        <option value="INSABI" @if ($inspeccion->SeguridadSocial == 'INSABI') selected="selected" @endif>INSABI</option>
+                                        <option value="OTRO" @if ($inspeccion->SeguridadSocial == 'OTRO') selected="selected" @endif>OTRO</option>
+                                        <option value="NINGUNO" @if ($inspeccion->SeguridadSocial == 'NINGUNO') selected="selected" @endif>NINGUNO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label for="Antiguedad" class="form-label">Antigüedad en la colonia</label>
                                     <input type="number" name="Antiguedad" id="Antiguedad" class="form-control" min="1" value="{{$inspeccion->Antiguedad}}" mb-2>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="Habitantes" class="form-label">Número de habitantes</label>
                                     <input type="number" name="Habitantes" id="Habitantes" class="form-control" min="1" value="{{$inspeccion->Habitantes}}" mb-2>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="Habitaciones" class="form-label">Número de habitaciones</label>
                                     <input type="number" name="Habitaciones" id="Habitaciones" class="form-control" min="0" value="{{$inspeccion->Habitaciones}}" mb-2>
                                 </div>
@@ -426,7 +450,7 @@
 
     <script type="text/javascript" src="{{ asset('js/pago.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('js/materialvivienda.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/materialeditar.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/gasto.js') }}"></script>
 

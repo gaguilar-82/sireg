@@ -26,6 +26,17 @@ function SelLote() {
     var claveContrato = claveContrato.concat(numLote);
 
     var costolote = parseFloat(superficie) * parseFloat(valor);
+    
+    if(superficie <= '200')
+    {
+        document.getElementById("CostoEscrituras").value=4658;
+    }
+    else if(superficie > '200')
+    {
+        var excedente = parseFloat(superficie) - parseFloat(200);
+        costoescrituras = (excedente * 21) + 4658;
+        document.getElementById("CostoEscrituras").value = costoescrituras;
+    }
 
     document.getElementById("lote_id").value = idLote;
     

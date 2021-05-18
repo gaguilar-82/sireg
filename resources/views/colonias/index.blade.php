@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">                       
-                            <input type="text" id ="ClaveColonia" value="" name="ClaveColonia">
+                            <input type="hidden" id ="ClaveColonia" value="" name="ClaveColonia">
                         </div>
                     </div>
                     <div class="form-row">

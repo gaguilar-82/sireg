@@ -14,6 +14,7 @@ class Asignado extends Model
                              'lotes_id',
                               'ClaveContrato',
                               'CostoLote',
+                              'CostoEscrituras',
                               'TipoContrato',
                               'FechaContrato',
                               'Mensualidades',

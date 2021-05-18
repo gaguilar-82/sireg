@@ -336,15 +336,27 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
+                                    <label for="SeguridadSocial" class="form-label">Seguridad Social</label>
+                                    <select name="SeguridadSocial" id="SeguridadSocial" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="IMSS" @if (old('SeguridadSocual') == 'IMSS') selected="selected" @endif>IMSS</option>
+                                        <option value="ISSSTE" @if (old('SeguridadSocial') == 'ISSSTE') selected="selected" @endif>ISSSTE</option>
+                                        <option value="ISSFAM" @if (old('SeguridadSocial') == 'ISSFAM') selected="selected" @endif>ISSFAM</option>
+                                        <option value="INSABI" @if (old('SeguridadSocial') == 'INSABI') selected="selected" @endif>INSABI</option>
+                                        <option value="OTRO" @if (old('SeguridadSocial') == 'OTRO') selected="selected" @endif>OTRO</option>
+                                        <option value="NINGUNO" @if (old('SeguridadSocial') == 'NINGUNO') selected="selected" @endif>NINGUNO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label for="Antiguedad" class="form-label">Antigüedad en la colonia</label>
                                     <input type="number" name="Antiguedad" id="Antiguedad" class="form-control" min="1" value="{{ old('Antiguedad')}}" mb-2>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="Habitantes" class="form-label">Número de habitantes</label>
                                     <input type="number" name="Habitantes" id="Habitantes" class="form-control" min="1" value="{{ old('Habitantes')}}" mb-2>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="Habitaciones" class="form-label">Número de habitaciones</label>
                                     <input type="number" name="Habitaciones" id="Habitaciones" class="form-control" min="0" value="{{ old('Habitaciones')}}" mb-2>
                                 </div>

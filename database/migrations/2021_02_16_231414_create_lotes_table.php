@@ -27,10 +27,10 @@ class CreateLotesTable extends Migration
             $table->string('Casa',4)->nullable();
             $table->string('CodigoPostal',5)->nullable();
             $table->float('Superficie');
-            $table->string('Colindancia1')->nullable();
-            $table->string('Colindancia2')->nullable();
-            $table->string('Colindancia3')->nullable();
-            $table->string('Colindancia4')->nullable();
+            $table->string('Colindancia1');
+            $table->string('Colindancia2');
+            $table->string('Colindancia3');
+            $table->string('Colindancia4');
             $table->float('Latitud')->nullable();
             $table->float('Longitud')->nullable();
             $table->string('Uso',15)->nullable();

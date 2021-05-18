@@ -12,6 +12,7 @@
 @php 
     $total=0;
     $porpagar=0;
+    $porpagarescrituras=0;
     $escrituras=0;
 @endphp
 @if ( session('mensaje') )
@@ -39,6 +40,7 @@
                 <p><strong>Tipo de Contrato: </strong>{{$asignado->TipoContrato}}</p>
                 <p><strong>Mensualidades: </strong>{{$asignado->Mensualidades}}</p>
                 <p><strong>Costo del lote: </strong>${{number_format($asignado->CostoLote,2,'.',',')}}</p>
+                <p><strong>Costo de las escrituras: </strong>${{number_format($asignado->CostoEscrituras,2,'.',',')}}</p>
                 @if ($pagos != NULL)
                     @foreach ($pagos as $pago)
                         @if(str_starts_with($pago->conceptos->Clave, 'IP-0001'))
@@ -52,12 +54,19 @@
                             @endphp
                         @endif
                     @endforeach
-                    <p><strong>Pagos a cuenta de regularización: </strong>${{number_format($total,2,'.',',')}}</p>
-                    @php
-                        $porpagar=($asignado->CostoLote)-$total;
-                    @endphp
-                    <p><strong>Saldo por pagar: </strong>${{number_format($porpagar,2,'.',',')}}</p> 
-                    <p><strong>Pago de escrituras: </strong>${{number_format($escrituras,2,'.',',')}}</p>
+                    @if($total > 0)
+                            @php
+                                $porpagar=($asignado->CostoLote)-$total;
+                            @endphp
+                            <p><strong>Saldo por pagar: </strong>${{number_format($porpagar,2,'.',',')}}</p> 
+                    @endif
+                    @if ($escrituras > 0)
+                            @php
+                                $porpagarescrituras=($asignado->CostoEscrituras)-$escrituras;    
+                            @endphp
+                            <p><strong>Pago de escrituras: </strong>${{number_format($escrituras,2,'.',',')}}</p>
+                            <p><strong>Saldo de escrituras por pagar: </strong>${{number_format($porpagarescrituras,2,'.',',')}}</p>
+                    @endif               
                 @endif
                 <p><strong>Fecha del contrato: </strong>{{\Carbon\Carbon::parse($asignado->FechaContrato)->format('d/m/Y')}}</p>
                 @if ($inspeccion != NULL)
@@ -87,7 +96,7 @@
                         @method('put')
                         @csrf
                         @if($pagos != NULL && $inspeccion != NULL)
-                            @if($asignado->CostoLote == $total && $escrituras == "2800" && $inspeccion->UsoVivienda == "HABITADA" && $inspeccion->ZAR != 'SÍ' )
+                            @if($asignado->CostoLote == $total && $asignado->CostoEscrituras == $escrituras && $inspeccion->UsoVivienda == "HABITADA" && $inspeccion->ZAR != 'SÍ' )
                                 <input type="hidden" name="ParaEscriturar" value="Sí">
                                 <button class="btn btn-dark" type="submit">Turnar a escrituración</button>
                             @endif

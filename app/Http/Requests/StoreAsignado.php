@@ -30,6 +30,7 @@ class StoreAsignado extends FormRequest
             'lotes_id' => 'required|unique:asignados,lotes_id',
             'ClaveContrato' => 'required|unique:asignados,ClaveContrato',
             'CostoLote' => 'required',
+            'CostoEscrituras' => 'required',
             'FechaContrato' => 'required',
             'TipoContrato' => 'required',
             'Mensualidades' => 'required',
