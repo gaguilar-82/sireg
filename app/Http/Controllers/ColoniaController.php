@@ -37,6 +37,7 @@ class ColoniaController extends Controller
         $colonia->SuperficieAdquirida = $request->SuperficieAdquirida;
         $colonia->ObservacionesColonia = $request->ObservacionesColonia;
         $colonia->municipios_id = $request->municipios_id;
+        $colonia->created_by = auth()->user()->id;
 
         $colonia->save();
 

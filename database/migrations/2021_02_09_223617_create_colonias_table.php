@@ -30,6 +30,12 @@ class CreateColoniasTable extends Migration
             ->references('id')->on('municipios')
             ->onDelete('cascade');
 
+            $table->unsignedBigInteger('created_by')->nullable();
+
+            $table->foreign('created_by')//Clave foranea
+            ->references('id')->on('users')
+            ->onDelete('set null');
+
             $table->timestamps();
         });
     }

@@ -65,4 +65,8 @@ class User extends Authenticatable
     public function adminlte_desc(){
         return "Administrador";
     }
+
+    public function colonias(){
+        return $this->hasMany(Colonia::class);
+    }
 }
