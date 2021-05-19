@@ -35,6 +35,12 @@ class CreatePosesionariosTable extends Migration
             $table->string('PoderNotarial')->nullable();
             $table->text('ObservacionesPosesionario')->nullable();
 
+            $table->unsignedBigInteger('users_id')->nullable();//Relación con Users
+
+            $table->foreign('users_id')//Clave foranea
+            ->references('id')->on('users')
+            ->onDelete('set null');
+
             $table->timestamps();
         });
     }

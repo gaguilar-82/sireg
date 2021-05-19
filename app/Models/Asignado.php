@@ -9,18 +9,6 @@ class Asignado extends Model
 {
     use HasFactory;
 
-    //Asignación Masiva Update
-    protected $fillable = ['posesionarios_id',
-                             'lotes_id',
-                              'ClaveContrato',
-                              'CostoLote',
-                              'CostoEscrituras',
-                              'TipoContrato',
-                              'FechaContrato',
-                              'Mensualidades',
-                              'ObservacionesAsignado'];
-
-
     //Relación uno a uno (inversa)
     public function posesionarios()
     {
@@ -43,5 +31,10 @@ class Asignado extends Model
     //Relación uno a uno
     public function escrituras(){
       return $this->hasOne(Escritura::class);
-  }
+    }
+
+    //Relación uno a muchos (inversa)
+    public function users(){
+      return $this->belongsTo(User::class);
+    }
 }

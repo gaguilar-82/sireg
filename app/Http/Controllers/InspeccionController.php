@@ -18,13 +18,35 @@ class InspeccionController extends Controller
         return view('inspecciones.index', compact('inspectores','asignados', 'inspecciones'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
-
     public function store(StoreInspeccion $request){
+
+        $inspeccion = new Inspeccion();
+
+        $inspeccion->FechaInspeccion = $request->FechaInspeccion;
+        $inspeccion->UsoVivienda = $request->UsoVivienda;
+        $inspeccion->MaterialVivienda = $request->MaterialVivienda;
+        $inspeccion->MaterialMuros = $request->MaterialMuros;
+        $inspeccion->MaterialTecho = $request->MaterialTecho;
+        $inspeccion->MaterialPiso = $request->MaterialPiso;
+        $inspeccion->ZAR = $request->ZAR;
+        $inspeccion->EnergiaElectrica = $request->EnergiaElectrica;
+        $inspeccion->AguaPotable = $request->AguaPotable;
+        $inspeccion->Drenaje = $request->Drenaje;
+        $inspeccion->Antiguedad = $request->Antiguedad;
+        $inspeccion->Habitantes = $request->Habitantes;
+        $inspeccion->Habitaciones = $request->Habitaciones;
+        $inspeccion->GastoAlimentacion = $request->GastoAlimentacion;
+        $inspeccion->GastoSalud = $request->GastoSalud; 
+        $inspeccion->GastoEducacion = $request->GastoEducacion;
+        $inspeccion->GastoOtros = $request->GastoOtros;
+        $inspeccion->GastoTotal= $request->GastoTotal;
+        $inspeccion->SeguridadSocial = $request->SeguridadSocial;
+        $inspeccion->ObservacionesInspeccion = $request->ObservacionesInspeccion;
+        $inspeccion->asignados_id = $request->asignados_id;
+        $inspeccion->inspectors_id = $request->inspectors_id;
+        $inspeccion->users_id = auth()->user()->id;
         
-        $inspeccion = Inspeccion::create($request->all());
+        $inspeccion->save();
 
         return back()->with('mensaje', 'Inspección agregada');
     }
@@ -42,8 +64,55 @@ class InspeccionController extends Controller
     }
 
     public function update(Request $request, Inspeccion $inspeccion){
+
+        $request->validate([
+            'asignados_id' => 'required',
+            'inspectors_id' => 'required',
+            'FechaInspeccion' => 'required',
+            'UsoVivienda' => 'required',
+            'MaterialVivienda' => 'required',
+            'MaterialMuros' => 'required',
+            'MaterialTecho' => 'required',
+            'MaterialPiso' => 'required',
+            'ZAR' => 'required',
+            'EnergiaElectrica' => 'required',
+            'AguaPotable' => 'required',
+            'Drenaje' => 'required',
+            'Antiguedad' => 'required', 
+            'Habitantes' => 'required',
+            'Habitaciones' => 'required',
+            'GastoAlimentacion' => 'required',
+            'GastoSalud' => 'required',
+            'GastoEducacion' => 'required',
+            'GastoOtros' => 'required',
+            'GastoTotal' => 'required',
+        ]);
+
+        $inspeccion->FechaInspeccion = $request->FechaInspeccion;
+        $inspeccion->UsoVivienda = $request->UsoVivienda;
+        $inspeccion->MaterialVivienda = $request->MaterialVivienda;
+        $inspeccion->MaterialMuros = $request->MaterialMuros;
+        $inspeccion->MaterialTecho = $request->MaterialTecho;
+        $inspeccion->MaterialPiso = $request->MaterialPiso;
+        $inspeccion->ZAR = $request->ZAR;
+        $inspeccion->EnergiaElectrica = $request->EnergiaElectrica;
+        $inspeccion->AguaPotable = $request->AguaPotable;
+        $inspeccion->Drenaje = $request->Drenaje;
+        $inspeccion->Antiguedad = $request->Antiguedad;
+        $inspeccion->Habitantes = $request->Habitantes;
+        $inspeccion->Habitaciones = $request->Habitaciones;
+        $inspeccion->GastoAlimentacion = $request->GastoAlimentacion;
+        $inspeccion->GastoSalud = $request->GastoSalud; 
+        $inspeccion->GastoEducacion = $request->GastoEducacion;
+        $inspeccion->GastoOtros = $request->GastoOtros;
+        $inspeccion->GastoTotal= $request->GastoTotal;
+        $inspeccion->SeguridadSocial = $request->SeguridadSocial;
+        $inspeccion->ObservacionesInspeccion = $request->ObservacionesInspeccion;
+        $inspeccion->asignados_id = $request->asignados_id;
+        $inspeccion->inspectors_id = $request->inspectors_id;
+        $inspeccion->users_id = auth()->user()->id;
           
-         $inspeccion->update($request->all());
+        $inspeccion->update();
          
          return redirect()->route('inspecciones.show', $inspeccion)->with('mensaje', 'Registro actualizado');
     }

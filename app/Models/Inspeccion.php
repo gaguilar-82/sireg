@@ -21,5 +21,10 @@ class Inspeccion extends Model
     public function inspectors(){
         return $this->belongsTo(Inspector::class);
     }
+
+    //Relación uno a muchos (inversa)
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
     
 }

@@ -38,7 +38,13 @@
                 @endcan
             </div>
             <div class="card-footer text-muted">
-              Fecha de creación {{$colonia->created_at->diffForHumans()}}
+                @if($colonia->created_at == $colonia->updated_at)
+                    <p>Fecha de creación: {{$colonia->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$colonia->users->name}}</p>
+                @elseif ($colonia->created_at != $colonia->updated_at)
+                    <p>Fecha de actualización: {{$colonia->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$colonia->users->name}}</p>   
+                @endif
             </div>
           </div>
     </div>

@@ -19,10 +19,6 @@ class ColoniaController extends Controller
         return view('colonias.index', compact('municipios','colonias'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
-
     public function store(StoreColonia $request){
 
               
@@ -37,8 +33,8 @@ class ColoniaController extends Controller
         $colonia->SuperficieAdquirida = $request->SuperficieAdquirida;
         $colonia->ObservacionesColonia = $request->ObservacionesColonia;
         $colonia->municipios_id = $request->municipios_id;
-        $colonia->created_by = auth()->user()->id;
-
+        $colonia->users_id = auth()->user()->id;
+ 
         $colonia->save();
 
         return back()->with('mensaje', 'Colonia agregada');
@@ -67,25 +63,22 @@ class ColoniaController extends Controller
             'ValorMetroCuadrado' => 'required|regex:/^\d*(\.\d{1,2})?$/',
         ]);
 
-        $colonia->update($request->all());
+        $colonia->NombreColonia = $request->NombreColonia;
+        $colonia->TipoColonia = $request->TipoColonia;
+        $colonia->ClaveColonia = $request->ClaveColonia;
+        $colonia->ValorMetroCuadrado = $request->ValorMetroCuadrado;
+        $colonia->TituloPropiedad = $request->TituloPropiedad;
+        $colonia->Lotificacion = $request->Lotificacion;
+        $colonia->SuperficieAdquirida = $request->SuperficieAdquirida;
+        $colonia->ObservacionesColonia = $request->ObservacionesColonia;
+        $colonia->municipios_id = $request->municipios_id;
+        $colonia->users_id = auth()->user()->id;
+
+        $colonia->update();
         
         return redirect()->route('colonias.show', $colonia)->with('mensaje', 'Registro actualizado');
             
     }
-
-    /* public function update(StoreColonia $request, Colonia $colonia){
-              
-        $colonia->NombreColonia = $request->NombreColonia;
-        $colonia->TipoColonia = $request->TipoColonia;
-        $colonia->Municipio = $request->Municipio;
-        $colonia->ClaveColonia = $request->ClaveColonia;
-        $colonia->ValorMetroCuadrado = $request->ValorMetroCuadrado;
-        $colonia->ObservacionesColonia = $request->ObservacionesColonia;
-
-        $colonia->save();
-
-        return redirect()->route('colonias.show', $colonia);
-    } */
 
     public function destroy(Colonia $colonia){
         $colonia->delete();

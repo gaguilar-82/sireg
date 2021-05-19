@@ -37,6 +37,7 @@ class PagoController extends Controller
         $pago->conceptos_id = $request->conceptos_id;
         $pago->CantidadPago = $request->CantidadPago;
         $pago->ObservacionesPago = $request->ObservacionesPago;
+        $pago->users_id = auth()->user()->id;
 
         $pago->save();
 
@@ -66,7 +67,15 @@ class PagoController extends Controller
             'CantidadPago' => 'required'
         ]);
 
-        $pago->update($request->all());
+        $pago->asignados_id = $request->asignados_id;
+        $pago->FolioPago = $request->FolioPago;
+        $pago->FechaPago = $request->FechaPago;
+        $pago->conceptos_id = $request->conceptos_id;
+        $pago->CantidadPago = $request->CantidadPago;
+        $pago->ObservacionesPago = $request->ObservacionesPago;
+        $pago->users_id = auth()->user()->id;
+
+        $pago->update();
         
         return redirect()->route('pagos.show', $pago)->with('mensaje', 'Registro actualizado');
             

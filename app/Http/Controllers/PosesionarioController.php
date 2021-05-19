@@ -19,21 +19,6 @@ class PosesionarioController extends Controller
         return view('posesionarios.index', compact('posesionarios'));
     }
 
-    /* public function store(Request $request){
-
-        $request->validate([
-
-            'ActaNacimiento' => 'mimes:pdf|max:2048'
-        ]);
-
-        $ActaNacimiento = $request->file('ActaNacimiento')->store('public/documentos');
-        
-        $urlActaNacimiento = Storage::url($ActaNacimiento);
-
-        return $urlActaNacimiento;
-
-    } */
-
     public function store(StorePosesionario $request){
         
         if(($request->file('ActaNacimiento')) != NULL){
@@ -105,6 +90,7 @@ class PosesionarioController extends Controller
         $posesionario->ConstanciaSolteria = $urlConstanciaSolteria;
         $posesionario->PoderNotarial = $urlPoderNotarial;
         $posesionario->ObservacionesPosesionario = $request->ObservacionesPosesionario;
+        $posesionario->users_id = auth()->user()->id;
        
         $posesionario->save();
 
@@ -155,7 +141,8 @@ class PosesionarioController extends Controller
             'EstadoCivil' => $request->EstadoCivil,
             'Ocupacion' => $request->Ocupacion,
             'Telefono' => $request->Telefono,
-            'ObservacionesPosesionario' => $request->ObservacionesPosesionario
+            'ObservacionesPosesionario' => $request->ObservacionesPosesionario,
+            'users_id' => auth()->user()->id
         ];
 
         if($request->hasfile('ActaNacimiento')){

@@ -23,10 +23,6 @@ class EscrituraController extends Controller
         return view('escrituras.index', compact('directores','asignados','escrituras'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
-
     public function store(StoreEscritura $request)
     {
         $escritura = new Escritura();
@@ -36,6 +32,7 @@ class EscrituraController extends Controller
         $escritura->asignados_id = $request->asignados_id;
         $escritura->directors_id = $request->directors_id;
         $escritura->ObservacionesEscritura = $request->ObservacionesEscritura;
+        $escritura->users_id = auth()->user()->id;
 
         $escritura->save();
 
@@ -53,10 +50,6 @@ class EscrituraController extends Controller
         return view('escrituras.edit', compact('directores','asignados','escritura'));
     }
 
-    /* public function update(Request $request){
-        return $request->all();
-    } */
-
     public function update(Request $request, Escritura $escritura){
         
         $request->validate([          
@@ -70,7 +63,14 @@ class EscrituraController extends Controller
             'directors_id' => 'required',
         ]);
 
-        $escritura->update($request->all());
+        $escritura->FolioEscritura = $request->FolioEscritura;
+        $escritura->FechaEscritura = $request->FechaEscritura;
+        $escritura->asignados_id = $request->asignados_id;
+        $escritura->directors_id = $request->directors_id;
+        $escritura->ObservacionesEscritura = $request->ObservacionesEscritura;
+        $escritura->users_id = auth()->user()->id;
+
+        $escritura->update();
         
         return redirect()->route('escrituras.show', $escritura)->with('mensaje', 'Registro actualizado');
             

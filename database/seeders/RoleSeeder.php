@@ -94,7 +94,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'escrituras.edit'])->syncRoles([$rol7]);
         Permission::create(['name' => 'escrituras.update'])->syncRoles([$rol7]);
         Permission::create(['name' => 'escrituras.destroy'])->syncRoles([$rol7]);
-        Permission::create(['name' => 'escrituras.print'])->syncRoles([$rol2, $rol3, $rol4]);
-        Permission::create(['name' => 'escrituras.pdf'])->syncRoles([$rol2]);
+        Permission::create(['name' => 'escrituras.print'])->syncRoles([$rol2, $rol3, $rol4, $rol7]);
+        Permission::create(['name' => 'escrituras.pdf'])->syncRoles([$rol2, $rol7]);
     }
 }

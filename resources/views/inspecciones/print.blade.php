@@ -59,7 +59,13 @@
                 <p><u>{{$inspeccion->inspectors->NombreInspector}}</u></p>
             </div>
             <div class="card-footer text-muted text-center">
-                Fecha de creación: {{$inspeccion->created_at->diffForHumans()}}
+                @if($inspeccion->created_at == $inspeccion->updated_at)
+                    <p>Fecha de creación: {{$inspeccion->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$inspeccion->users->name}}</p>
+                @elseif ($inspeccion->created_at != $inspeccion->updated_at)
+                    <p>Fecha de actualización: {{$inspeccion->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$inspeccion->users->name}}</p>   
+                @endif
             </div>
         </div>
     </div>

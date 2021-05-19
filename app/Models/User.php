@@ -62,11 +62,43 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
     public function adminlte_desc(){
         return "Administrador";
     }
 
+    //Relación uno a muchos
     public function colonias(){
         return $this->hasMany(Colonia::class);
     }
+
+    //Relación uno a muchos
+    public function lotes(){
+        return $this->hasMany(Lote::class);
+    }
+
+    //Relación uno a muchos
+    public function posesionarios(){
+        return $this->hasMany(Posesionario::class);
+    }
+
+    //Relación uno a muchos
+    public function asignados(){
+        return $this->hasMany(Asignado::class);
+    }
+
+    //Relación uno a muchos
+    public function inspeccions(){
+        return $this->hasMany(Inspeccion::class);
+    }
+
+    //Relación uno a muchos
+    public function pagos(){
+        return $this->hasMany(Pago::class);
+    }
+
+    //Relación uno a muchos
+    public function escrituras(){
+        return $this->hasMany(Escritura::class);
+    }    
 }

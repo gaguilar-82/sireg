@@ -66,7 +66,8 @@
                 <p><strong>Saldo por pagar: </strong>${{number_format($porpagar,2,'.',',')}}</p>
             </div>
             <div class="card-footer text-muted text-center">
-                Fecha de impresión {{\Carbon\Carbon::now()->format('d/m/Y')}}
+                Fecha de impresión: {{\Carbon\Carbon::now()->format('d/m/Y')}}
+                Impreso por: {{auth()->user()->name}}
             </div>
             <div class="visible-print text-center">
                 {!! QrCode::size(75)->encoding('UTF-8')->errorCorrection('H')->generate($pago->asignados->ClaveContrato); !!}

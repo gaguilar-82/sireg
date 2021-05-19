@@ -79,12 +79,18 @@
                 @can('escrituras.print')
                     <a href="{{route('escrituras.print', [$escritura->id])}}" target="_blank" class="btn btn-success">Vista previa</a>
                 @endcan
-                @can('escriturs.pdf')
+                @can('escrituras.pdf')
                     <a href="{{route('escrituras.pdf', [$escritura->id])}}" target="_blank" class="btn btn-dark">Generar Escritura</a>
                 @endcan
             </div>
             <div class="card-footer text-muted text-center">
-                Fecha de creación: {{$escritura->created_at->diffForHumans()}}
+                @if($escritura->created_at == $escritura->updated_at)
+                    <p>Fecha de creación: {{$escritura->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$escritura->users->name}}</p>
+                @elseif ($escritura->created_at != $escritura->updated_at)
+                    <p>Fecha de actualización: {{$escritura->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$escritura->users->name}}</p>   
+                @endif
             </div>
         </div>
     </div>

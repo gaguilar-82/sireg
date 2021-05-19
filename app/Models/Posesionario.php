@@ -31,4 +31,9 @@ class Posesionario extends Model
     public function asignados(){
         return $this->hasOne(Asignado::class);
     }
+
+    //Relación uno a muchos (inversa)
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

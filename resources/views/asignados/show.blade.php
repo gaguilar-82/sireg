@@ -27,11 +27,11 @@
     <div class="bg-gray-200">    
         <div class="card text-center">
             <div class="card-header">
-                <h4>{{$asignado->lotes->colonias->NombreColonia}} Manzana {{$asignado->lotes->Manzana}} Lote {{$asignado->lotes->NumLote}}</h4>
+                <h4>{{strtoupper($asignado->lotes->colonias->NombreColonia)}} Manzana {{$asignado->lotes->Manzana}} Lote {{$asignado->lotes->NumLote}}</h4>
                 <h5>{{strtoupper($asignado->ClaveContrato)}}</h5>
             </div>
             <div class="card-body">
-                <p><strong>Nombre del Posesionario: </strong> {{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</p>
+                <p><strong>Nombre del Posesionario: </strong> {{strtoupper($asignado->posesionarios->NombrePosesionario)}} {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</p>
                 <p><strong>Tipo de Colonia: </strong>{{$asignado->lotes->colonias->TipoColonia}}</p>
                 <p><strong>Municipio: </strong>{{$asignado->lotes->colonias->municipios->NombreMunicipio}}</p>
                 <p><strong>Clave: </strong>{{strtoupper($asignado->lotes->colonias->ClaveColonia)}}</p>
@@ -105,7 +105,13 @@
                 @endcan
             </div>
             <div class="card-footer text-muted">
-              Fecha de creación {{$asignado->created_at->diffForHumans()}}
+                @if($asignado->created_at == $asignado->updated_at)
+                    <p>Fecha de creación: {{$asignado->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$asignado->users->name}}</p>
+                @elseif ($asignado->created_at != $asignado->updated_at)
+                    <p>Fecha de actualización: {{$asignado->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$asignado->users->name}}</p>   
+                @endif
             </div>
           </div>
     </div>

@@ -40,6 +40,7 @@ class AsignadoController extends Controller
         $asignado->FechaContrato = $request->FechaContrato;
         $asignado->Mensualidades = $request->Mensualidades;
         $asignado->ObservacionesAsignado = $request->ObservacionesAsignado;
+        $asignado->users_id = auth()->user()->id;
 
         $asignado->save();
 
@@ -59,8 +60,6 @@ class AsignadoController extends Controller
     }
 
     public function update(Request $request, Asignado $asignado){
-        
-       // return $request->all();
 
         $request->validate([
             'posesionarios_id' => ['required',
@@ -79,7 +78,18 @@ class AsignadoController extends Controller
             'Mensualidades' => 'required',
         ]);
 
-        $asignado->update($request->all());
+        $asignado->posesionarios_id = $request->posesionarios_id;
+        $asignado->lotes_id = $request->lotes_id;
+        $asignado->ClaveContrato = $request->ClaveContrato;
+        $asignado->CostoLote = $request->CostoLote;
+        $asignado->CostoEscrituras =$request->CostoEscrituras;
+        $asignado->TipoContrato = $request->TipoContrato;
+        $asignado->FechaContrato = $request->FechaContrato;
+        $asignado->Mensualidades = $request->Mensualidades;
+        $asignado->ObservacionesAsignado = $request->ObservacionesAsignado;
+        $asignado->users_id = auth()->user()->id;
+
+        $asignado->update();
         
         return redirect()->route('asignados.show', $asignado)->with('mensaje', 'Registro actualizado');
     }

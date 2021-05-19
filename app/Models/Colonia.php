@@ -8,19 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Colonia extends Model
 {
     use HasFactory;
-
-    //Asignación Masiva Update
-    protected $fillable = ['NombreColonia',
-                             'TipoColonia',
-                              'municipios_id',
-                              'ClaveColonia',
-                              'ValorMetroCuadrado',
-                              'TituloPropiedad',
-                              'Lotificacion',
-                              'SuperficieAdquirida',
-                              'ObservacionesColonia'];
-
-       
+  
     //Relación uno a muchos
     public function lotes(){
         return $this->hasMany(Lote::class);
@@ -29,5 +17,10 @@ class Colonia extends Model
     //Relación uno a muchos (inversa)
     public function municipios(){
         return $this->belongsTo(Municipio::class);
+    }
+
+    //Relación uno a muchos (inversa)
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

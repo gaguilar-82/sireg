@@ -61,6 +61,8 @@ class LoteController extends Controller
         
         $lote->colonias_id = $request->colonias_id;
 
+        $lote->users_id = auth()->user()->id;
+
         $lote->save();
 
         return back()->with('mensaje', 'Lote agregado');
@@ -124,7 +126,8 @@ class LoteController extends Controller
             'Fusion' => $request->Fusion,
             'Actualizacion' => $request->Actualizacion,
             'ConflictoLegal' => $request->ConflictoLegal,
-            'ObservacionesLote' => $request->ObservacionesLote
+            'ObservacionesLote' => $request->ObservacionesLote,
+            'users_id' => auth()->user()->id
         ];
 
         if(($request->file('Croquis')) != NULL){

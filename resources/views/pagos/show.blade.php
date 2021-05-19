@@ -38,6 +38,8 @@
                             <th>Fecha</th>
                             <th>Concepto</th>
                             <th>Cantidad</th>
+                            <th>Cobrado por</th>
+                            <th>Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,12 +50,14 @@
                                     <td>{{\Carbon\Carbon::parse($recibo->FechaPago)->format('d/m/Y')}}</td>
                                     <td>{{$recibo->conceptos->Clave}}-{{$recibo->conceptos->NombreConcepto}}</td>
                                     <td>${{number_format($recibo->CantidadPago,2,'.',',')}}</td>
-                                    @if(str_starts_with($recibo->conceptos->Clave, 'IP-0001'))
+                                    <td>{{$recibo->users->name}}</td>
+                                    <th>{{$recibo->ObservacionesPago}}</th>
+                                </tr>
+                                @if(str_starts_with($recibo->conceptos->Clave, 'IP-0001'))
                                         @php
                                             $total=$total+$recibo->CantidadPago
                                         @endphp
-                                    @endif
-                                </tr>
+                                @endif
                             @endif
                         @endforeach
                     </tbody>
@@ -71,7 +75,11 @@
                 @endcan
             </div>
             <div class="card-footer text-muted text-center">
-                Fecha de creación: {{$pago->created_at->diffForHumans()}}
+                @if($pago->created_at == $pago->updated_at)
+                    <p>Fecha de creación: {{$pago->created_at->diffForHumans()}}</p>
+                @elseif ($pago->created_at != $pago->updated_at)
+                    <p>Fecha de actualización: {{$pago->updated_at->diffForHumans()}}</p>    
+                @endif
             </div>
         </div>
     </div>

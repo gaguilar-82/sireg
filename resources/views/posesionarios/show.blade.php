@@ -63,7 +63,13 @@
                 @endcan
             </div>
             <div class="card-footer text-muted">
-              Fecha de creación {{$posesionario->created_at->diffForHumans()}}
+                @if($posesionario->created_at == $posesionario->updated_at)
+                    <p>Fecha de creación: {{$posesionario->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$posesionario->users->name}}</p>
+                @elseif ($posesionario->created_at != $posesionario->updated_at)
+                    <p>Fecha de actualización: {{$posesionario->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$posesionario->users->name}}</p>   
+                 @endif
             </div>
           </div>
         </div>

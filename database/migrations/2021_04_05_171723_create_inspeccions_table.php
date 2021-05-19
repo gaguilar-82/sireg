@@ -49,6 +49,12 @@ class CreateInspeccionsTable extends Migration
             ->references('id')->on('inspectors')
             ->onDelete('cascade');
 
+            $table->unsignedBigInteger('users_id')->nullable();//Relación con Users
+
+            $table->foreign('users_id')//Clave foranea
+            ->references('id')->on('users')
+            ->onDelete('set null');
+
             $table->timestamps();
         });
     }

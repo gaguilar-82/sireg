@@ -36,7 +36,7 @@ class StoreInspeccion extends FormRequest
             'EnergiaElectrica' => 'required',
             'AguaPotable' => 'required',
             'Drenaje' => 'required',
-            'Antiguedad' => 'required',
+            'Antiguedad' => 'required', 
             'Habitantes' => 'required',
             'Habitaciones' => 'required',
             'GastoAlimentacion' => 'required',

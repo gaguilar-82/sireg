@@ -80,7 +80,13 @@
                 @endif
             </div>
             <div class="card-footer text-muted text-center">
-                Fecha de creación: {{$escritura->created_at->diffForHumans()}}
+                @if($escritura->created_at == $escritura->updated_at)
+                    <p>Fecha de creación: {{$escritura->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$escritura->users->name}}</p>
+                @elseif ($escritura->created_at != $escritura->updated_at)
+                    <p>Fecha de actualización: {{$escritura->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$escritura->users->name}}</p>   
+                @endif
             </div>
         </div>
     </div>
