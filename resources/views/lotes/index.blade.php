@@ -51,6 +51,46 @@
         </button>
     </div>
     @enderror
+    @error('Superficie')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('Colindancia1')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('Colindancia2')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('Colindancia3')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('Colindancia4')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
     @error('Croquis')
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{$message}}

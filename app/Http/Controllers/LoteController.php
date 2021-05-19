@@ -97,6 +97,10 @@ class LoteController extends Controller
             'NumLote' => 'required|max:4', 
             'Casa' => 'max:4',
             'Superficie' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'Colindancia1' => 'required',
+            'Colindancia2' => 'required',
+            'Colindancia3' => 'required',
+            'Colindancia4' => 'required',
             'Croquis' => 'nullable|image|dimensions:max_width=600,max_height=600|max:2048'
         ]);
 

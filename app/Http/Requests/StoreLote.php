@@ -35,6 +35,10 @@ class StoreLote extends FormRequest
             'NumLote' => 'required|max:4',
             'Casa' => 'max:4',
             'Superficie' => 'required|regex:/^\d*(\.\d{1,2})?$/',
+            'Colindancia1' => 'required',
+            'Colindancia2' => 'required',
+            'Colindancia3' => 'required',
+            'Colindancia4' => 'required',
             'Croquis' => 'nullable|image|dimensions:max_width=600,max_height=600|max:2048',
             //'Latitud' => 'regex:/^\d*(\.\d{1,2})?$/',
             //'Longitud' => 'regex:/^\d*(\.\d{1,2})?$/'
@@ -46,7 +50,11 @@ class StoreLote extends FormRequest
         return [
             'colonias_id' => 'Nombre de la Colonia',
             'NumLote' => 'Número de lote',
-            'ClaveLote' => 'Clave Unica de Lote'
+            'ClaveLote' => 'Clave Unica de Lote',
+            'Colindancia1' => 'Colindancia 1',
+            'Colindancia2' => 'Colindancia 2',
+            'Colindancia3' => 'Colindancia 3',
+            'Colindancia4' => 'Colindancia 4'
         ];
     }
 
