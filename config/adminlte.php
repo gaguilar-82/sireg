@@ -266,6 +266,13 @@ return [
             'icon' => 'fas fa-user-plus fa-fw',
             'can' => 'admin.index'
         ],
+
+        [
+            'text' => 'Directores',
+            'route'  => 'admin.directors.index',
+            'icon' => 'fas fa-user-tie fa-fw',
+            'can' => 'admin.index'
+        ],
        
        
         ['header' => 'account_settings'],

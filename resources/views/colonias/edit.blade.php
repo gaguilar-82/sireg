@@ -47,8 +47,8 @@
   @enderror
 
   <div class="container mx-auto pt-5">
+    <h1>Editar Colonia</h1>
     <div class="bg-gray-200">
-      <h1>Editar Colonia</h1>
       @can('colonias.update')
         <form action="{{route('colonias.update', $colonia)}}" onSubmit="javascript:procesar();" method="POST">
             @csrf

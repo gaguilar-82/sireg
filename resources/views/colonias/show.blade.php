@@ -12,7 +12,7 @@
     <div class="bg-gray-200">    
         <div class="card text-center">
             <div class="card-header">
-                <h4>COLONIA {{$colonia->NombreColonia}}</h4>
+                <h4>COLONIA {{strtoupper($colonia->NombreColonia)}}</h4>
                 <h5>{{strtoupper($colonia->ClaveColonia)}}</h5>
             </div>
             <div class="card-body">
@@ -26,7 +26,7 @@
                 <p><strong>Observaciones: </strong>{{$colonia->ObservacionesColonia}}</p>
                 <br>
                 @can('colonias.edit')
-                    <a href="{{route('colonias.edit', $colonia)}}" class="btn btn-warning editar">Editar Colonia</a>
+                    <a href="{{route('colonias.edit', $colonia)}}" class="btn btn-warning">Editar Colonia</a>
                 @endcan
                 <a href="{{route('colonias.index')}}" class="btn btn-info">Regresar a Colonias</a>
                 @can('colonias.destroy')

@@ -40,8 +40,6 @@ class StoreLote extends FormRequest
             'Colindancia3' => 'required',
             'Colindancia4' => 'required',
             'Croquis' => 'nullable|image|dimensions:max_width=600,max_height=600|max:2048',
-            //'Latitud' => 'regex:/^\d*(\.\d{1,2})?$/',
-            //'Longitud' => 'regex:/^\d*(\.\d{1,2})?$/'
         ];
     }
 

@@ -18,9 +18,6 @@ class LoteController extends Controller
         return view('lotes.index', compact('colonias','lotes'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
 
     public function store(StoreLote $request){
              
