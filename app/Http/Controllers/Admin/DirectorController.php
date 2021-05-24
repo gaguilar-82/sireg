@@ -3,28 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Director;
 use Illuminate\Http\Request;
 
 class DirectorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('admin.directors.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        //
+        return view('admin.directors.create');
     }
 
     /**
@@ -35,51 +28,83 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'NombreDirector' => 'required|max:255',
+            'ApellidoPaternoDirector' => 'required|max:255',
+            'ApellidoMaternoDirector' => 'required|max:255',
+            'FechaNacimientoDirector' => 'required',
+            'LugarNacimientoDirector' => 'required|max:255',
+            'EstadoCivilDirector' => 'required|max:255',
+            'FechaNombramiento' => 'required',
+            'ExpedidoPor' => 'required|max:255',
+            'ActaPublica' => 'required',
+        ]);
+
+        $director = new Director();
+
+        $director->NombreDirector = $request->NombreDirector;
+        $director->ApellidoPaternoDirector = $request->ApellidoPaternoDirector;
+        $director->ApellidoMaternoDirector = $request->ApellidoMaternoDirector;
+        $director->FechaNacimientoDirector = $request->FechaNacimientoDirector;
+        $director->LugarNacimientoDirector = $request->LugarNacimientoDirector;
+        $director->EstadoCivilDirector = $request->EstadoCivilDirector;
+        $director->FechaNombramiento = $request->FechaNombramiento;
+        $director->ExpedidoPor = $request->ExpedidoPor;
+        $director->ActaPublica = $request->ActaPublica;
+
+        $director->save();
+
+        return back()->with('mensaje', 'Director agregado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+    public function edit(Director $director)
     {
-        //
+        return view('admin.directors.edit', compact('director'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(Request $request, Director $director)
     {
-        //
-    }
+        $request->validate([
+            'NombreDirector' => 'required|max:255',
+            'ApellidoPaternoDirector' => 'required|max:255',
+            'ApellidoMaternoDirector' => 'required|max:255',
+            'FechaNacimientoDirector' => 'required',
+            'LugarNacimientoDirector' => 'required|max:255',
+            'EstadoCivilDirector' => 'required|max:255',
+            'FechaNombramiento' => 'required',
+            'ExpedidoPor' => 'required|max:255',
+            'ActaPublica' => 'required',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+        $director->NombreDirector = $request->NombreDirector;
+        $director->ApellidoPaternoDirector = $request->ApellidoPaternoDirector;
+        $director->ApellidoMaternoDirector = $request->ApellidoMaternoDirector;
+        $director->FechaNacimientoDirector = $request->FechaNacimientoDirector;
+        $director->LugarNacimientoDirector = $request->LugarNacimientoDirector;
+        $director->EstadoCivilDirector = $request->EstadoCivilDirector;
+        $director->FechaNombramiento = $request->FechaNombramiento;
+        $director->ExpedidoPor = $request->ExpedidoPor;
+        $director->ActaPublica = $request->ActaPublica;
+
+        $director->update();
+
+        return back()->with('mensaje', 'Director actualizado');
+    }
+    
+
+    
+    public function destroy(Director $director)
     {
-        //
+        $director->delete();
+
+        return redirect()->route('admin.index')->with('eliminar','ok');
     }
 }

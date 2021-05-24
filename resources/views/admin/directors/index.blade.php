@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Bienvenido a SIREG.</p>
+    @livewire('admin.directors-index')
 @stop
 
 @section('css')
@@ -15,9 +15,15 @@
 @stop
 
 @section('js')
+
+    {{-- SweetAlert Eliminar --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript" src="{{ asset('js/eliminar.js') }}"></script>
+
     {{-- Confirmación registro eliminado --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @if (session('eliminar') == 'ok')
         <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
     @endif
+    
 @stop

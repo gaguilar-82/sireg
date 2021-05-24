@@ -273,6 +273,13 @@ return [
             'icon' => 'fas fa-user-tie fa-fw',
             'can' => 'admin.index'
         ],
+
+        [
+            'text' => 'Alta de directores',
+            'route'  => 'admin.directors.create',
+            'icon' => 'fas fa-user-plus fa-fw',
+            'can' => 'admin.index'
+        ],
        
        
         ['header' => 'account_settings'],

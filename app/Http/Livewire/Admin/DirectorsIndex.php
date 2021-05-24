@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Director;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class UsersIndex extends Component
+class DirectorsIndex extends Component
 {
     use WithPagination;
 
@@ -20,11 +20,12 @@ class UsersIndex extends Component
 
     public function render()
     {
-        $users = User::where('name', 'LIKE' , '%' . $this->search . '%')
-                    ->orWhere('email', 'LIKE' , '%' . $this->search . '%')
+        $directors = Director::where('NombreDirector', 'LIKE' , '%' . $this->search . '%')
+                    ->orWhere('ApellidoPaternoDirector', 'LIKE' , '%' . $this->search . '%')
+                    ->orWhere('ApellidoMaternoDirector', 'LIKE' , '%' . $this->search . '%')
                     ->paginate();
 
-        return view('livewire.admin.users-index', compact('users'));
+        return view('livewire.admin.directors-index', compact('directors'));
     }
 
     public function alertConfirm()

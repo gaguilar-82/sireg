@@ -33,7 +33,6 @@ class UserController extends Controller
    
     public function store(Request $request)
     {
-        //return $request->all();
 
         $request->validate([
             'name' => 'required|max:255',
@@ -49,6 +48,7 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('mensaje', 'Usuario agregado');
+        
     }
 
     
@@ -77,6 +77,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.index')->with('eliminar','ok');
+        return redirect()->route('admin.users.index')->with('eliminar','ok');
     }
 }
