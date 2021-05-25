@@ -21,14 +21,28 @@
                             <td>{{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}</td>
                             <td>{{\Carbon\Carbon::parse($director->FechaNombramiento)->format('d/m/Y')}}</td>
                             <td width="10px">
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.directors.edit', $director)}}">Editar</a>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.directors.edit', $director)}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                             </td>
                             <td width="10px">
-                                <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
+                                {{-- <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button class="btn btn-danger btn-sm" type="submit" wire:click="alertConfirm">Eliminar</button>
-                                </form>
+                                </form> --}}
+                                @if ($directors->count() > '1')
+                                    {{-- <a class="btn btn-danger btn-sm" wire:click="$emit('deletePost', {{ $director->id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </a> --}} 
+                                    <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm" type="submit" wire:click="$emit('deletePost')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -131,7 +131,7 @@
                         'placeholder' => 'Ingrese los datos del acta pública'
                     ]) !!}
                 </div>
-                {!! Form::submit('Crear usuario', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Crear Director', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>

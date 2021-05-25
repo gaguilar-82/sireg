@@ -29,15 +29,23 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.index'])->assignRole($rol1);
 
         Permission::create(['name' => 'admin.users.index'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.users.create'])->assignRole($rol1);
         Permission::create(['name' => 'admin.users.edit'])->assignRole($rol1);
         Permission::create(['name' => 'admin.users.update'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.users.destroy'])->assignRole($rol1);
+
+        Permission::create(['name' => 'admin.directors.index'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.directors.create'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.directors.edit'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.directors.update'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.directors.destroy'])->assignRole($rol1);
 
         //Permisos home
         Permission::create(['name' => 'home'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol6, $rol7]);
 
         //Permisos para el módulo de Colonias
         Permission::create(['name' => 'colonias.index'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol7]);
-        Permission::create(['name' => 'colonias.store'])->syncRoles([$rol2]);
+        Permission::create(['name' => 'colonias.store'])->syncRoles([$rol1, $rol2]);
         Permission::create(['name' => 'colonias.show'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol7]);
         Permission::create(['name' => 'colonias.edit'])->syncRoles([$rol2]);
         Permission::create(['name' => 'colonias.update'])->syncRoles([$rol2]);
