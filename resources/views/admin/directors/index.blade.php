@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Inicio')
+@section('title', 'Directores')
 
 @section('content_header')
     <h1>Lista de Directores</h1>

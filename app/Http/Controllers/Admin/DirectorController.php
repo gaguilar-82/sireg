@@ -105,6 +105,7 @@ class DirectorController extends Controller
     {
         $director->delete();
 
-        return redirect()->route('admin.index')->with('eliminar','ok');
+        return redirect()->route('admin.directors.index')->with('eliminar','ok');
     }
+    
 }
