@@ -23,6 +23,8 @@ class InspectorFactory extends Factory
     {
         return [
             'NombreInspector' => $this->faker->name,
+            'Delegacion' => $this->faker->randomElement(['DA','DC', 'DCC', 'DCG', 'DM', 'DN', 'DTC']),
+            'Categoria' => $this->faker->randomElement(['Trabajador Social', 'Topógrafo', 'Auxiliar Técnico'])
         ];
     }
 }

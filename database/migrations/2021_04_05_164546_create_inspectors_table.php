@@ -17,6 +17,8 @@ class CreateInspectorsTable extends Migration
             $table->id();
 
             $table->string('NombreInspector');
+            $table->string('Delegacion');
+            $table->string('Categoria');
 
             $table->timestamps();
         });

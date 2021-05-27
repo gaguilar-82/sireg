@@ -11,7 +11,8 @@ class DirectorController extends Controller
 
     public function index()
     {
-        return view('admin.directors.index');
+        $directors = Director::all();
+        return view('admin.directors.index', compact('directors'));
     }
 
     
@@ -20,12 +21,6 @@ class DirectorController extends Controller
         return view('admin.directors.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([

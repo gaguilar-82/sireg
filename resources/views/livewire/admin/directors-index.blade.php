@@ -13,7 +13,7 @@
                             <th>Fecha de nombramiento</th>
                             <th>Acciones</td>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         @foreach ($directors as $director)
                         <tr>
@@ -26,19 +26,11 @@
                                 </a>
                             </td>
                             <td width="10px">
-                                {{-- <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger btn-sm" type="submit" wire:click="alertConfirm">Eliminar</button>
-                                </form> --}}
-                                @if ($directors->count() > '1')
-                                    {{-- <a class="btn btn-danger btn-sm" wire:click="$emit('deletePost', {{ $director->id }})">
-                                        <i class="fas fa-trash"></i>
-                                    </a> --}} 
+                                @if ($directors->count() > '1') 
                                     <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" id="eliminar" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit" wire:click="$emit('deletePost')">
+                                        <button class="btn btn-danger btn-sm" type="submit" wire:click="alertConfirm">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

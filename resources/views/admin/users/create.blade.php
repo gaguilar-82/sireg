@@ -6,7 +6,7 @@
     <h1>Alta de usuarios</h1>
 @stop
 
-@section('content')
+@section('content') 
     @if ( session('mensaje') )
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('mensaje') }}

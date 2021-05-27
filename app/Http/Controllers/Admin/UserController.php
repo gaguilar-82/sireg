@@ -21,7 +21,8 @@ class UserController extends Controller
     
     public function index()
     {
-        return view('admin.users.index');
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     }
 
     
@@ -77,6 +78,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('eliminar','ok');
+        return back()->with('info','Se eliminó el usuario correctamente');
     }
 }

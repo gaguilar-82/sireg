@@ -6,15 +6,11 @@ use App\Models\Director;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-
-
 class DirectorsIndex extends Component
 {
     use WithPagination;
 
     protected $paginationTheme = "bootstrap";
-
-    protected $listeners = ['delete'];
 
     public $search;
 
@@ -32,9 +28,13 @@ class DirectorsIndex extends Component
         return view('livewire.admin.directors-index', compact('directors'));
     }
 
-    public function delete(Director $director)
+    public function alertConfirm()
     {
-        $director->delete();
+        $this->dispatchBrowserEvent('swal:confirm', [
+                'type' => 'warning',  
+                'message' => 'Are you sure?', 
+                'text' => 'If deleted, you will not be able to recover this imaginary file!'
+            ]);
     }
 
 }

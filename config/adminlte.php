@@ -255,30 +255,65 @@ return [
         ],
         [
             'text' => 'Usuarios',
-            'route'  => 'admin.users.index',
-            'icon' => 'fas fa-users fa-fw',
-            'can' => 'admin.index'
-        ],
-
-        [
-            'text' => 'Alta de usuarios',
-            'route'  => 'admin.users.create',
-            'icon' => 'fas fa-user-plus fa-fw',
-            'can' => 'admin.index'
+            'icon' => 'fas fa-user fa-fw',
+            'can' => 'admin.index',
+            'submenu' => [
+                [
+                    'text' => 'Listado de usuarios',
+                    'route'  => 'admin.users.index',
+                    'icon' => 'fas fa-users fa-fw',
+                    'can' => 'admin.index'
+                ],
+                [
+                    'text' => 'Alta de usuarios',
+                    'route'  => 'admin.users.create',
+                    'icon' => 'fas fa-user-plus fa-fw',
+                    'can' => 'admin.index'
+                ]
+            ]
+            
         ],
 
         [
             'text' => 'Directores',
-            'route'  => 'admin.directors.index',
             'icon' => 'fas fa-user-tie fa-fw',
-            'can' => 'admin.index'
+            'can' => 'admin.index',
+            'submenu' => [
+                [
+                    'text' => 'Listado de directores',
+                    'route'  => 'admin.directors.index',
+                    'icon' => 'fas fa-users fa-fw',
+                    'can' => 'admin.index',
+                ],
+
+                [
+                    'text' => 'Alta de directores',
+                    'route'  => 'admin.directors.create',
+                    'icon' => 'fas fa-user-plus fa-fw',
+                    'can' => 'admin.index'
+                ],
+            ]
         ],
 
         [
-            'text' => 'Alta de directores',
-            'route'  => 'admin.directors.create',
-            'icon' => 'fas fa-user-plus fa-fw',
-            'can' => 'admin.index'
+            'text' => 'Inspectores de campo',
+            'icon' => 'fas fa-clipboard fa-fw',
+            'can' => 'admin.index',
+            'submenu' => [
+                [
+                    'text' => 'Listado de Inspectores',
+                    'route'  => 'admin.inspectors.index',
+                    'icon' => 'fas fa-users fa-fw',
+                    'can' => 'admin.index',
+                ],
+
+                [
+                    'text' => 'Alta de inspectores',
+                    'route'  => 'admin.inspectors.create',
+                    'icon' => 'fas fa-user-plus fa-fw',
+                    'can' => 'admin.index'
+                ],
+            ]
         ],
        
        
@@ -385,22 +420,22 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/js/query.dataTables.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
@@ -430,12 +465,12 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2/sweetalert2.all.min.js',
                 ],
             ],
         ],
