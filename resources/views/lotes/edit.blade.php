@@ -220,7 +220,7 @@
                         <div class="form-group col-md-4">
                             <label for="Fusion" class="form-label">¿Está fusionado?</label>
                             <select name="Fusion" id="Fusion" class="form-control">
-                                <option value="">--Seleccione una opción--/option>
+                                <option value="">--Seleccione una opción--</option>
                                 <option value="SÍ" @if ($lote->Fusion == 'SÍ') selected="selected" @endif>SÍ</option>
                                 <option value="NO" @if ($lote->Fusion == 'NO') selected="selected" @endif>NO</option>
                             </select>

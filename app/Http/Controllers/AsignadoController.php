@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAsignado;
 use App\Models\Asignado;
+use App\Models\Concepto;
 use App\Models\Inspeccion;
 use App\Models\Lote;
 use App\Models\Pago;
@@ -18,8 +19,9 @@ class AsignadoController extends Controller
         $asignados = Asignado::all();
         $posesionarios = Posesionario::all();
         $lotes = Lote::all();
+        $escritura = Concepto::where('Clave', '=', 'IP-0002')->first();
                            
-        return view('asignados.index', compact('asignados', 'posesionarios', 'lotes'));
+        return view('asignados.index', compact('asignados', 'posesionarios', 'lotes', 'escritura'));
     }
 
     /* public function store(Request $request){

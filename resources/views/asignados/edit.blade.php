@@ -94,7 +94,7 @@
                             @foreach($posesionarios as $posesionario)
                             <tr>
                                 <td id="Pos1">{{$posesionario->id}}</td>
-                                <td id="Pos2">{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
+                                <td id="Pos2">{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</td>
                                 <td id="Pos3">{{$posesionario->CURP}}</td>
                                 <td id="Pos4">{{$posesionario->Telefono}}</td>
                                 <td>

@@ -18,6 +18,7 @@ class CreateConceptosTable extends Migration
 
             $table->string('Clave')->unique();
             $table->string('NombreConcepto');
+            $table->float('ValorConcepto');
 
             $table->timestamps();
         });

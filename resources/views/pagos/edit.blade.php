@@ -87,7 +87,7 @@
                                 <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
                                 <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
                                 <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                <td id="Asig6">{{strtoupper($asignado->posesionarios->NombrePosesionario)}}) {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</td>
                                 <td>
                                     <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
                                 </td>

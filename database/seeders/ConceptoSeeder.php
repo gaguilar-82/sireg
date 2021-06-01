@@ -90,14 +90,56 @@ class ConceptoSeeder extends Seeder
                         "ANOTACIONES Y CANCELACIONES DE ESCRITURA ANTE EL R.P.P.",
                         "OTROS INGRESOS",
                     ];
+       
+        $valor = [  "0",
+                    "0",
+                    "0",
+                    "0",
+                    "4658",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "4105",
+                    "479",
+                    "479",
+                    "6842",
+                    "108",
+                    "1293",
+                    "539",
+                    "216",
+                    "4105",
+                    "6842",
+                    "6842",
+                    "4105",
+                    "411",
+                    "0",
+                    "0",
+                    "452",
+                    "429",
+                    "137",
+                    "479",
+                    "0",
+                    "0",
+                    "108",
+                    "0",
+                    "0",
+                    "1401",
+                    "0",
+                    "0",
+                ];
 
-        for ($item=0; $item < count($claves); $item++) {
-            foreach ($claves as $clave) {
+        for ($item=0; $item < count($claves); $item++) 
+        {
+            foreach ($claves as $clave) 
+            {
                 $clave = new Concepto;
                 $clave->Clave = $claves[$item];
                 $clave->NombreConcepto = $conceptos[$item];
-                }       
-                $clave->save(); 
-            }
+                $clave->ValorConcepto = $valor[$item];
+            }       
+            $clave->save(); 
+        }
     }
 }

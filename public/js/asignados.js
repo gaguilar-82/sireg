@@ -15,6 +15,7 @@ function SelLote() {
     var numLote = document.getElementById("Lote6").innerText;
     var superficie = document.getElementById("Lote7").innerText;
     var valor = document.getElementById("Lote8").innerText;
+    var escrituras = parseFloat(document.getElementById("ValorEscrituras").value);
 
     var nombrelote = nombreColonia.concat(" MANZANA ");
     nombrelote = nombrelote.concat(manzana);
@@ -28,13 +29,13 @@ function SelLote() {
     var costolote = parseFloat(superficie) * parseFloat(valor);
     
     if(superficie <= '200')
-    {
-        document.getElementById("CostoEscrituras").value=4658;
+    { 
+        document.getElementById("CostoEscrituras").value=escrituras;
     }
     else if(superficie > '200')
     {
         var excedente = parseFloat(superficie) - parseFloat(200);
-        costoescrituras = (excedente * 21) + 4658;
+        costoescrituras = (excedente * 21) + escrituras;
         document.getElementById("CostoEscrituras").value = costoescrituras;
     }
 

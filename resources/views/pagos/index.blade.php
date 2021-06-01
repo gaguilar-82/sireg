@@ -10,6 +10,9 @@
 @section('title', 'SIREG | Pagos')
 
 @section('Content')
+    @php
+        $valor_concepto = 0;
+    @endphp
    
     {{-- Mensajes --}}
     @if ( session('mensaje') )
@@ -88,7 +91,7 @@
                                     <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
                                     <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
                                     <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                    <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                    <td id="Asig6">{{strtoupper($asignado->posesionarios->NombrePosesionario)}} {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</td>
                                     <td>
                                         <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
                                     </td>
@@ -124,21 +127,22 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="Concepto" class="form-label">Concepto</label>
-                                    <select name="conceptos_id" id="conceptos_id" class="form-control">
+                                    <select name="conceptos_id" id="conceptos" class="form-control">
                                         <option value="">--Seleccione el Concepto--</option>
                                         @foreach ($conceptos as $concepto)
-                                            <option value="{{$concepto['id']}}"  
-                                                @if (old('conceptos_id') == ($concepto['id']))   
-                                                    selected="selected"     
-                                                @endif>
+                                            <option value="{{$concepto['id']}}" data-valor="{{$concepto['ValorConcepto']}}"
+                                                @if (old('conceptos_id') == ($concepto['id']))
+                                                    selected="selected"  
+                                                @endif
+                                                >
                                                 {{$concepto->Clave}} - {{$concepto->NombreConcepto}}
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div>    
                                 <div class="form-group col-md-2">
                                     <label for="CantidadPago" class="form-label">Cantidad</label>
-                                    <input type="number" name="CantidadPago" class="date form-control" id="CantidadPago" class="form-control" value="{{ old('CantidadPago')}}" mb-2>
+                                    <input type="number" name="CantidadPago" class="form-control" id="CantidadPago" class="form-control" value="{{-- {{ old('CantidadPago')}} --}}" mb-2>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -178,7 +182,7 @@
                                 <td>{{$pago->id}}</td>
                                 <td>{{strtoupper($pago->asignados->ClaveContrato)}}</td>
                                 <td>{{$pago->asignados->lotes->colonias->NombreColonia}} MANZANA {{$pago->asignados->lotes->Manzana}} LOTE {{$pago->asignados->lotes->NumLote}}</td>
-                                <td>{{$pago->asignados->posesionarios->NombrePosesionario}} {{$pago->asignados->posesionarios->ApellidoPaterno}} {{$pago->asignados->posesionarios->ApellidoMaterno}}</td>
+                                <td>{{strtoupper($pago->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($pago->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($pago->asignados->posesionarios->ApellidoMaterno)}}</td>
                                 <td>{{\Carbon\Carbon::parse($pago->FechaPago)->format('d/m/Y')}}</td>
                                 <td>${{number_format($pago->CantidadPago,2,'.',',')}}</td>
                                 <td>
@@ -231,5 +235,15 @@
     @if (session('eliminar') == 'ok')
     <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
     @endif
+
+    <script>
+        $(function(){
+            $('#conceptos').change(function(){
+                var selected = $(this).find('option:selected');
+                var costo = selected.data('valor'); 
+                $('#CantidadPago').val(costo);
+            });
+        });
+    </script>
 
 @endsection

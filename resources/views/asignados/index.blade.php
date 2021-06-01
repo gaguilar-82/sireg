@@ -95,7 +95,7 @@
                                 @foreach($posesionarios as $posesionario)
                                 <tr>
                                     <td id="Pos1">{{$posesionario->id}}</td>
-                                    <td id="Pos2">{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
+                                    <td id="Pos2">{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</td>
                                     <td id="Pos3">{{$posesionario->CURP}}</td>
                                     <td id="Pos4">{{$posesionario->Telefono}}</td>
                                     <td>
@@ -171,6 +171,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="CostoEscrituras" class="form-label">Costo de las Escrituras</label>
+                            <input type="hidden" name="ValorEscrituras" id="ValorEscrituras" class="form-control" mb-2 value="{{$escritura->ValorConcepto}}">
                             <input type="text" name="CostoEscrituras" id="CostoEscrituras" class="form-control" mb-2>
                         </div>
 
