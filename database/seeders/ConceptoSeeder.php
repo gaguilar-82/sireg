@@ -50,6 +50,7 @@ class ConceptoSeeder extends Seeder
                   "IP-0029",
                   "IP-0030",
                   "IP-0031",
+                  "IP-0032",
                 ];
 
         $conceptos = ["INGRESOS POR VENTA DE TERRENOS DE CONTADO",

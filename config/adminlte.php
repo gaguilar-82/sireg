@@ -315,6 +315,13 @@ return [
                 ],
             ]
         ],
+
+        [
+            'text' => 'Conceptos de cobro',
+            'route'  => 'admin.conceptos.index',
+            'icon' => 'fas fa-money-check-alt fa-fw',
+            'can' => 'admin.index'
+        ],
        
        
         ['header' => 'account_settings'],
