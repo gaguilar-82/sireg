@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Directores')
+@section('title', 'Papelera de Reciclaje / Colonias')
 
 @section('content_header')
-    <h1>Lista de Directores</h1>
+    <h1>Lista de Colonias Eliminadas</h1>
 @stop
 
 @section('content')
 
-    @if (session('info'))
+    @if (session('mensaje'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('info')}}</strong>
+            <strong>{{session('mensaje')}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -20,37 +20,36 @@
     <div>
         <div class="card">
             <div class="card-body">
-                <table id="directores" class="table table-striped">
+                <table id="colonias" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Fecha de nombramiento</th>
-                            <th>Acciones</td>
-                            <th></th>
+                            <th>Id</th>
+                            <th>Colonia</th>
+                            <th>Tipo de colonia</th>
+                            <th>Municipio</th>
+                            <th>Valor por m²</th>
+                            <th>Acciones</th>
                         </tr>
-                    </thead> 
+                    </thead>
                     <tbody>
-                        @foreach ($directors as $director)
+                        @foreach($colonias as $colonia)
                         <tr>
-                            <td>{{$director->id}}</td>
-                            <td>{{$director->NombreDirector}} {{$director->ApellidoPaternoDirector}} {{$director->ApellidoMaternoDirector}}</td>
-                            <td>{{\Carbon\Carbon::parse($director->FechaNombramiento)->format('d/m/Y')}}</td>
+                            <td>{{$colonia->id}}</td>
+                            <td>{{$colonia->NombreColonia}}</td>
+                            <td>{{$colonia->TipoColonia}}</td>
+                            <td>{{$colonia->municipios->NombreMunicipio}}</td>
+                            <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
                             <td width="10px">
-                                <a class="btn btn-primary btn-sm" href="{{route('admin.directors.edit', $director)}}">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                            <td width="10px">
-                                @if ($directors->count() > '1') 
-                                    <form action="{{route('admin.directors.destroy',[$director->id])}}" method="POST" class="d-inline eliminar" method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                @endif
+                                @can('colonias.show')
+                                    <a href="{{route('admin.colonias.restore', [$colonia->id])}}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-trash-restore"></i>
+                                    </a>
+                                @endcan
+                                @can('colonias.edit')
+                                    <a href="{{route('admin.colonias.recycle', [$colonia->id])}}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-recycle"></i>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -77,7 +76,7 @@
 
     <script>
         $(document).ready(function(){
-            $('#directores').DataTable({
+            $('#colonias').DataTable({
                 responsive: true,
                 autoWidth: false,
 

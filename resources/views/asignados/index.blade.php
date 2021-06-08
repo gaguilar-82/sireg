@@ -109,8 +109,8 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        {{-- Datatable Lotes --}}
                         <h5>Seleccione el lote</h5>
+                        {{-- Datatable Lotes --}}
                         <table id="datatable_2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -145,7 +145,7 @@
                         </table>
                     </div>
                 </div>
-                {{-- Formulario --}}
+                {{-- Formulario Asignados--}}
                 <form action="{{route('asignados.store')}}" onSubmit="" method="POST">
                     @csrf
                     <div class="form-row">

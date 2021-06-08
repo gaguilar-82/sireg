@@ -69,7 +69,7 @@
                 @elseif ($posesionario->created_at != $posesionario->updated_at)
                     <p>Fecha de actualización: {{$posesionario->updated_at->diffForHumans()}}</p> 
                     <p>Editado por: {{$posesionario->users->name}}</p>   
-                 @endif
+                @endif
             </div>
           </div>
         </div>

@@ -85,4 +85,25 @@ class ColoniaController extends Controller
 
         return redirect()->route('colonias.index')->with('eliminar','ok');
     }
+
+    public function trash(){
+        
+        $colonias = Colonia::onlyTrashed()->get();
+        
+        return view('admin.colonias.trash', compact('colonias'));
+    }
+
+    public function restore($id){
+
+        Colonia::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Colonia restaurada');
+    }
+
+    public function recycle($id){
+
+        Colonia::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('eliminar','ok');
+    }
 }

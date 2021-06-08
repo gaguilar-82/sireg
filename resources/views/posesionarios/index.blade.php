@@ -200,7 +200,7 @@
                             <input type="file" name="ConstanciaSolteria" id="ConstanciaSolteria" accept="application/pdf">
                         </div>
                         <div class="input-group col-md-4">
-                            <label for="ConstanciaSolteria"><strong>Poder notarial</strong></label>
+                            <label for="PoderNotarial"><strong>Poder notarial</strong></label>
                             <input type="file" name="PoderNotarial" id="PoderNotarial" accept="application/pdf">
                         </div>
                     </div>

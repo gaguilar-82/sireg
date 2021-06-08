@@ -24,13 +24,8 @@ class AsignadoController extends Controller
         return view('asignados.index', compact('asignados', 'posesionarios', 'lotes', 'escritura'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
-
     public function store(StoreAsignado $request){
-
-              
+     
         $asignado = new Asignado();
 
         $asignado->posesionarios_id = $request->posesionarios_id;

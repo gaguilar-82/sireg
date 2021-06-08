@@ -322,6 +322,26 @@ return [
             'icon' => 'fas fa-money-check-alt fa-fw',
             'can' => 'admin.index'
         ],
+
+        [
+            'text' => 'Papelera de reciclaje',
+            'icon' => 'fas fa-trash-alt fa-fw',
+            'can' => 'admin.index',
+            'submenu' => [
+                [
+                    'text' => 'Colonias',
+                    'route'  => 'admin.colonias.trash',
+                    'icon' => 'fas fa-map fa-fw',
+                    'can' => 'admin.index',
+                ],
+
+                [
+                    'text' => 'Lotes',
+                    'icon' => 'fas fa-draw-polygon fa-fw',
+                    'can' => 'admin.index'
+                ],
+            ]
+        ],
        
        
         ['header' => 'account_settings'],
