@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lote extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     //Asignación Masiva Update
     protected $fillable = ['ClaveLote',
@@ -41,7 +45,7 @@ class Lote extends Model
 
     //Relación uno a muchos (inversa)
     public function colonias(){
-        return $this->belongsTo(Colonia::class);
+        return $this->belongsTo(Colonia::class)->withTrashed();
     }
 
     //Relación uno a uno

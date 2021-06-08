@@ -16,7 +16,7 @@ class Asignado extends Model
     }
     public function lotes()
     {
-      return $this->belongsTo(Lote::class);
+      return $this->belongsTo(Lote::class)->withTrashed();
     }
 
     //Relación uno a muchos

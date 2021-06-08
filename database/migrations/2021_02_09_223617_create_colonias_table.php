@@ -34,7 +34,7 @@ class CreateColoniasTable extends Migration
 
             $table->foreign('users_id')//Clave foranea
             ->references('id')->on('users')
-            ->onDelete('set null');
+            ->onDelete('cascade');
 
             $table->timestamps();
             $table->softDeletes();

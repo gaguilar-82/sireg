@@ -337,6 +337,7 @@ return [
 
                 [
                     'text' => 'Lotes',
+                    'route'  => 'admin.lotes.trash',
                     'icon' => 'fas fa-draw-polygon fa-fw',
                     'can' => 'admin.index'
                 ],

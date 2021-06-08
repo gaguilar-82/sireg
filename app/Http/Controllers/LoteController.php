@@ -144,7 +144,6 @@ class LoteController extends Controller
             
     }
 
-    
     public function destroy(Lote $lote){
         $lote->delete();
 
@@ -154,5 +153,26 @@ class LoteController extends Controller
     public function print(Lote $lote){
     
         return view('lotes.print' , compact('lote'));
+    }
+
+    public function trash(){
+        
+        $lotes = Lote::onlyTrashed()->get();
+        
+        return view('admin.lotes.trash', compact('lotes'));
+    }
+
+    public function restore($id){
+
+        Lote::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Lote restaurado');
+    }
+
+    public function recycle($id){
+
+        Lote::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('eliminar','ok');
     }
 }
