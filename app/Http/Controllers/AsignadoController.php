@@ -107,4 +107,25 @@ class AsignadoController extends Controller
         return redirect()->route('asignados.index')->with('eliminar','ok');
     }
 
+    public function trash(){
+        
+        $asignados = Asignado::onlyTrashed()->get();
+        
+        return view('admin.asignados.trash', compact('asignados'));
+    }
+
+    public function restore($id){
+
+        Asignado::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Asignación restaurada');
+    }
+
+    public function recycle($id){
+
+        Asignado::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('mensaje','Asignación eliminada permanentemente');
+    }
+
 }

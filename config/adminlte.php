@@ -348,6 +348,13 @@ return [
                     'icon' => 'fas fa-portrait fa-fw',
                     'can' => 'admin.index'
                 ],
+
+                [
+                    'text' => 'Asignados',
+                    'route'  => 'admin.asignados.trash',
+                    'icon' => 'fas fa-id-card fa-fw',
+                    'can' => 'admin.index'
+                ],
             ]
         ],
        

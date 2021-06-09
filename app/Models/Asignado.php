@@ -4,15 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Asignado extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     //Relación uno a uno (inversa)
     public function posesionarios()
     {
-      return $this->belongsTo(Posesionario::class);
+      return $this->belongsTo(Posesionario::class)->withTrashed();
     }
     public function lotes()
     {
