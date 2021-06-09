@@ -96,7 +96,7 @@
                                 <tr>
                                     <td id="Pos1">{{$posesionario->id}}</td>
                                     <td id="Pos2">{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</td>
-                                    <td id="Pos3">{{$posesionario->CURP}}</td>
+                                    <td id="Pos3">{{strtoupper($posesionario->CURP)}}</td>
                                     <td id="Pos4">{{$posesionario->Telefono}}</td>
                                     <td>
                                         <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelPosesionario();">Seleccionar</button>
@@ -228,10 +228,10 @@
                             @foreach($asignados as $asignado)
                             <tr>
                                 <td>{{$asignado->id}}</td>
-                                <td>{{$asignado->lotes->colonias->NombreColonia}}</td>
+                                <td>{{strtoupper($asignado->lotes->colonias->NombreColonia)}}</td>
                                 <td>{{$asignado->lotes->Manzana}}</td>
                                 <td>{{$asignado->lotes->NumLote}}</td>
-                                <td>{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                <td>{{strtoupper($asignado->posesionarios->NombrePosesionario)}} {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</td>
                                 <td>${{number_format($asignado->CostoLote,2,'.',',')}}</td>
                                 <td>{{$asignado->TipoContrato}}</td>
                                 <td>

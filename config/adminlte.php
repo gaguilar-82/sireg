@@ -341,6 +341,13 @@ return [
                     'icon' => 'fas fa-draw-polygon fa-fw',
                     'can' => 'admin.index'
                 ],
+
+                [
+                    'text' => 'Posesionarios',
+                    'route'  => 'admin.posesionarios.trash',
+                    'icon' => 'fas fa-portrait fa-fw',
+                    'can' => 'admin.index'
+                ],
             ]
         ],
        

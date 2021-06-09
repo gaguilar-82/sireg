@@ -13,7 +13,7 @@
         @endif
         <div class="card text-center">
             <div class="card-header">
-                <h4>{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</h4>
+                <h4>{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</h4>
                 <h5>{{strtoupper($posesionario->CURP)}}</h5>
             </div>
             <div class="card-body">

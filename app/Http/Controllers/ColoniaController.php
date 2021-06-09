@@ -104,6 +104,6 @@ class ColoniaController extends Controller
 
         Colonia::onlyTrashed()->find($id)->forceDelete();
 
-        return back()->with('eliminar','ok');
+        return back()->with('mensaje','Colonia eliminada permanentemente');
     }
 }

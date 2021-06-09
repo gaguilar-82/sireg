@@ -231,8 +231,8 @@
                             @foreach($posesionarios as $posesionario)
                             <tr>
                                 <td>{{$posesionario->id}}</td>
-                                <td>{{$posesionario->NombrePosesionario}} {{$posesionario->ApellidoPaterno}} {{$posesionario->ApellidoMaterno}}</td>
-                                <td>{{$posesionario->CURP}}</td>
+                                <td>{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</td>
+                                <td>{{strtoupper($posesionario->CURP)}}</td>
                                 <td>{{$posesionario->Telefono}}</td>
                                 <td>
                                     @can('posesionarios.show')

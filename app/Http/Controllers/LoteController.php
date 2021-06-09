@@ -173,6 +173,6 @@ class LoteController extends Controller
 
         Lote::onlyTrashed()->find($id)->forceDelete();
 
-        return back()->with('eliminar','ok');
+        return back()->with('mensaje','Lote eliminado permanentemente');
     }
 }

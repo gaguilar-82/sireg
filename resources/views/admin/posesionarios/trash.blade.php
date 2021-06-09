@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Papelera de Reciclaje / Colonias')
+@section('title', 'Papelera de Reciclaje / Posesionarios')
 
 @section('content_header')
-    <h1>Lista de Colonias Eliminadas</h1>
+    <h1>Lista de Posesionarios Eliminados</h1>
 @stop
 
 @section('content')
@@ -20,33 +20,31 @@
     <div>
         <div class="card">
             <div class="card-body">
-                <table id="colonias" class="table table-striped table-bordered">
+                <table id="posesionarios" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Colonia</th>
-                            <th>Tipo de colonia</th>
-                            <th>Municipio</th>
-                            <th>Valor por m²</th>
+                            <th>Nombre</th>
+                            <th>CURP</th>
+                            <th>Telefono</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($colonias as $colonia)
+                        @foreach($posesionarios as $posesionario)
                         <tr>
-                            <td>{{$colonia->id}}</td>
-                            <td>{{$colonia->NombreColonia}}</td>
-                            <td>{{$colonia->TipoColonia}}</td>
-                            <td>{{$colonia->municipios->NombreMunicipio}}</td>
-                            <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
-                            <td width="10px">
-                                @can('colonias.show')
-                                    <a href="{{route('admin.colonias.restore', [$colonia->id])}}" class="btn btn-info btn-sm">
+                            <td>{{$posesionario->id}}</td>
+                            <td>{{strtoupper($posesionario->NombrePosesionario)}} {{strtoupper($posesionario->ApellidoPaterno)}} {{strtoupper($posesionario->ApellidoMaterno)}}</td>
+                            <td>{{strtoupper($posesionario->CURP)}}</td>
+                            <td>{{$posesionario->Telefono}}</td>
+                            <td>
+                                @can('posesionarios.show')
+                                    <a href="{{route('admin.posesionarios.restore', [$posesionario->id])}}" class="btn btn-info btn-sm">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('colonias.edit')
-                                    <a href="{{route('admin.colonias.recycle', [$colonia->id])}}" class="btn btn-danger btn-sm">
+                                @can('posesionarios.edit')
+                                    <a href="{{route('admin.posesionarios.recycle', [$posesionario->id])}}" class="btn btn-danger btn-sm">
                                         <i class="fas fa-recycle"></i>
                                     </a>
                                 @endcan
@@ -76,7 +74,7 @@
 
     <script>
         $(document).ready(function(){
-            $('#colonias').DataTable({
+            $('#posesionarios').DataTable({
                 responsive: true,
                 autoWidth: false,
 

@@ -204,4 +204,25 @@ class PosesionarioController extends Controller
 
         return redirect()->route('posesionarios.index')->with('eliminar','ok');
     }
+
+    public function trash(){
+        
+        $posesionarios = Posesionario::onlyTrashed()->get();
+        
+        return view('admin.posesionarios.trash', compact('posesionarios'));
+    }
+
+    public function restore($id){
+
+        Posesionario::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Posesionario restaurado');
+    }
+
+    public function recycle($id){
+
+        Posesionario::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('mensaje','Posesionario eliminado permanentemente');
+    }
 }
