@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AsignadoController;
 use App\Http\Controllers\ColoniaController;
 use App\Http\Controllers\LoteController;
+use App\Http\Controllers\PagoController;
 use App\Http\Controllers\PosesionarioController;
+
 
 
 Route::get('',[HomeController::class, 'index'])->name('admin.index');
@@ -53,3 +55,11 @@ Route::get('asignados', [AsignadoController::class, 'trash'])->name('admin.asign
 Route::get('asignados/restore/{asignado}', [AsignadoController::class, 'restore'])->name('admin.asignados.restore');
 
 Route::get('asignados/recycle/{asignado}', [AsignadoController::class, 'recycle'])->name('admin.asignados.recycle');
+
+//Papelera de reciclaje pagos
+
+Route::get('pagos', [PagoController::class, 'trash'])->name('admin.pagos.trash');
+
+Route::get('pagos/restore/{pago}', [PagoController::class, 'restore'])->name('admin.pagos.restore');
+
+Route::get('pagos/recycle/{pago}', [PagoController::class, 'recycle'])->name('admin.pagos.recycle');

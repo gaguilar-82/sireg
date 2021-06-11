@@ -36,6 +36,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Fecha</th>
+                            <th>Folio</th>
                             <th>Concepto</th>
                             <th>Cantidad</th>
                             <th>Cobrado por</th>
@@ -48,6 +49,7 @@
                                 <tr>
                                     <td>{{$recibo->id}}</td>
                                     <td>{{\Carbon\Carbon::parse($recibo->FechaPago)->format('d/m/Y')}}</td>
+                                    <td>{{$recibo->FolioPago}}</td>
                                     <td>{{$recibo->conceptos->Clave}}-{{$recibo->conceptos->NombreConcepto}}</td>
                                     <td>${{number_format($recibo->CantidadPago,2,'.',',')}}</td>
                                     <td>{{$recibo->users->name}}</td>

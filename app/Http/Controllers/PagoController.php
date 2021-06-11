@@ -98,4 +98,25 @@ class PagoController extends Controller
 
         return $pdf->stream('estadodecuenta.pdf');
     }
+
+    public function trash(){
+        
+        $pagos = Pago::onlyTrashed()->get();
+        
+        return view('admin.pagos.trash', compact('pagos'));
+    }
+
+    public function restore($id){
+
+        Pago::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Pago restaurado');
+    }
+
+    public function recycle($id){
+
+        Pago::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('mensaje','Pago eliminado permanentemente');
+    }
 }

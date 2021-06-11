@@ -355,6 +355,12 @@ return [
                     'icon' => 'fas fa-id-card fa-fw',
                     'can' => 'admin.index'
                 ],
+                [
+                    'text' => 'Pagos',
+                    'route'  => 'admin.pagos.trash',
+                    'icon' => 'fas fa-dollar-sign fa-fw',
+                    'can' => 'admin.index'
+                ],
             ]
         ],
        

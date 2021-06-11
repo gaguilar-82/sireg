@@ -40,6 +40,7 @@ class CreatePagosTable extends Migration
             ->onDelete('set null');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
