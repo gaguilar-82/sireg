@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Papelera de Reciclaje / Lotes')
+@section('title', 'Papelera de Reciclaje / Escrituras')
 
 @section('content_header')
-    <h1>Lista de Lotes Eliminados</h1>
+    <h1>Lista de Escrituras Eliminadas</h1>
 @stop
 
 @section('content')
@@ -20,35 +20,33 @@
     <div>
         <div class="card">
             <div class="card-body">
-                <table id="lotes" class="table table-striped table-bordered">
+                <table id="escrituras" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Colonia</th>
-                            <th>Manzana</th>
+                            <th>Contrato</th>
                             <th>Lote</th>
-                            <th>Superficie</th>
-                            <th>Valor por m²</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($lotes as $lote)
+                        @foreach($escrituras as $escritura)
                         <tr>
-                            <td>{{$lote->id}}</td>
-                            <td>{{$lote->colonias->NombreColonia}}</td>
-                            <td>{{$lote->Manzana}}</td>
-                            <td>{{$lote->NumLote}}</td>
-                            <td>{{number_format($lote->Superficie,2,'.',',')}}m²</td>
-                            <td>${{number_format($lote->colonias->ValorMetroCuadrado,2,'.','.')}}</td>
+                            <td>{{$escritura->id}}</td>
+                            <td>{{strtoupper($escritura->asignados->ClaveContrato)}}</td>
+                            <td>{{strtoupper($escritura->asignados->lotes->colonias->NombreColonia)}} Manzana {{$escritura->asignados->lotes->Manzana}} Lote {{$escritura->asignados->lotes->NumLote}}</td>
+                            <td>{{strtoupper($escritura->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($escritura->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($escritura->asignados->posesionarios->ApellidoMaterno)}}</td>
+                            <td>{{\Carbon\Carbon::parse($escritura->FechaEscritura)->format('d/m/Y')}}</td>
                             <td>
-                                @can('admin.lotes.restore')
-                                    <a href="{{route('admin.lotes.restore', [$lote->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
+                                @can('admin.escrituras.restore')
+                                    <a href="{{route('admin.escrituras.restore', [$escritura->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('admin.lotes.recycle')
-                                    <a href="{{route('admin.lotes.recycle', [$lote->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
+                                @can('admin.escrituras.recycle')
+                                    <a href="{{route('admin.escrituras.recycle', [$escritura->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
                                         <i class="fas fa-recycle"></i>
                                     </a>
                                 @endcan
@@ -78,7 +76,7 @@
 
     <script>
         $(document).ready(function(){
-            $('#lotes').DataTable({
+            $('#escrituras').DataTable({
                 responsive: true,
                 autoWidth: false,
 

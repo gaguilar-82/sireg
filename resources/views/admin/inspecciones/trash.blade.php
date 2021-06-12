@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Papelera de Reciclaje / Lotes')
+@section('title', 'Papelera de Reciclaje / Inspecciones')
 
 @section('content_header')
-    <h1>Lista de Lotes Eliminados</h1>
+    <h1>Lista de Inspecciones Eliminadas</h1>
 @stop
 
 @section('content')
@@ -20,35 +20,35 @@
     <div>
         <div class="card">
             <div class="card-body">
-                <table id="lotes" class="table table-striped table-bordered">
+                <table id="inspecciones" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Colonia</th>
                             <th>Manzana</th>
                             <th>Lote</th>
-                            <th>Superficie</th>
-                            <th>Valor por m²</th>
+                            <th>Posesionario</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($lotes as $lote)
+                        @foreach($inspecciones as $inspeccion)
                         <tr>
-                            <td>{{$lote->id}}</td>
-                            <td>{{$lote->colonias->NombreColonia}}</td>
-                            <td>{{$lote->Manzana}}</td>
-                            <td>{{$lote->NumLote}}</td>
-                            <td>{{number_format($lote->Superficie,2,'.',',')}}m²</td>
-                            <td>${{number_format($lote->colonias->ValorMetroCuadrado,2,'.','.')}}</td>
+                            <td>{{$inspeccion->id}}</td>
+                            <td>{{$inspeccion->asignados->lotes->colonias->NombreColonia}}</td>
+                            <td>{{$inspeccion->asignados->lotes->Manzana}}</td>
+                            <td>{{$inspeccion->asignados->lotes->NumLote}}</td>
+                            <td>{{strtoupper($inspeccion->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoMaterno)}}</td>
+                            <td>{{\Carbon\Carbon::parse($inspeccion->FechaInspeccion)->format('d/m/Y')}}</td>
                             <td>
-                                @can('admin.lotes.restore')
-                                    <a href="{{route('admin.lotes.restore', [$lote->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
+                                @can('lotes.show')
+                                    <a href="{{route('admin.inspecciones.restore', [$inspeccion->id])}}" class="btn btn-info btn-sm">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('admin.lotes.recycle')
-                                    <a href="{{route('admin.lotes.recycle', [$lote->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
+                                @can('lotes.edit')
+                                    <a href="{{route('admin.inspecciones.recycle', [$inspeccion->id])}}" class="btn btn-danger btn-sm">
                                         <i class="fas fa-recycle"></i>
                                     </a>
                                 @endcan
@@ -78,7 +78,7 @@
 
     <script>
         $(document).ready(function(){
-            $('#lotes').DataTable({
+            $('#inspecciones').DataTable({
                 responsive: true,
                 autoWidth: false,
 

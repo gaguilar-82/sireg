@@ -40,13 +40,13 @@
                             <td>{{$colonia->municipios->NombreMunicipio}}</td>
                             <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
                             <td width="10px">
-                                @can('colonias.show')
-                                    <a href="{{route('admin.colonias.restore', [$colonia->id])}}" class="btn btn-info btn-sm">
+                                @can('admin.colonias.restore')
+                                    <a href="{{route('admin.colonias.restore', [$colonia->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('colonias.edit')
-                                    <a href="{{route('admin.colonias.recycle', [$colonia->id])}}" class="btn btn-danger btn-sm">
+                                @can('admin.colonias.recycle')
+                                    <a href="{{route('admin.colonias.recycle', [$colonia->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
                                         <i class="fas fa-recycle"></i>
                                     </a>
                                 @endcan

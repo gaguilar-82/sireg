@@ -262,13 +262,13 @@ return [
                     'text' => 'Listado de usuarios',
                     'route'  => 'admin.users.index',
                     'icon' => 'fas fa-users fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.users.index'
                 ],
                 [
                     'text' => 'Alta de usuarios',
                     'route'  => 'admin.users.create',
                     'icon' => 'fas fa-user-plus fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.users.create'
                 ]
             ]
             
@@ -283,14 +283,14 @@ return [
                     'text' => 'Listado de directores',
                     'route'  => 'admin.directors.index',
                     'icon' => 'fas fa-users fa-fw',
-                    'can' => 'admin.index',
+                    'can' => 'admin.directors.index',
                 ],
 
                 [
                     'text' => 'Alta de directores',
                     'route'  => 'admin.directors.create',
                     'icon' => 'fas fa-user-plus fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.directors.create'
                 ],
             ]
         ],
@@ -304,14 +304,14 @@ return [
                     'text' => 'Listado de Inspectores',
                     'route'  => 'admin.inspectors.index',
                     'icon' => 'fas fa-users fa-fw',
-                    'can' => 'admin.index',
+                    'can' => 'admin.inspectors.index',
                 ],
 
                 [
                     'text' => 'Alta de inspectores',
                     'route'  => 'admin.inspectors.create',
                     'icon' => 'fas fa-user-plus fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.inspectors.create'
                 ],
             ]
         ],
@@ -320,7 +320,7 @@ return [
             'text' => 'Conceptos de cobro',
             'route'  => 'admin.conceptos.index',
             'icon' => 'fas fa-money-check-alt fa-fw',
-            'can' => 'admin.index'
+            'can' => 'admin.conceptos.index'
         ],
 
         [
@@ -332,34 +332,46 @@ return [
                     'text' => 'Colonias',
                     'route'  => 'admin.colonias.trash',
                     'icon' => 'fas fa-map fa-fw',
-                    'can' => 'admin.index',
+                    'can' => 'admin.colonias.trash',
                 ],
 
                 [
                     'text' => 'Lotes',
                     'route'  => 'admin.lotes.trash',
                     'icon' => 'fas fa-draw-polygon fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.lotes.trash'
                 ],
 
                 [
                     'text' => 'Posesionarios',
                     'route'  => 'admin.posesionarios.trash',
                     'icon' => 'fas fa-portrait fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.posesionarios.trash'
                 ],
 
                 [
                     'text' => 'Asignados',
                     'route'  => 'admin.asignados.trash',
                     'icon' => 'fas fa-id-card fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.asignados.trash'
                 ],
                 [
                     'text' => 'Pagos',
                     'route'  => 'admin.pagos.trash',
                     'icon' => 'fas fa-dollar-sign fa-fw',
-                    'can' => 'admin.index'
+                    'can' => 'admin.pagos.trash'
+                ],
+                [
+                    'text' => 'Inspecciones',
+                    'route'  => 'admin.inspecciones.trash',
+                    'icon' => 'fas fa-clipboard fa-fw',
+                    'can' => 'admin.inspecciones.trash'
+                ],
+                [
+                    'text' => 'Escrituras',
+                    'route'  => 'admin.escrituras.trash',
+                    'icon' => 'fas fa-file-alt fa-fw',
+                    'can' => 'admin.escrituras.trash'
                 ],
             ]
         ],

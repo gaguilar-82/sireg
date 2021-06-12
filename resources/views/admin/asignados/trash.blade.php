@@ -44,13 +44,13 @@
                                 <td>${{number_format($asignado->CostoLote,2,'.',',')}}</td>
                                 <td>{{$asignado->TipoContrato}}</td>
                                 <td>
-                                    @can('asignados.show')
-                                        <a href="{{route('admin.asignados.restore', [$asignado->id])}}" class="btn btn-info btn-sm">
+                                    @can('admin.asignados.restore')
+                                        <a href="{{route('admin.asignados.restore', [$asignado->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
                                             <i class="fas fa-trash-restore"></i>
                                         </a>
                                     @endcan
-                                    @can('asignados.edit')
-                                        <a href="{{route('admin.asignados.recycle', [$asignado->id])}}" class="btn btn-danger btn-sm">
+                                    @can('admin.asignados.recycle')
+                                        <a href="{{route('admin.asignados.recycle', [$asignado->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
                                             <i class="fas fa-recycle"></i>
                                         </a>
                                     @endcan

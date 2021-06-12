@@ -94,7 +94,26 @@ class EscrituraController extends Controller
         $pdf->setPaper("Legal", "portrait");
 
         return $pdf->stream('escritura.pdf');
-    
-        /* return view('escrituras.pdf' , compact('escritura')); */
+    }
+
+    public function trash(){
+        
+        $escrituras = Escritura::onlyTrashed()->get();
+        
+        return view('admin.escrituras.trash', compact('escrituras'));
+    }
+
+    public function restore($id){
+
+        Escritura::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Escritura restaurada');
+    }
+
+    public function recycle($id){
+
+        Escritura::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('mensaje','Escritura eliminada permanentemente');
     }
 }

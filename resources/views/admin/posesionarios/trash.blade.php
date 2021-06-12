@@ -38,13 +38,13 @@
                             <td>{{strtoupper($posesionario->CURP)}}</td>
                             <td>{{$posesionario->Telefono}}</td>
                             <td>
-                                @can('posesionarios.show')
-                                    <a href="{{route('admin.posesionarios.restore', [$posesionario->id])}}" class="btn btn-info btn-sm">
+                                @can('admin.posesionarios.restore')
+                                    <a href="{{route('admin.posesionarios.restore', [$posesionario->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('posesionarios.edit')
-                                    <a href="{{route('admin.posesionarios.recycle', [$posesionario->id])}}" class="btn btn-danger btn-sm">
+                                @can('admin.posesionarios.recycle')
+                                    <a href="{{route('admin.posesionarios.recycle', [$posesionario->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
                                         <i class="fas fa-recycle"></i>
                                     </a>
                                 @endcan

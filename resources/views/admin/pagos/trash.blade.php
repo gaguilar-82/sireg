@@ -42,13 +42,13 @@
                                 <td>${{number_format($pago->CantidadPago,2,'.',',')}}</td>
                                 <td>{{$pago->users->name}}</td>
                                 <td>
-                                    @can('lotes.show')
-                                        <a href="{{route('admin.pagos.restore', [$pago->id])}}" class="btn btn-info btn-sm" alt="Restaurar">
+                                    @can('admin.pagos.restore')
+                                        <a href="{{route('admin.pagos.restore', [$pago->id])}}" class="btn btn-info btn-sm" alt="Restaurar" alt="Restaurar">
                                             <i class="fas fa-trash-restore"></i>
                                         </a>
                                     @endcan
-                                    @can('lotes.edit')
-                                        <a href="{{route('admin.pagos.recycle', [$pago->id])}}" class="btn btn-danger btn-sm" alt="Eliminar">
+                                    @can('admin.pagos.recycle')
+                                        <a href="{{route('admin.pagos.recycle', [$pago->id])}}" class="btn btn-danger btn-sm" alt="Eliminar" alt="Eliminar">
                                             <i class="fas fa-recycle"></i>
                                         </a>
                                     @endcan

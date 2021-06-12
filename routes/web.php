@@ -114,7 +114,7 @@ Route::get('inspecciones/{inspeccion}/edit',[InspeccionController::class, 'edit'
 
 Route::put('inspecciones/{inspeccion}', [InspeccionController::class, 'update'])->middleware('can:inspecciones.update')->name('inspecciones.update');
 
-Route::delete('inspecciones/{inspeccion}', [InspeccionController::class, 'destroy'])->middleware('can:inspecciones.destoy')->name('inspecciones.destroy');
+Route::delete('inspecciones/{inspeccion}', [InspeccionController::class, 'destroy'])->middleware('can:inspecciones.destroy')->name('inspecciones.destroy');
 
 Route::get('inspecciones/{inspeccion}/print', [InspeccionController::class, 'print'])->middleware('can:inspecciones.print')->name('inspecciones.print');
 

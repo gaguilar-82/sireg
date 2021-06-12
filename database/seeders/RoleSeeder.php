@@ -34,11 +34,71 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.users.update'])->assignRole($rol1);
         Permission::create(['name' => 'admin.users.destroy'])->assignRole($rol1);
 
+        //Permisos para la gestión de directores
+
         Permission::create(['name' => 'admin.directors.index'])->assignRole($rol1);
         Permission::create(['name' => 'admin.directors.create'])->assignRole($rol1);
         Permission::create(['name' => 'admin.directors.edit'])->assignRole($rol1);
         Permission::create(['name' => 'admin.directors.update'])->assignRole($rol1);
         Permission::create(['name' => 'admin.directors.destroy'])->assignRole($rol1);
+
+        //Permisos para la gestión de inspectores
+
+        Permission::create(['name' => 'admin.inspectors.index'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspectors.create'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspectors.edit'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspectors.update'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspectors.destroy'])->assignRole($rol1);
+
+        //Permisos para la gestión de conceptos
+
+        Permission::create(['name' => 'admin.conceptos.index'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.conceptos.create'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.conceptos.edit'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.conceptos.update'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.conceptos.destroy'])->assignRole($rol1);
+
+        //Permisos para la papelera de colonias
+
+        Permission::create(['name' => 'admin.colonias.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.colonias.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.colonias.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de lotes
+
+        Permission::create(['name' => 'admin.lotes.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.lotes.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.lotes.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de posesionarios
+
+        Permission::create(['name' => 'admin.posesionarios.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.posesionarios.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.posesionarios.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de asignaciones
+
+        Permission::create(['name' => 'admin.asignados.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.asignados.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.asignados.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de pagos
+
+        Permission::create(['name' => 'admin.pagos.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.pagos.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.pagos.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de inspecciones
+
+        Permission::create(['name' => 'admin.inspecciones.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspecciones.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.inspecciones.recycle'])->assignRole($rol1);
+
+        //Permisos para la papelera de escrituras
+
+        Permission::create(['name' => 'admin.escrituras.trash'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.escrituras.restore'])->assignRole($rol1);
+        Permission::create(['name' => 'admin.escrituras.recycle'])->assignRole($rol1);
 
         //Permisos home
         Permission::create(['name' => 'home'])->syncRoles([$rol1, $rol2, $rol3, $rol4, $rol5, $rol6, $rol7]);

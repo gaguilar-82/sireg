@@ -127,5 +127,26 @@ class InspeccionController extends Controller
     
         return view('inspecciones.print' , compact('inspeccion'));
     }
+
+    public function trash(){
+        
+        $inspecciones = Inspeccion::onlyTrashed()->get();
+        
+        return view('admin.inspecciones.trash', compact('inspecciones'));
+    }
+
+    public function restore($id){
+
+        Inspeccion::onlyTrashed()->find($id)->restore();
+
+        return back()->with('mensaje', 'Inspección restaurada');
+    }
+
+    public function recycle($id){
+
+        Inspeccion::onlyTrashed()->find($id)->forceDelete();
+
+        return back()->with('mensaje','Inspección eliminada permanentemente');
+    }
 }
  
