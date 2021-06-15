@@ -56,6 +56,14 @@
         </button>
     </div>
     @enderror
+    @error('Mensualidades')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
     @error('lotes_id')
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{$message}}
@@ -129,8 +137,8 @@
                                 @foreach($lotes as $lote)
                                 <tr>
                                     <td id="Lote1">{{$lote->id}}</td>
-                                    <td id="Lote2">{{$lote->colonias->ClaveColonia}}</td>
-                                    <td id="Lote3">{{$lote->colonias->NombreColonia}}</td>
+                                    <td id="Lote2">{{strtoupper($lote->colonias->ClaveColonia)}}</td>
+                                    <td id="Lote3">{{strtoupper($lote->colonias->NombreColonia)}}</td>
                                     <td id="Lote4">{{$lote->ClaveLote}}</td>
                                     <td id="Lote5">{{$lote->Manzana}}</td>
                                     <td id="Lote6">{{$lote->NumLote}}</td>
@@ -150,23 +158,23 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="Nombre" class="form-label">Nombre</label>
+                            <label for="Nombre" class="form-label">Nombre*</label>
                             <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
                             <input type="hidden" name="posesionarios_id" id="posesionario_id" class="form-control" mb-2>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="NombreLote" class="form-label">Lote</label>
+                            <label for="NombreLote" class="form-label">Lote*</label>
                             <input type="text" name="" id="NombreLote" class="form-control" mb-2  disabled=true>
                             <input type="hidden" name="lotes_id" id="lote_id" class="form-control" mb-2>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="ClaveContrato" class="form-label">Clave del Contrato</label>
+                            <label for="ClaveContrato" class="form-label">Clave del Contrato*</label>
                             <input type="text" name="ClaveContrato" id="ClaveContrato" class="form-control" mb-2>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="CostoLote" class="form-label">Costo del Lote</label>
+                            <label for="CostoLote" class="form-label">Costo del Lote*</label>
                             <input type="text" name="CostoLote" id="CostoLote" class="form-control" mb-2>
                         </div>
                         <div class="form-group col-md-3">
@@ -176,13 +184,13 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="FechaContrato" class="form-label">Fecha del Contrato</label>
+                            <label for="FechaContrato" class="form-label">Fecha del Contrato*</label>
                             <input type="date" name="FechaContrato" class="date form-control" id="FechaContrato" class="form-control" value="{{ old('FechaContrato')}}" mb-2>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="TipoContrato" class="form-label">Tipo de contrato</label>
+                            <label for="TipoContrato" class="form-label">Tipo de contrato*</label>
                             <select name="TipoContrato" id="TipoContrato" class="form-control">
                                 <option value="">--Seleccione el Tipo de Contrato--</option>
                                 <option value="CONTADO" @if (old('TipoContrato') == 'CONTADO') selected="selected" @endif>CONTADO</option>
@@ -190,7 +198,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="Mensualidades" class="form-label">Mensualidades</label>
+                            <label for="Mensualidades" class="form-label">Mensualidades*</label>
                             <input type="number" name="Mensualidades" id="Mensualidades" min="1" max="48" class="form-control" value="{{ old('Mensualidades')}}" mb-2>
                         </div>
                         <div class="form-group col-md-4">

@@ -17,7 +17,11 @@ class AsignadoController extends Controller
 {
     public function index(){
         $asignados = Asignado::all();
-        $posesionarios = Posesionario::all();
+        $posesionarios = Posesionario::where([
+                                                ['ActaNacimiento', '!=', 'Null'], 
+                                                ['IdentificacionOficial', '!=', 'Null'], 
+                                                ['ConstanciaNoPropiedad', '!=', 'Null']
+                                            ])->get();
         $lotes = Lote::all();
         $escritura = Concepto::where('Clave', '=', 'IP-0002')->first();
                            

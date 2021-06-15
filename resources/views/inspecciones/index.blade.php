@@ -212,11 +212,11 @@
                                 @foreach($asignados as $asignado)
                                 <tr>
                                     <td id="Asig1">{{$asignado->id}}</td>
-                                    <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
+                                    <td id="Asig2">{{strtoupper($asignado->lotes->colonias->NombreColonia)}}</td>
                                     <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
                                     <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
                                     <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                    <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                    <td id="Asig6">{{strtoupper($asignado->posesionarios->NombrePosesionario)}} {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</td>
                                     <td>
                                         <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
                                     </td>
@@ -233,18 +233,18 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <label for="Nombre" class="form-label">Nombre*</label>
                                     <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
                                     <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <label for="ClaveContrato" class="form-label">Contrato*</label>
                                     <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inspectors_id" class="form-label">Inspector</label>
+                                    <label for="inspectors_id" class="form-label">Inspector*</label>
                                     <select name="inspectors_id" id="inspectors_id" class="form-control">
                                         <option value="">--Seleccione al Inspector--</option>
                                         @foreach ($inspectores as $inspector)
@@ -252,17 +252,17 @@
                                                 @if (old('inspectors_id') == ($inspector['id']))   
                                                     selected="selected"     
                                                 @endif>
-                                                {{$inspector->NombreInspector}}
+                                                {{strtoupper($inspector->NombreInspector)}}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="FechaInspeccion" class="form-label">Fecha</label>
+                                    <label for="FechaInspeccion" class="form-label">Fecha*</label>
                                     <input type="date" name="FechaInspeccion" id="FechaInspeccion" class="form-control" value="{{ old('FechaInspeccion')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="UsoVivienda" class="form-label">Uso de la vivienda</label>
+                                    <label for="UsoVivienda" class="form-label">Uso de la vivienda*</label>
                                     <select name="UsoVivienda" id="UsoVivienda" class="form-control">
                                         <option value="">--Seleccione el uso--</option>
                                         <option value="HABITADA">HABITADA</option>
@@ -274,7 +274,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
-                                    <label for="MaterialVivienda" class="form-label">Material de la vivienda</label>
+                                    <label for="MaterialVivienda" class="form-label">Material de la vivienda*</label>
                                     <select name="MaterialVivienda" id="MaterialVivienda" class="form-control" onChange="material();">
                                         <option value="">--Seleccione el material--</option>
                                         <option value="SIMPLE" @if (old('MaterialVivienda') == 'SIMPLE') selected="selected" @endif>SIMPLE</option>
@@ -283,19 +283,19 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="MaterialTecho" class="form-label">Material del techo</label>
+                                    <label for="MaterialTecho" class="form-label">Material del techo*</label>
                                     <select name="MaterialTecho" id="MaterialTecho" class="form-control">
                                         <option value="">--Seleccione el material--</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="MaterialMuros" class="form-label">Material de los muros</label>
+                                    <label for="MaterialMuros" class="form-label">Material de los muros*</label>
                                     <select name="MaterialMuros" id="MaterialMuros" class="form-control">
                                         <option value="">--Seleccione el material--</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="MaterialPiso" class="form-label">Material del piso</label>
+                                    <label for="MaterialPiso" class="form-label">Material del piso*</label>
                                     <select name="MaterialPiso" id="MaterialPiso" class="form-control">
                                         <option value="">--Seleccione el material--</option>
                                     </select>
@@ -303,15 +303,15 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
-                                    <label for="ZAR" class="form-label">¿Zona de alto riesgo?</label>
+                                    <label for="ZAR" class="form-label">¿Zona de alto riesgo?*</label>
                                     <select name="ZAR" id="ZAR" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
-                                        <option value="SÍ" @if (old('ZAR') == 'SÍ') selected="selected" @endif>SÍ</option>
                                         <option value="NO" @if (old('ZAR') == 'NO') selected="selected" @endif>NO</option>
+                                        <option value="SÍ" @if (old('ZAR') == 'SÍ') selected="selected" @endif>SÍ</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="EnergiaElectrica" class="form-label">¿Cuenta con energía eléctrica?</label>
+                                    <label for="EnergiaElectrica" class="form-label">¿Cuenta con energía eléctrica?*</label>
                                     <select name="EnergiaElectrica" id="EnergiaElectrica" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
                                         <option value="SÍ" @if (old('EnergiaElectrica') == 'SÍ') selected="selected" @endif>SÍ</option>
@@ -319,7 +319,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="AguaPotable" class="form-label">¿Cuenta con agua potable?</label>
+                                    <label for="AguaPotable" class="form-label">¿Cuenta con agua potable?*</label>
                                     <select name="AguaPotable" id="AguaPotable" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
                                         <option value="SÍ" @if (old('AguaPotable') == 'SÍ') selected="selected" @endif>SÍ</option>
@@ -327,7 +327,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="Drenaje" class="form-label">¿Cuenta con drenaje?</label>
+                                    <label for="Drenaje" class="form-label">¿Cuenta con drenaje?*</label>
                                     <select name="Drenaje" id="Drenaje" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
                                         <option value="SÍ" @if (old('Drenaje') == 'SÍ') selected="selected" @endif>SÍ</option>
@@ -337,7 +337,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
-                                    <label for="SeguridadSocial" class="form-label">Seguridad Social</label>
+                                    <label for="SeguridadSocial" class="form-label">Seguridad Social*</label>
                                     <select name="SeguridadSocial" id="SeguridadSocial" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
                                         <option value="IMSS" @if (old('SeguridadSocual') == 'IMSS') selected="selected" @endif>IMSS</option>
@@ -349,33 +349,33 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="Antiguedad" class="form-label">Antigüedad en la colonia</label>
+                                    <label for="Antiguedad" class="form-label">Antigüedad en la colonia*</label>
                                     <input type="number" name="Antiguedad" id="Antiguedad" class="form-control" min="1" value="{{ old('Antiguedad')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="Habitantes" class="form-label">Número de habitantes</label>
+                                    <label for="Habitantes" class="form-label">Número de habitantes*</label>
                                     <input type="number" name="Habitantes" id="Habitantes" class="form-control" min="1" value="{{ old('Habitantes')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="Habitaciones" class="form-label">Número de habitaciones</label>
+                                    <label for="Habitaciones" class="form-label">Número de habitaciones*</label>
                                     <input type="number" name="Habitaciones" id="Habitaciones" class="form-control" min="0" value="{{ old('Habitaciones')}}" mb-2>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-3">
-                                    <label for="GastoAlimentacion" class="form-label">Gasto en alimentacion</label>
+                                    <label for="GastoAlimentacion" class="form-label">Gasto en alimentacion*</label>
                                     <input type="number" name="GastoAlimentacion" id="GastoAlimentacion" class="form-control" min="0" value="{{ old('GastoAlimentacion')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="GastoSalud" class="form-label">Gasto en salud</label>
+                                    <label for="GastoSalud" class="form-label">Gasto en salud*</label>
                                     <input type="number" name="GastoSalud" id="GastoSalud" class="form-control" min="0" value="{{ old('GastoSalud')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="GastoEducacion" class="form-label">Gasto en educación</label> 
+                                    <label for="GastoEducacion" class="form-label">Gasto en educación*</label> 
                                     <input type="number" name="GastoEducacion" id="GastoEducacion" class="form-control" min="0" value="{{ old('GastoEducacion')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="GastoOtros" class="form-label">Otros gastos</label>
+                                    <label for="GastoOtros" class="form-label">Otros gastos*</label>
                                     <input type="number" name="GastoOtros" id="GastoOtros" class="form-control" min="0" value="{{ old('GastoOtros')}}" mb-2>
                                     <input type="hidden" name="GastoTotal" id="GastoTotal" class="form-control">
                                 </div>
@@ -416,10 +416,10 @@
                             @foreach($inspecciones as $inspeccion)
                             <tr>
                                 <td>{{$inspeccion->id}}</td>
-                                <td>{{$inspeccion->asignados->lotes->colonias->NombreColonia}}</td>
+                                <td>{{strtoupper($inspeccion->asignados->lotes->colonias->NombreColonia)}}</td>
                                 <td>{{$inspeccion->asignados->lotes->Manzana}}</td>
                                 <td>{{$inspeccion->asignados->lotes->NumLote}}</td>
-                                <td>{{$inspeccion->asignados->posesionarios->NombrePosesionario}} {{$inspeccion->asignados->posesionarios->ApellidoPaterno}} {{$inspeccion->asignados->posesionarios->ApellidoMaterno}}</td>
+                                <td>{{strtoupper($inspeccion->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoMaterno)}}</td>
                                 <td>{{\Carbon\Carbon::parse($inspeccion->FechaInspeccion)->format('d/m/Y')}}</td>
                                 <td>{{$inspeccion->UsoVivienda}}</td>
                                 <td>{{$inspeccion->MaterialVivienda}}</td>

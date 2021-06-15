@@ -81,7 +81,7 @@
                                     <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
                                     <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
                                     <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
-                                    <td id="Asig6">{{$asignado->posesionarios->NombrePosesionario}} {{$asignado->posesionarios->ApellidoPaterno}} {{$asignado->posesionarios->ApellidoMaterno}}</td>
+                                    <td id="Asig6">{{strtoupper($asignado->posesionarios->NombrePosesionario)}} {{strtoupper($asignado->posesionarios->ApellidoPaterno)}} {{strtoupper($asignado->posesionarios->ApellidoMaterno)}}</td>
                                     <td>
                                         <button id="SeleccionarPosesionario" class="btn btn-warning btn-sm" onClick="javascript:SelAsignado();">Seleccionar</button>
                                     </td>
@@ -97,26 +97,26 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <label for="Nombre" class="form-label">Nombre*</label>
                                     <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
                                     <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <label for="ClaveContrato" class="form-label">Contrato*</label>
                                     <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="FolioEscritura" class="form-label">Folio de la escritura</label>
+                                    <label for="FolioEscritura" class="form-label">Folio de la escritura*</label>
                                     <input type="text" name="FolioEscritura" id="FolioEscritura" class="form-control" value="{{ old('FolioPago')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="FechaEscritura" class="form-label">Fecha de la escritura</label>
+                                    <label for="FechaEscritura" class="form-label">Fecha de la escritura*</label>
                                     <input type="date" name="FechaEscritura" id="FechaEscritura" class="form-control" value="{{ old('FechaPago')}}" mb-2>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="Director" class="form-label">Nombre del Director</label>
+                                    <label for="Director" class="form-label">Nombre del Director*</label>
                                     <select name="directors_id" id="directors_id" class="form-control">
                                         <option value="">--Seleccione el Director--</option>
                                         @foreach ($directores as $director)

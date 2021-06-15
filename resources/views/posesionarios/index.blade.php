@@ -104,35 +104,35 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="NombrePosesionario" class="form-label">Nombre(s)</label>
+                            <label for="NombrePosesionario" class="form-label">Nombre(s)*</label>
                             <input type="text" name="NombrePosesionario" placeholder="Nombre(s)" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('NombrePosesionario')}}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="ApellidoPaterno" class="form-label">Apellido paterno</label>
+                            <label for="ApellidoPaterno" class="form-label">Apellido paterno*</label>
                             <input type="text" name="ApellidoPaterno" placeholder="Apellido paterno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoPaterno')}}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="ApellidoMaterno" class="form-label">Apellido materno</label>
+                            <label for="ApellidoMaterno" class="form-label">Apellido materno*</label>
                             <input type="text" name="ApellidoMaterno" placeholder="Apellido materno" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ApellidoMaterno')}}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="CURP" class="form-label">CURP</label>
+                            <label for="CURP" class="form-label">CURP*</label>
                             <input type="text" name="CURP" placeholder="CURP" id="CURP" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('CURP')}}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="LugarNacimiento" class="form-label">Lugar de nacimiento</label>
+                            <label for="LugarNacimiento" class="form-label">Lugar de nacimiento*</label>
                             <input type="text" name="LugarNacimiento" placeholder="Lugar de nacimiento" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('LugarNacimiento')}}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                            <label for="FechaNacimiento" class="form-label">Fecha de nacimiento*</label>
                             <input type="date" name="FechaNacimiento" placeholder="Fecha de nacimiento" class="date form-control" id="FechaNacimiento" mb-2 style="text-transform:uppercase;" value="{{ old('FechaNacimiento')}}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="EstadoCivil" class="form-label">Estado civil</label>
+                            <label for="EstadoCivil" class="form-label">Estado civil*</label>
                             <select name="" id="EstadoCivil" class="form-control" onChange="javascript:ec();">
                                 <option value="">--Seleccione el estado civil--</option>
                                 <option value="SOLTERO" @if (old('EstadoCivil') == 'SOLTERO' || old('EstadoCivil') == 'SOLTERA') selected="selected" @endif>SOLTERO(A)</option>
@@ -142,11 +142,11 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="Ocupacion" class="form-label">Ocupación</label>
+                            <label for="Ocupacion" class="form-label">Ocupación*</label>
                             <input type="text" name="Ocupacion" placeholder="Ocupación" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Ocupacion')}}">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="Telefono" class="form-label">Teléfono</label>
+                            <label for="Telefono" class="form-label">Teléfono*</label>
                             <input type="tel" name="Telefono" placeholder="Teléfono" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Telefono')}}">
                         </div>
                     </div>
@@ -250,8 +250,6 @@
             </div>
         </div>
     </div>
-</div>
-
 @endsection
 
 @section('js')

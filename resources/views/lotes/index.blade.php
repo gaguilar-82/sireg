@@ -108,12 +108,11 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inputColonia" class="form-label">Colonia</label>
+                            <label for="inputColonia" class="form-label">Colonia*</label>
                             <select name="colonias_id" id="colonias_id" class="form-control">
                                 <option value="">--Seleccione la Colonia--</option>
                                 @foreach ($colonias as $colonia)
-                                    <option value="{{$colonia['id']}}" @if (old('colonias_id') == ($colonia['id'])) selected="selected" @endif>{{$colonia->NombreColonia}} - {{$colonia->municipios->Delegacion}}</option>
-                                    
+                                    <option value="{{$colonia['id']}}" @if (old('colonias_id') == ($colonia['id'])) selected="selected" @endif>{{strtoupper($colonia->NombreColonia)}} - {{$colonia->municipios->Delegacion}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -136,11 +135,11 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <label for="Manzana" class="form-label">Manzana</label>
+                            <label for="Manzana" class="form-label">Manzana*</label>
                             <input type="text" name="Manzana" id="Manzana" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Manzana') }}" onChange="javascript:procesar();">
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="NumLote" class="form-label">Número de Lote</label>
+                            <label for="NumLote" class="form-label">Número de Lote*</label>
                             <input type="text" name="NumLote" id="NumLote" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('NumLote') }}" onChange="javascript:procesar();">
                         </div>
                         <div class="form-group col-md-2">
@@ -148,7 +147,7 @@
                             <input type="text" name="Casa" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Casa') }}">
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="Superficie" class="form-label">Superficie (m²)</label>
+                            <label for="Superficie" class="form-label">Superficie (m²)*</label>
                             <input type="number" name="Superficie" class="form-control" mb-2 min="0" style="text-transform:uppercase;" value="{{ old('Superficie') }}">
                         </div>
                         <div class="form-group col-md-1">
@@ -166,19 +165,19 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="Colindancia1" class="form-label">Colindancia 1</label>
+                            <label for="Colindancia1" class="form-label">Colindancia 1*</label>
                             <input type="text" name="Colindancia1" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia1') }}">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="Colindancia2" class="form-label">Colindancia 2</label>
+                            <label for="Colindancia2" class="form-label">Colindancia 2*</label>
                             <input type="text" name="Colindancia2" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia2') }}">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="Colindancia3" class="form-label">Colindancia 3</label>
+                            <label for="Colindancia3" class="form-label">Colindancia 3*</label>
                             <input type="text" name="Colindancia3" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia3') }}">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="Colindancia4" class="form-label">Colindancia 4</label>
+                            <label for="Colindancia4" class="form-label">Colindancia 4*</label>
                             <input type="text" name="Colindancia4" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('Colindancia4') }}">
                         </div>
                     </div>
@@ -286,7 +285,7 @@
                         @foreach($lotes as $lote)
                         <tr>
                             <td>{{$lote->id}}</td>
-                            <td>{{$lote->colonias->NombreColonia}}</td>
+                            <td>{{strtoupper($lote->colonias->NombreColonia)}}</td>
                             <td>{{$lote->Manzana}}</td>
                             <td>{{$lote->NumLote}}</td>
                             <td>{{number_format($lote->Superficie,2,'.',',')}}m²</td>

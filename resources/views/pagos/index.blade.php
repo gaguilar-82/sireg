@@ -87,7 +87,7 @@
                                 @foreach($asignados as $asignado)
                                 <tr>
                                     <td id="Asig1">{{$asignado->id}}</td>
-                                    <td id="Asig2">{{$asignado->lotes->colonias->NombreColonia}}</td>
+                                    <td id="Asig2">{{strtoupper($asignado->lotes->colonias->NombreColonia)}}</td>
                                     <td id="Asig3">{{$asignado->lotes->Manzana}}</td>
                                     <td id="Asig4">{{$asignado->lotes->NumLote}}</td>
                                     <td id="Asig5">{{strtoupper($asignado->ClaveContrato)}}</td>
@@ -107,26 +107,26 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="Nombre" class="form-label">Nombre</label>
+                                    <label for="Nombre" class="form-label">Nombre*</label>
                                     <input type="text" name="" id="Nombre" class="form-control" mb-2 disabled=true>
                                     <input type="hidden" name="asignados_id" id="asignados_id" class="form-control" mb-2>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="ClaveContrato" class="form-label">Contrato</label>
+                                    <label for="ClaveContrato" class="form-label">Contrato*</label>
                                     <input type="text" name="" id="ClaveContrato" class="form-control" mb-2  disabled=true>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-2">
-                                    <label for="FolioPago" class="form-label">Folio</label>
+                                    <label for="FolioPago" class="form-label">Folio*</label>
                                     <input type="text" name="FolioPago" id="FolioPago" class="form-control" value="{{ old('FolioPago')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="FechaPago" class="form-label">Fecha</label>
+                                    <label for="FechaPago" class="form-label">Fecha*</label>
                                     <input type="date" name="FechaPago" id="FechaPago" class="form-control" value="{{ old('FechaPago')}}" mb-2>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="Concepto" class="form-label">Concepto</label>
+                                    <label for="Concepto" class="form-label">Concepto*</label>
                                     <select name="conceptos_id" id="conceptos" class="form-control">
                                         <option value="">--Seleccione el Concepto--</option>
                                         @foreach ($conceptos as $concepto)
@@ -141,7 +141,7 @@
                                     </select>
                                 </div>    
                                 <div class="form-group col-md-2">
-                                    <label for="CantidadPago" class="form-label">Cantidad</label>
+                                    <label for="CantidadPago" class="form-label">Cantidad*</label>
                                     <input type="number" name="CantidadPago" class="form-control" id="CantidadPago" class="form-control" value="{{-- {{ old('CantidadPago')}} --}}" mb-2>
                                 </div>
                             </div>

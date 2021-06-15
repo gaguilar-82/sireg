@@ -72,11 +72,11 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="NombreColonia" class="form-label">Colonia</label>
+                            <label for="NombreColonia" class="form-label">Colonia*</label>
                             <input type="text" name="NombreColonia" placeholder="Nombre de la Colonia" style="text-transform:uppercase;" class="form-control mb-2" value="{{ old('NombreColonia') }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="TipoColonia" class="form-label">Tipo de Colonia</label>
+                            <label for="TipoColonia" class="form-label">Tipo de Colonia*</label>
                             <select name="TipoColonia" id="TipoColonia" class="form-control">
                                 <option value="">--Seleccione el tipo de colonia--</option>
                                 <option value='PATRIMONIO INVISUR' @if (old('TipoColonia') == 'PATRIMONIO INVISUR') selected="selected" @endif>PATRIMONIO INVISUR</option>
@@ -90,7 +90,7 @@
                     
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="municipios_id" class="form-label">Municipio</label>
+                            <label for="municipios_id" class="form-label">Municipio*</label>
                             <select name="municipios_id" id="municipios_id" class="form-control">
                                 <option value="">--Seleccione el Municipio--</option>
                                 @foreach ($municipios as $municipio)
@@ -104,11 +104,11 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="ParcialColonia" class="form-label">Clave de Colonia</label>
+                            <label for="ParcialColonia" class="form-label">Clave de Colonia*</label>
                             <input type="text" name="ParcialColonia" id="ParcialColonia" placeholder="Clave" class="form-control" style="text-transform:uppercase" mb-2 value="{{ old('ParcialColonia') }}">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="ValorMetroCuadrado" class="form-label">Valor por metro cuadrado</label>
+                            <label for="ValorMetroCuadrado" class="form-label">Valor por metro cuadrado*</label>
                             <input type="number" name="ValorMetroCuadrado" placeholder="Valor por Metro Cuadrado" class="form-control" mb-2 min="0" value="{{ old('ValorMetroCuadrado') }}">
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                         @foreach($colonias as $colonia)
                         <tr>
                             <td>{{$colonia->id}}</td>
-                            <td>{{$colonia->NombreColonia}}</td>
+                            <td>{{strtoupper($colonia->NombreColonia)}}</td>
                             <td>{{$colonia->TipoColonia}}</td>
                             <td>{{$colonia->municipios->NombreMunicipio}}</td>
                             <td>${{number_format($colonia->ValorMetroCuadrado,2,'.',',')}}</td>
