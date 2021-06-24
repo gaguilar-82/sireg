@@ -25,6 +25,8 @@ class CreatePosesionariosTable extends Migration
             $table->string('EstadoCivil');
             $table->string('Ocupacion');
             $table->string('Telefono',10);
+            $table->text('Domicilio');
+            $table->string('FolioIdentificacion',13);
             $table->string('ActaNacimiento')->nullable();
             $table->string('ActaMatrimonio')->nullable();
             $table->string('ActaHijos')->nullable();
