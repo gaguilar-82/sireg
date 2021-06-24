@@ -33,6 +33,8 @@ class StorePosesionario extends FormRequest
             'EstadoCivil' => 'required',
             'Ocupacion' => 'required',
             'Telefono' => 'required|max:10|min:10',
+            'FolioIdentificacion' => 'required|max:13|min:13',
+            'Domicilio' => 'required',
             'ActaNacimiento' => 'nullable|mimes:pdf|max:2048',
             'ActaMatrimonio' => 'nullable|mimes:pdf|max:2048',
             'ActaHijos' => 'nullable|mimes:pdf|max:2048',

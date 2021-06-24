@@ -95,6 +95,22 @@
         </button>
     </div>
     @enderror
+    @error('FolioIdentificacion')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+    @error('Domicilio')
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
     <div class="container mx-auto pt-5">
         <h1>Posesionarios</h1>
         <div class="bg-gray-200">
@@ -159,9 +175,19 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="FolioIdentificacion" class="form-label">Folio INE*</label>
+                            <input type="num" name="FolioIdentificacion" placeholder="Folio INE" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('FolioIdentificacion')}}">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="Domicilio" class="form-label">Domicilio completo*</label>
+                            <textarea name="Domicilio" placeholder="Domicilio completo" rows="4" cols="100" maxlength="200" class="form-control" mb-2 style="text-transform:uppercase;">{{ old('Domicilio') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="ObservacionesPosesionario" class="form-label">Observaciones</label>
-                            <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;" value="{{ old('ObservacionesPosesionario') }}"></textarea>
+                            <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2 style="text-transform:uppercase;">{{ old('ObservacionesPosesionario') }}</textarea>
                         </div>
                     </div>
                     <div class="form-row">              

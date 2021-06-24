@@ -81,6 +81,8 @@ class PosesionarioController extends Controller
         $posesionario->EstadoCivil = $request->EstadoCivil;
         $posesionario->Ocupacion = $request->Ocupacion;
         $posesionario->Telefono = $request->Telefono;
+        $posesionario->FolioIdentificacion = $request->FolioIdentificacion;
+        $posesionario->Domicilio = $request->Domicilio;
         $posesionario->ActaNacimiento = $urlActaNacimiento;
         $posesionario->ActaMatrimonio = $urlActaMatrimonio;
         $posesionario->ActaHijos = $urlActaHijos;
@@ -121,6 +123,8 @@ class PosesionarioController extends Controller
             'EstadoCivil' => 'required',
             'Ocupacion' => 'required',
             'Telefono' => 'required|max:10|min:10',
+            'FolioIdentificacion' => 'required|max:13|min:13',
+            'Domicilio' => 'required',
             'ActaNacimiento' => 'nullable|mimes:pdf|max:2048',
             'ActaMatrimonio' => 'nullable|mimes:pdf|max:2048',
             'ActaHijos' => 'nullable|mimes:pdf|max:2048',
@@ -141,6 +145,8 @@ class PosesionarioController extends Controller
             'EstadoCivil' => $request->EstadoCivil,
             'Ocupacion' => $request->Ocupacion,
             'Telefono' => $request->Telefono,
+            'FolioIdentificacion' => $request->FolioIdentificacion,
+            'Domicilio' => $request->Domicilio,
             'ObservacionesPosesionario' => $request->ObservacionesPosesionario,
             'users_id' => auth()->user()->id
         ];

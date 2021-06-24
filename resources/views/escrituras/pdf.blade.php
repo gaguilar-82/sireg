@@ -152,12 +152,13 @@
             EL <strong>LIC. {{strtoupper($escritura->directors->NombreDirector)}}  {{strtoupper($escritura->directors->ApellidoPaternoDirector)}} {{strtoupper($escritura->directors->ApellidoMaternoDirector)}}</strong>
             ES ORIGINARIO DE <strong>{{strtoupper($escritura->directors->LugarNacimientoDirector)}}</strong>, DONDE NACIÓ EL <strong>DÍA {{strtoupper(\Carbon\Carbon::parse($escritura->directors->FechaNacimientoDirector)->formatLocalized('%d de %B de %Y'))}}</strong>,
             ESTADO CIVIL  <strong>{{strtoupper($escritura->directors->EstadoCivilDirector)}}</strong>, CON INSTRUCCIÓN PROFESIONAL Y DE OCUPACIÓN <strong>SERVIDOR PÚBLICO</strong>, CON DOMICILIO OFICIAL EN <strong>CARRETERA NACIONAL MÉXICO-ACAPULCO KM. 272.5 DE LA 
-            CIUDAD DE CHILPANCINGO, GUERRERO</strong>, MISMO QUE SEÑALA PARA LOS EFECTOS DE OÍR Y RECIBIR NOTIFICACIONES Y AL CORRIENTE EN EL PAGO DE SUS IMPUESTOS SIN ACREDITARLO.<br>
+            CIUDAD DE CHILPANCINGO, GUERRERO</strong>, MISMO QUE SEÑALA PARA LOS EFECTOS DE OÍR Y RECIBIR NOTIFICACIONES, Y SE IDENTIFICA CON CREDENCIAL DE ELECTOR EXPEDIDA POR EL INSTITUTO NACIONAL ELECTORAL CON FOLIO {{$escritura->directors->FolioINE}} Y AL CORRIENTE EN EL PAGO DE SUS IMPUESTOS SIN ACREDITARLO.<br>
             EL (LA) <strong>C. {{strtoupper($escritura->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($escritura->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($escritura->asignados->posesionarios->ApellidoMaterno)}}</strong>
             ES ORIGINARIO (A) DE <strong>{{strtoupper($escritura->asignados->posesionarios->LugarNacimiento)}}, MÉXICO,</strong> DONDE NACIÓ EL DIA {{strtoupper(\Carbon\Carbon::parse($escritura->asignados->posesionarios->FechaNacimiento)->formatLocalized('%d de %B de %Y'))}}</strong>,
-            CON DOMICILIO EN <strong>LOTE {{$escritura->asignados->lotes->NumLote}} MANZANA {{$escritura->asignados->lotes->Manzana}} DEL FRACCIONAMIENTO "{{strtoupper($escritura->asignados->lotes->colonias->NombreColonia)}}", CÓDIGO POSTAL {{$escritura->asignados->lotes->CodigoPostal}},
-            {{strtoupper($escritura->asignados->lotes->colonias->municipios->NombreMunicipio)}}, GUERRERO</strong>, ESTADO CIVIL <strong>{{strtoupper($escritura->asignados->posesionarios->EstadoCivil)}}</strong>,
-            OCUPACION <strong>{{strtoupper($escritura->asignados->posesionarios->Ocupacion)}}</strong>, MANIFESTANDO ENCONTRARSE AL CORRIENTE DE SUS IMPUESTOS SIN ACREDITARLO.<br>
+            CON DOMICILIO EN <strong>{{$escritura->asignados->posesionarios->Domicilio}}</strong>, ESTADO CIVIL <strong>{{strtoupper($escritura->asignados->posesionarios->EstadoCivil)}}</strong>,
+            OCUPACION <strong>{{strtoupper($escritura->asignados->posesionarios->Ocupacion)}}</strong>, Y SE IDENTIFICA CON CREDENCIAL DE ELECTOR EXPEDIDA POR EL INSTITUTO NACIONAL ELECTORAL CON FOLIO {{$escritura->asignados->posesionarios->FolioIdentificacion}}, MANIFESTANDO ENCONTRARSE AL CORRIENTE DE SUS IMPUESTOS SIN ACREDITARLO.<br>
+        </p>
+        <p>
             LEÍDO QUE FUE EL PRESENTE INSTRUMENTO POR  LAS PARTES QUE INTERVIENEN  Y ENTERADAS DE SU CONTENIDO Y ALCANCE LEGAL, LO FIRMAN DE CONFORMIDAD, EN LA CIUDAD DE <strong>{{strtoupper($escritura->asignados->lotes->colonias->municipios->NombreMunicipio)}}, GUERRERO</strong>, 
             EL DÍA {{strtoupper(\Carbon\Carbon::parse($escritura->FechaEscritura)->formatLocalized('%d de %B de %Y'))}}.
         </p>

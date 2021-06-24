@@ -88,6 +88,14 @@
         </button>
     </div>
     @enderror
+    @error('FolioINE')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
 
     <div class="card">
         <div class="card-body">
@@ -134,6 +142,10 @@
                       'rows'       => 4, 
                       'placeholder' => 'Ingrese los datos del acta pública'
                   ]) !!}
+              </div>
+              <div class="form-group">
+                {!! Form::label('FolioINE', 'Folio de identificación oficial') !!}
+                {!! Form::text('FolioINE', null , ['class' => 'form-control', 'placeholder' => 'Ingrese el folio de la identificación oficial']) !!}
               </div>
               {!! Form::submit('Actualizar', ['class' => 'btn btn-primary mt-2']) !!}
             {!! Form::close() !!}

@@ -25,6 +25,7 @@ class CreateDirectorsTable extends Migration
             $table->date('FechaNombramiento');
             $table->string('ExpedidoPor');
             $table->text('ActaPublica');
+            $table->string('FolioINE',13);
 
             $table->timestamps();
         });

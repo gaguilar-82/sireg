@@ -17,11 +17,13 @@
                 <h5>{{strtoupper($posesionario->CURP)}}</h5>
             </div>
             <div class="card-body">
-                <p><strong>Lugar de nacimiento: </strong>{{$posesionario->LugarNacimiento}}</p>
+                <p><strong>Lugar de nacimiento: </strong>{{strtoupper($posesionario->LugarNacimiento)}}</p>
                 <p><strong>Fecha de nacimiento: </strong>{{\Carbon\Carbon::parse($posesionario->FechaNacimiento)->format('d/m/Y')}}</p>
                 <p><strong>Estado civil: </strong>{{($posesionario->EstadoCivil)}}</p>
-                <p><strong>Ocupacion: </strong>{{$posesionario->Ocupacion}}</p>
+                <p><strong>Ocupacion: </strong>{{strtoupper($posesionario->Ocupacion)}}</p>
                 <p><strong>Telefono: </strong>{{$posesionario->Telefono}}</p>
+                <p><strong>Folio INE: </strong>{{$posesionario->FolioIdentificacion}}</p>
+                <p><strong>Domicilio: </strong>{{strtoupper($posesionario->Domicilio)}}</p>
                 <p><strong>Observaciones: </strong>{{$posesionario->ObservacionesPosesionario}}</p>                
                 <p>
                     <div class="btn-group" role="group" aria-label="Documentos">

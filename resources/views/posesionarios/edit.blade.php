@@ -147,6 +147,16 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="FolioIdentificacion" class="form-label">Folio INE*</label>
+                            <input type="num" name="FolioIdentificacion" placeholder="Folio INE" class="form-control" mb-2  value="{{$posesionario->FolioIdentificacion}}">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="Domicilio" class="form-label">Domicilio completo*</label>
+                            <textarea name="Domicilio" placeholder="Domicilio completo" rows="4" cols="100" maxlength="200" class="form-control" mb-2>{{$posesionario->Domicilio}}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-12">
                             <textarea name="ObservacionesPosesionario" placeholder="Observaciones" rows="4" cols="100" maxlength="100" class="form-control" mb-2>{{$posesionario->ObservacionesPosesionario}}</textarea>
                         </div>
