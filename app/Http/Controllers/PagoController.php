@@ -22,13 +22,8 @@ class PagoController extends Controller
         return view('pagos.index', compact('conceptos','asignados', 'pagos'));
     }
 
-    /* public function store(Request $request){
-        return $request->all();
-    } */
-
     public function store(StorePago $request){
-
-              
+      
         $pago = new Pago();
 
         $pago->asignados_id = $request->asignados_id;

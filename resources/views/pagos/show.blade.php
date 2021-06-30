@@ -21,7 +21,7 @@
             <div class="card-header">
                 <h4>{{$pago->asignados->lotes->colonias->NombreColonia}} Manzana {{$pago->asignados->lotes->Manzana}} Lote {{$pago->asignados->lotes->NumLote}}</h4>
                 <h5>{{strtoupper($pago->asignados->ClaveContrato)}}</h5>
-                <h5>{{$pago->asignados->posesionarios->NombrePosesionario}} {{$pago->asignados->posesionarios->ApellidoPaterno}} {{$pago->asignados->posesionarios->ApellidoMaterno}}</h5>
+                <h5>{{strtoupper($pago->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($pago->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($pago->asignados->posesionarios->ApellidoMaterno)}}</h5>
             </div>
         </div>
         <div class="card">

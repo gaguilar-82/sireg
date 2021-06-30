@@ -142,13 +142,13 @@
                                 </div>    
                                 <div class="form-group col-md-2">
                                     <label for="CantidadPago" class="form-label">Cantidad*</label>
-                                    <input type="number" name="CantidadPago" class="form-control" id="CantidadPago" class="form-control" value="{{-- {{ old('CantidadPago')}} --}}" mb-2>
+                                    <input type="number" name="CantidadPago" class="form-control" id="CantidadPago" class="form-control" value="" mb-2>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="ObservacionesPago" class="form-label">Observaciones</label>
-                                    <textarea name="ObservacionesPago"  rows="2" cols="100" maxlength="100" class="form-control" style="text-transform:uppercase;" mb-2 value="{{ old('ObservacionesPago') }}"></textarea>
+                                    <textarea name="ObservacionesPago"  rows="2" cols="100" maxlength="100" class="form-control" style="text-transform:uppercase;" mb-2>{{ old('ObservacionesPago') }}</textarea>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <button class="btn btn-primary btn-block" type="submit">Agregar</button>
@@ -236,6 +236,7 @@
     <script type="text/javascript" src="{{ asset('js/eliminado.js') }}"></script>
     @endif
 
+    {{-- Carga el costo preestablecido del concepto--}}
     <script>
         $(function(){
             $('#conceptos').change(function(){

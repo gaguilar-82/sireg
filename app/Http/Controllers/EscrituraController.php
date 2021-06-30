@@ -45,8 +45,8 @@ class EscrituraController extends Controller
 
     public function edit(Escritura $escritura){
         $directores = Director::all();
-        $asignados = Asignado::all();
-                           
+        $asignados = Asignado::where('ParaEscriturar','=', 'Sí')->get();
+    
         return view('escrituras.edit', compact('directores','asignados','escritura'));
     }
 

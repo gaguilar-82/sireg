@@ -87,7 +87,13 @@
                 <p><strong>Conflicto Legal: </strong>{{$lote->ConflictoLegal}}</p>
             </div>
             <div class="card-footer text-muted">
-              Fecha de creación {{$lote->created_at->diffForHumans()}}
+                @if($lote->created_at == $lote->updated_at)
+                    <p>Fecha de creación: {{$lote->created_at->diffForHumans()}}</p>
+                    <p>Creado por: {{$lote->users->name}}</p>
+                @elseif ($lote->created_at != $lote->updated_at)
+                    <p>Fecha de actualización: {{$lote->updated_at->diffForHumans()}}</p> 
+                    <p>Editado por: {{$lote->users->name}}</p>   
+                 @endif
             </div>
           </div>
     </div>

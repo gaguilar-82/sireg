@@ -327,7 +327,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="Drenaje" class="form-label">¿Cuenta con drenaje?*</label>
+                                    <label for="Drenaje" class="form-label">C*</label>
                                     <select name="Drenaje" id="Drenaje" class="form-control">
                                         <option value="">--Seleccione una opción--</option>
                                         <option value="SÍ" @if (old('Drenaje') == 'SÍ') selected="selected" @endif>SÍ</option>

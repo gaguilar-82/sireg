@@ -18,7 +18,7 @@ class Escritura extends Model
        return $this->belongsTo(Asignado::class)->withTrashed();
      }
 
-     //Relación uno a muchos
+     //Relación uno a muchos (inversa)
     public function directors(){
         return $this->belongsTo(Director::class);
     }
