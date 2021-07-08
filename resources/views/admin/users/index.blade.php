@@ -41,7 +41,7 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
-                            @if ($users->count() > '1')
+                            @if ($user->id != '1')
                                 <td width="10px">
                                     <form action="{{route('admin.users.destroy',[$user->id])}}" method="POST" class="d-inline eliminar" method="POST">
                                         @method('DELETE')
@@ -50,7 +50,9 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                </td>
+                                </td>                               
+                            @else
+                                <td width="10px"></td>
                             @endif
                         </tr>
                         @endforeach

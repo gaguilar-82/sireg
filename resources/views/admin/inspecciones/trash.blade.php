@@ -42,12 +42,12 @@
                             <td>{{strtoupper($inspeccion->asignados->posesionarios->NombrePosesionario)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoPaterno)}} {{strtoupper($inspeccion->asignados->posesionarios->ApellidoMaterno)}}</td>
                             <td>{{\Carbon\Carbon::parse($inspeccion->FechaInspeccion)->format('d/m/Y')}}</td>
                             <td>
-                                @can('lotes.show')
+                                @can('admin.inspecciones.restore')
                                     <a href="{{route('admin.inspecciones.restore', [$inspeccion->id])}}" class="btn btn-info btn-sm">
                                         <i class="fas fa-trash-restore"></i>
                                     </a>
                                 @endcan
-                                @can('lotes.edit')
+                                @can('admin.inspecciones.recycle')
                                     <a href="{{route('admin.inspecciones.recycle', [$inspeccion->id])}}" class="btn btn-danger btn-sm">
                                         <i class="fas fa-recycle"></i>
                                     </a>

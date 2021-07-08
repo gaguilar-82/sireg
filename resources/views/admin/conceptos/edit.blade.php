@@ -45,11 +45,11 @@
             {!! Form::model($concepto, ['route' => ['admin.conceptos.update', $concepto], 'method' => 'put']) !!}
                 <div class="form-group">
                   {!! Form::label('Clave', 'Clave del Concepto') !!}
-                  {!! Form::text('Clave', null, ['class' => 'form-control']) !!}
+                  {!! Form::text('Clave', null, ['class' => 'form-control', 'readonly' => 'true']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('NombreConcepto', 'Nombre del Concepto') !!}
-                    {!! Form::text('NombreConcepto', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('NombreConcepto', null, ['class' => 'form-control', 'readonly' => 'true']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('Costo', 'Costo') !!}
